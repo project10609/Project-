@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load shuffle %}
+
+      {% for product in category.products.all|shuffle %}
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-4">
+            <a href="{{ product.get_absolute_url }}"><img src="{{ product.product_images }}" alt="image"></a>
+            <a href="{{ product.get_absolute_url }}">{{ product.product_name }}</a>
+            <h4>{{ product.product_price }}</h4>
+            <a class="btn btn-warning" href="{{ product.product_url }}">前往購買</a>
+          </div>
+        </div>
+      </div>
+
+      {% endfor %}
+
+      {% if is_paginated %}
+            <div class="pagination">
+                <span class="page-links">
+                    {% if page_obj.has_previous %}
+                        <a href="{{ category.get_absolute_url }}?page={{ page_obj.previous_page_number }}">previous</a>
+                    {% endif %}
+                    <span class="page-current">
+                        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                    </span>
+                    {% if page_obj.has_next %}
+                        <a href="{{ category.get_absolute_url }}?page={{ page_obj.next_page_number }}">next</a>
+                    {% endif %}
+                </span>
+            </div>
+        {% endif %}
+{% endblock %}

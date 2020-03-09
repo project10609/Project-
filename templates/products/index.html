@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load shuffle %}
+<div class="jumbotron">
+  {% if user.is_authenticated %}
+  <h1>You are now Logged In</h1>
+  {% else %}
+  <h1>Please Login In</h1>
+  {% endif %}
+</div>
+
+  <div class="row">
+    <div class="col-xs-3">
+    {% for product in products|shuffle %}
+    <a href="{{ product.get_absolute_url }}"><img src="{{ product.product_images }}" alt=""></a>
+      <li>{{ product.product_name }}</li>
+      <li>{{ product.product_price }}</li>
+      <a class='btn btn-warning' href="{{ product.product_url }}">前往購買！</a>
+  <hr>
+    {% endfor %}
+    </div>
+
+  </div>
+
+  {% if is_paginated %}
+        <div class="pagination">
+            <span class="page-links">
+                {% if page_obj.has_previous %}
+                    <a href="{% url 'index' %}?page={{ page_obj.previous_page_number }}">previous</a>
+                {% endif %}
+                <span class="page-current">
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                </span>
+                {% if page_obj.has_next %}
+                    <a href="{% url 'index' %}?page={{ page_obj.next_page_number }}">next</a>
+                {% endif %}
+            </span>
+        </div>
+    {% endif %}
+
+
+
+{% endblock %}

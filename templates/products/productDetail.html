@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+<div class="jumbotron">
+
+  <h4>{{ product.product_name }}</h1>
+  <p>{{ product.product_price }}</p>
+  <img src="{{ product.product_images }}" alt="">
+  <p>{{ product.product_category }}</p>
+  {% if product.product_source.slug == "Ruten" %}
+    <img src="{% static 'img/ruten.png' %}" alt="{{ product.product_name }}">
+  {% elif product.product_source.slug == "Shopee" %}
+    <img src="{% static 'img/shopee.png' %}" alt="{{ product.product_name }}">
+  {% endif %}
+
+</div>
+
+{% endblock %}

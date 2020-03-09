@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<!-- <div class="jumbotron">
+  <h1>Please Log in!</h1>
+  <form action='{% url "account:user_login" %}'method="post">
+    {% csrf_token %}
+    <label for="username">Username:</label>
+    <input type="text" name="username" value="" placeholder="Enter Username">
+    <label for="password">Password:</label>
+    <input type="password" name="password" value="">
+    <input type="submit" name="" value="Login">
+  </form>
+
+</div> -->
+<div class="register-login-section spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 offset-lg-3">
+                <div class="login-form">
+                    <h2>登入</h2>
+                    <div class="container">
+                      <h4>{{ message }}</h4>
+                    </div>
+                    <form action="{% url 'account:user_login' %}" method="POST">
+                        {% csrf_token %}
+                        <div class="group-input">
+                            <label for="username">帳號</label>
+                            <input type="text" id="username" name="username">
+                        </div>
+                        <div class="group-input">
+                            <label for="pass">密碼</label>
+                            <input type="password" id="pass" name="password">
+                        </div>
+                        <div class="group-input gi-check">
+                            <div class="gi-more">
+                                <label for="save-pass">
+                                    記住密碼
+                                    <input type="checkbox" id="save-pass">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <a href="#" class="forget-pass">忘記密碼？</a>
+                            </div>
+                        </div>
+                        <button type="submit" class="site-btn login-btn">登入</button>
+                    </form>
+                    <div class="switch-login">
+                        <a href="../register.html" class="or-login">註冊</a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

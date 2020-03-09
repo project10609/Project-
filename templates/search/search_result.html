@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% for result in results %}
+<div class="container">
+  <a href="{% url 'products:product_detail' result.pk %}"><img src="{{ result.product_images }}" alt=""></a>
+  <a href="{% url 'products:product_detail' result.pk %}">{{ result.product_name }}</a>
+  <li class="">{{ result.product_price }}</li>
+  <a class="btn btn-warning" href="{{ result.product_url }}">前往購買！</a>
+</div>
+{% endfor %}
+
+{% endblock %}
