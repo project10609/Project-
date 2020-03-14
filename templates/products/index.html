@@ -9,18 +9,31 @@
   {% endif %}
 </div>
 
-  <div class="row">
-    <div class="col-xs-3">
-    {% for product in products|shuffle %}
-    <a href="{{ product.get_absolute_url }}"><img src="{{ product.product_images }}" alt=""></a>
-      <li>{{ product.product_name }}</li>
-      <li>{{ product.product_price }}</li>
-      <a class='btn btn-warning' href="{{ product.product_url }}">前往購買！</a>
-  <hr>
-    {% endfor %}
-    </div>
-
+<div class="row">
+  {% for product in products|shuffle %}
+  <div class="col-md-12"><br></div>
+  <div class="col-md-4">
+      <div class="product-image2">
+          <div class="pi-pic">
+              <img src="{{product.product_images}}" alt="">
+              <div class="sale pp-sale">#1</div>
+              <div class="icon">
+                  <i class="icon_heart_alt"></i>
+              </div>
+          </div>
+      </div>
   </div>
+  <div class="col-md-6">
+      <div class="px-text">
+          <div class="product-name">{{ product.product_name }}</div>
+          <div class="product-store">{{ product.product_source }}</div>
+          <div class="product-price">{{ product.product_price }}</div>
+          <button><a href="{{ product.product_url }}">前往網站瀏覽</a></button>
+      </div>
+  </div>
+  {% endfor %}
+
+
 
   {% if is_paginated %}
         <div class="pagination">

@@ -2,18 +2,31 @@
 {% block content %}
 {% load shuffle %}
 
-      {% for product in category.products.all|shuffle %}
-      <div class="container">
-        <div class="row">
-          <div class="col-xs-4">
-            <a href="{{ product.get_absolute_url }}"><img src="{{ product.product_images }}" alt="image"></a>
-            <a href="{{ product.get_absolute_url }}">{{ product.product_name }}</a>
-            <h4>{{ product.product_price }}</h4>
-            <a class="btn btn-warning" href="{{ product.product_url }}">前往購買</a>
-          </div>
-        </div>
-      </div>
+      {% for product in category.products.all %}
+      <div class="col-lg-4 col-sm-6">
+          <div class="product-item">
+              <div class="pi-pic">
+                  <a href="{{ product.get_absolute_url }}"><img src="{{ product.product_images }}" alt="image"></a>
+                  <div class="sale pp-sale">{{ product.pk }}</div>
+                  <div class="icon">
+                      <i class="icon_heart_alt"></i>
+                  </div>
+                  <ul>
+                      <li class="quick-view"><a href="{{ product.product_url }}">前往網站瀏覽</a></li>
+                  </ul>
+              </div>
+              <div class="pi-text">
+                  <a href="{{ product.get_absolute_url }}">
+                      <h5>{{ product.product_name }}</h5>
+                  </a>
+                  <div class="catagory-name">{{ product.product_source }}</div>
+                  <div class="product-price">
+                      {{ product.product_price }}
 
+                  </div>
+              </div>
+          </div>
+      </div>
       {% endfor %}
 
       {% if is_paginated %}

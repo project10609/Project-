@@ -19,7 +19,7 @@ class Categories(models.Model):
 
 class Product(models.Model):
     product_name = models.CharField(max_length=256,db_column='product_name')
-    product_price = models.CharField(max_length=120,db_column='product_price')
+    product_price = models.IntegerField(db_column='product_price')
     product_url = models.CharField(max_length=120,db_column='product_url')
     product_category = models.ForeignKey(Categories,db_column='product_category',on_delete=models.CASCADE,related_name='products')
     product_images = models.CharField(max_length=120,db_column='product_images',blank=True,null=True)
@@ -37,7 +37,7 @@ class Product(models.Model):
 
 class Source(models.Model):
     source = models.CharField(max_length=255,db_column='source')
-    slug = models.SlugField(unique=True,primary_key=True,db_column='slug')
+    slug = models.SlugField(primary_key=True,db_column='slug')
 
     def __str__(self):
         return self.source
