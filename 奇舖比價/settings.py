@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'products',
     'account',
     'search',
+    'bootstrap3',
+    
 ]
 
 MIDDLEWARE = [
@@ -74,6 +76,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'products.views.category_list',
+                'products.views.source_list',
             ],
             'libraries':{
             'shuffle': 'products.shuffle',

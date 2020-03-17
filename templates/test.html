@@ -151,8 +151,8 @@
                             <div class="filter-range-wrap">
                                 <div class="range-slider">
                                     <div class="price-input">
-                                        <input type="text" id="minamount">
-                                        <input type="text" id="maxamount">
+                                        <input type="text" name="price-min" id="minamount">
+                                        <input type="text" name="price-max" id="maxamount">
                                     </div>
                                 </div>
                                 <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
@@ -163,7 +163,7 @@
                                 </div>
                             </div>
                         </div>
-                        <input class="filter-submit" type="submit" value="套用篩選"></input>
+                        <input class="filter-submit" type="submit" name="submit" value="套用篩選"></input>
                     </form>
                 </div>
                 <div class="col-lg-9 order-1 order-lg-2">
@@ -179,17 +179,23 @@
                                         <option value="">可靠性評估-高到低</option>
                                         <option value="">可靠性評估-低到高</option>
                                     </select>
-                                    <div>
-                                        <input id="block-btn" type="image" src="img/sorting/block.png" width="25px"
-                                            style="margin-top:10px; margin-left: 10px;"></input>
+                                    <div class="arrange">
+                                        <input id="block-btn" type="image" src="img/sorting/block.png" width="40px"
+                                            style="margin-left: 5px; padding: 5px; background-color: #f6f6f6;"></input>
                                         <input id="straight-btn" type="image" src="img/sorting/Straight.png"
-                                            width="25px" style="margin-top:10px; margin-left: 15px;"></input>
+                                            width="40px" style="padding: 5px;"></input>
                                     </div>
+                                    <p class="product-search-result"><span>「」</span>的搜尋結果</p>
                                 </div>
                             </div>
-
-                            <div class="col-lg-5 col-md-5 text-right">
-                                <p>Show 01- 09 Of 36 Product</p>
+                            <div class="col-lg-5 col-md-5 product-page-controller text-right">
+                                <p>
+                                    <sapn class="current-page-number">1</sapn>
+                                    /
+                                    <span class="total-page-number">100</span>
+                                </p>
+                                <button class="page-prev" title="上一頁">&lt;</button>
+                                <button class="page-next" title="下一頁">&gt;</button>
                             </div>
                         </div>
                     </div>
@@ -261,7 +267,6 @@
                                         <div class="catagory-name">奇摩拍賣</div>
                                         <div class="product-price">
                                             $34.00
-
                                         </div>
                                     </div>
                                 </div>
@@ -426,12 +431,12 @@
                                     <button>前往網站瀏覽</button>
                                 </div>
                             </div>
-                            <div class="col-md-12"><br></div>
                             <div class="col-md-4">
+                                <br>
                                 <div class="product-image2">
                                     <div class="pi-pic">
                                         <img src="img/products/product-1.jpg" alt="">
-                                        <div class="sale pp-sale">#1</div>
+                                        <div class="sale pp-sale">#2</div>
                                         <div class="icon">
                                             <i class="icon_heart_alt"></i>
                                         </div>
@@ -439,6 +444,7 @@
                                 </div>
                             </div>
                             <div class="col-md-6">
+                                <br>
                                 <div class="px-text">
                                     <div class="product-name">雅詩蘭黛 粉持久完美持妝粉底</div>
                                     <div class="product-store">露天拍賣</div>
@@ -446,12 +452,12 @@
                                     <button>前往網站瀏覽</button>
                                 </div>
                             </div>
-                            <div class="col-md-12"><br></div>
                             <div class="col-md-4">
+                                <br>
                                 <div class="product-image2">
                                     <div class="pi-pic">
                                         <img src="img/products/product-1.jpg" alt="">
-                                        <div class="sale pp-sale">#1</div>
+                                        <div class="sale pp-sale">#3</div>
                                         <div class="icon">
                                             <i class="icon_heart_alt"></i>
                                         </div>
@@ -459,6 +465,7 @@
                                 </div>
                             </div>
                             <div class="col-md-6">
+                                <br>
                                 <div class="px-text">
                                     <div class="product-name">雅詩蘭黛 粉持久完美持妝粉底</div>
                                     <div class="product-store">露天拍賣</div>
@@ -467,6 +474,20 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="col-md-12 col-lg-12 product-bottom-page-controller text-center">
+                        <button class="page-prev" title="上一頁">&lt;</button>
+                        <button class="page-button-1 current-page">1</button>
+                        <button class="page-button-2">2</button>
+                        <button class="page-button-3">3</button>
+                        <button class="page-button-4">4</button>
+                        <button class="page-button-5">5</button>
+                        <button class="page-button-6">6</button>
+                        <button class="page-button-7">7</button>
+                        <button class="page-button-8">8</button>
+                        <button class="page-button-9">9</button>
+                        <button class="page-button-10">10</button>
+                        <button class="page-next" title="下一頁">&gt;</button>
                     </div>
                 </div>
             </div>
@@ -490,10 +511,14 @@
             $("#block-btn").click(function () {
                 $("#straight-soring").hide();
                 $("#block-sorting").show();
+                $("#straight-btn").css("background-color", "#ffffff");
+                $("#block-btn").css("background-color", "#f6f6f6");
             });
             $("#straight-btn").click(function () {
                 $("#block-sorting").hide();
                 $("#straight-soring").show();
+                $("#straight-btn").css("background-color", "#f6f6f6");
+                $("#block-btn").css("background-color", "#ffffff");
             });
         });
     </script>
