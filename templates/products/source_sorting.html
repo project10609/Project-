@@ -3,8 +3,6 @@
 {% load shuffle %}
 {% load static %}
 {% load bootstrap3 %}
-{% load get_list %}
-
 
 <section class="product-shop spad">
     <div class="container">
@@ -23,18 +21,13 @@
                       <h4 class="fw-title">電商平台</h4>
                       <div class="fw-brand-check">
                           <div class="bc-item">
-                            <li><a href="{% url 'products:categories' category.pk %}">全部商品</a></li>
                             <!-- {{ sourceform.as_p }} -->
                               {% for field in sourceform.source %}
                               <label for="{{ field.id_for_label }}">
                                 {{ field }}
-                                <span class='checkmark'></span>
 
                               </label>
                               {% endfor %}
-                              <!-- {% if request.GET.filter_by %}
-                              <input type="hidden" name="filter_by" value="{{ request.GET.filter_by }}">
-                              {% endif %} -->
                             <!-- <input type="submit" name="sourceSubmit" value="套用"> -->
                           </div>
                       </div>
@@ -63,7 +56,7 @@
                 <div class="product-show-option">
                     <div class="row">
                         <div class="col-lg-7 col-md-7">
-                          <form action="{% url 'products:categories' category.pk %}" method="GET">
+                          <form action="{% url 'products:categories' category.pk %}"method="GET">
                             <div class="select-option">
                               {{ sortingform }}
                                 <!-- <select name="sort" class="sorting">
@@ -75,11 +68,6 @@
                                     <option value="">可靠性評估-低到高</option>
                                 </select> -->
                                 <!-- <input type="submit" name="sortSubmit" value="套用"> -->
-                                {% if request.GET.source %}
-                                  {% for sources in request.GET|get_list:'source' %}
-                                    <input type="hidden" name="source" value="{{ sources }}">
-                                  {% endfor %}
-                                {% endif %}
                             </div>
 
                           <input type="image" src="{% static 'img/block.png' %}" width="25px"
@@ -110,7 +98,7 @@
 <div class="product-list" id="block-sorting">
     <div class="row">
       {% for product in product_list %}
-      <div class="col-lg-3 col-sm-6">
+      <div class="col-lg-4 col-sm-6">
           <div class="product-item">
               <div class="pi-pic">
                   <a href="{{ product.get_absolute_url }}"><img src="{{ product.product_images }}" alt="image"></a>
@@ -124,7 +112,7 @@
               </div>
               <div class="pi-text">
                   <a href="{{ product.get_absolute_url }}">
-                      <h5>{{ product.product_name|truncatechars:20 }}</h5>
+                      <h5>{{ product.product_name|truncatechars:12 }}</h5>
 |                  </a>
                   {% if product.product_source.slug == "Ruten" %}
                   <div class="catagory-name">露天拍賣</div>
@@ -156,17 +144,17 @@
 
 <div class="col-md-12 col-lg-12 product-bottom-page-controller text-center">
     {% if product_list.has_previous %}
-    <a href="?page={{ product_list.previous_page_number }}{% if request.GET.filter_by %}&filter_by={{ request.GET.filter_by }}{% endif %}{% if request.GET.source %}&source={% for a in request.GET|get_list:'source' %}{{a}}&source={% endfor %}{% endif %}">&lt;</a>
+    <a href="?page={{ product_list.previous_page_number }}{% if request.GET.filter_by %}&filter_by={{ request.GET.filter_by }}{% endif %}{% if request.GET.source %}&source={{ request.GET.source }}{% endif %}">&lt;</a>
     {% endif %}
         {% for pg in page_range %}
             {% if product_list.number == pg %}
-                <a href="?page={{pg}}{% if request.GET.filter_by %}&filter_by={{ request.GET.filter_by }}{% endif %}{% if request.GET.source %}&source={% for a in request.GET|get_list:'source' %}{{a}}&source={% endfor %}{% endif %}" class="page-button-1 current-page">{{pg}}</a>
+                <a href="?page={{pg}}{% if request.GET.filter_by %}&filter_by={{ request.GET.filter_by }}{% endif %}{% if request.GET.source %}&source={{ request.GET.source }}{% endif %}" class="page-button-1 current-page">{{pg}}</a>
             {% else %}
-                <a href="?page={{pg}}{% if request.GET.filter_by %}&filter_by={{ request.GET.filter_by }}{% endif %}{% if request.GET.source %}&source={% for a in request.GET|get_list:'source' %}{{a}}&source={% endfor %}{% endif %}" class="page-button-1">{{pg}}</a>
+                <a href="?page={{pg}}{% if request.GET.filter_by %}&filter_by={{ request.GET.filter_by }}{% endif %}{% if request.GET.source %}&source={{ request.GET.source }}{% endif %}" class="page-button-1">{{pg}}</a>
             {% endif %}
         {% endfor %}
     {% if product_list.has_next %}
-        <a class="page-next" href="?page={{ product_list.next_page_number }}&filter_by={{ request.GET.filter_by }}{% if request.GET.source %}&source={% for a in request.GET|get_list:'source' %}{{a}}&source={% endfor %}{% endif %}">&gt;</a>
+        <a class="page-next" href="?page={{ product_list.next_page_number }}{% if request.GET.filter_by %}&filter_by={{ request.GET.filter_by }}{% endif %}{% if request.GET.source %}&source={{ request.GET.source }}{% endif %}">&gt;</a>
     {% endif %}
 
       </div>

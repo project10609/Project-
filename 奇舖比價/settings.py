@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'account',
     'search',
     'bootstrap3',
-    
+
 ]
 
 MIDDLEWARE = [
@@ -80,6 +80,7 @@ TEMPLATES = [
             ],
             'libraries':{
             'shuffle': 'products.shuffle',
+            'get_list': 'products.templatefilters'
 
             }
         },

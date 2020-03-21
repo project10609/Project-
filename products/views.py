@@ -36,21 +36,86 @@ class ProductDetailView(DetailView):
 
 def category_item(request,pk):
     category = get_object_or_404(Categories,pk=pk)
-    source = Source.objects.all()
-    products = Product.objects.filter(product_category__slug__icontains=category)
-    sortingform = ProductFilterForm(request.GET)
-    sourceform = ProductSourceForm(request.GET)
+    products = Product.objects.filter(product_category__slug__icontains=category).order_by('?')
     if request.method == 'GET' and 'filter_by' in request.GET or request.method == 'GET' and 'source' in request.GET:
+        sortingform = ProductFilterForm(request.GET)
+        sourceform = ProductSourceForm(request.GET)
         if sortingform.is_valid() or sourceform.is_valid():
+            source = request.GET.getlist('source', None)
             sortby = sortingform.cleaned_data.get('filter_by')
-            if sortby == "PriceAsc":
-                products = products.order_by('product_price')
-            elif sortby == "PriceDesc":
-                products = products.order_by('-product_price')
+            if sortby == 'PriceAsc':
+                products = products.filter(product_source__slug__in=source).order_by('product_price')
+            elif sortby == 'PriceDesc':
+                products = products.filter(product_source__slug__in=source).order_by('-product_price')
             else:
-                sources = request.GET.getlist('source')
-                products = products.filter(product_source__slug__in=sources)
+                products = products.filter(product_source__slug__in=source)
 
+
+        paginator = Paginator(products,20)
+        try:
+            page = request.GET.get('page','1')
+        except:
+            page = 1
+        try:
+            product_list = paginator.page(page)
+        except(EmptyPage, InvalidPage):
+            product_list = paginator.page(1)
+
+        index = product_list.number - 1
+        max_index = len(paginator.page_range)
+        start_index = index - 5 if index >= 5 else 0
+        end_index = index + 5 if index <= max_index - 5 else max_index
+        page_range = list(paginator.page_range)[start_index:end_index]
+
+        context={
+            'products':products,
+            'product_list':product_list,
+            'page_range':page_range,
+            'category':category,
+            'sortingform':sortingform,
+            'sourceform':sourceform
+        }
+        return render(request,'products/category.html',context)
+
+    else:
+        sortingform = ProductFilterForm()
+        sourceform = ProductSourceForm()
+
+        paginator = Paginator(products,20)
+        try:
+            page = request.GET.get('page','1')
+        except:
+            page = 1
+        try:
+            product_list = paginator.page(page)
+        except(EmptyPage, InvalidPage):
+            product_list = paginator.page(1)
+
+        index = product_list.number - 1
+        max_index = len(paginator.page_range)
+        start_index = index - 5 if index >= 5 else 0
+        end_index = index + 5 if index <= max_index - 5 else max_index
+        page_range = list(paginator.page_range)[start_index:end_index]
+
+        context={
+            'products':products,
+            'product_list':product_list,
+            'page_range':page_range,
+            'category':category,
+            'sortingform':sortingform,
+            'sourceform':sourceform
+        }
+        return render(request,'products/category.html',context)
+
+def source_sorting(request,category,source):
+    category = get_object_or_404(Categories,pk=category)
+    sources = get_object_or_404(Source,source=source)
+    products = Product.objects.filter(product_category__slug__icontains=category).filter(product_source__slug__icontains=sources)
+    sourceform = ProductSourceForm(request.GET)
+
+    if request.method == 'GET' and 'source' in request.GET:
+        source = request.GET.getlist('source')
+        products = products.filter(product_source__slug__icontains=source)
 
     paginator = Paginator(products,25)
     try:
@@ -69,55 +134,16 @@ def category_item(request,pk):
     page_range = list(paginator.page_range)[start_index:end_index]
 
     context={
+        'sourceform':sourceform,
         'products':products,
         'product_list':product_list,
         'page_range':page_range,
         'category':category,
-        'sortingform':sortingform,
-        'source':source,
-        'sourceform':sourceform
+        'sources':sources
     }
-    return render(request,'products/category.html',context)
+    return render(request,'products/source_sorting.html',context)
 
-# def source_sorting(request,pk,id):
-#     category = get_object_or_404(Categories,pk=pk)
-#     sources = get_object_or_404(Source,pk=id)
-#     products = Product.objects.filter(product_category__slug__icontains=category).filter(product_source__slug__icontains=sources)
-#
-#     if request.method == 'GET':
-#         source = request.GET.getlist('source')
-#         products = products.filter(product_source__slug__icontains=source)
-#
-#     paginator = Paginator(products,25)
-#     try:
-#         page = request.GET.get('page','1')
-#     except:
-#         page = 1
-#     try:
-#         product_list = paginator.page(page)
-#     except(EmptyPage, InvalidPage):
-#         product_list = paginator.page(1)
-#
-#     index = product_list.number - 1
-#     max_index = len(paginator.page_range)
-#     start_index = index - 5 if index >= 5 else 0
-#     end_index = index + 5 if index <= max_index - 5 else max_index
-#     page_range = list(paginator.page_range)[start_index:end_index]
-#
-#     context={
-#         'products':products,
-#         'product_list':product_list,
-#         'page_range':page_range,
-#         'category':category,
-#     }
-#     return render(request,'products/source_sorting.html',context)
-# class CategoryListView(ListView):
-#     template_name = 'products/category.html'
-#     context_object_name = 'product'
-#     paginate_by = 10
-#
-#     def get_queryset(self):
-#         return Product.
+
 
 def category_list(request):
     categories = Categories.objects.all()

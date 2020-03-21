@@ -31,6 +31,8 @@ class Product(models.Model):
     def get_absolute_url(self):
         return reverse('products:product_detail',args=[self.pk])
 
+    def get_success_url(self):
+        return self.object.get_absolute_url + '?source=%s&filter_by=%s' % self.request.GET.get('source'),self.request.GET.get('filter_by')
     class Meta:
         db_table = 'Product'
 
