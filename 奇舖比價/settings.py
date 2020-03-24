@@ -163,7 +163,7 @@ LOCALE_PATHS = (
     os.path.join(BASE_DIR, 'locale'),
 )
 
-STATIC_ROOT = os.path.join(BASE_DIR,'static','static_root')
+
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static','static_root'),
