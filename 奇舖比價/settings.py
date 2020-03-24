@@ -28,7 +28,7 @@ SECRET_KEY = '-2_fg*hd^kpdv%g%fx88v-&lu_zx@3(rs-nt)*9wm5pb-)8q!^'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['https://evening-fortress-74505.herokuapp.com/']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -108,9 +108,7 @@ DATABASES = {
         'OPTIONS': {'charset': 'utf8mb4'},
         }
 }
-DATABASES = {
-    'default': dj_database_url.config(conn_max_age=500),
-}
+
 
 PASSWORD_HASHERS = [
         'django.contrib.auth.hashers.Argon2PasswordHasher',
@@ -164,7 +162,7 @@ LOCALE_PATHS = (
 )
 
 
-STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static','static_root'),
 ]
