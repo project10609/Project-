@@ -10,39 +10,39 @@ def search(request):
     category = request.GET.get('category',None)
     query = request.GET.get('q',None)
     if category:
-        products = Product.objects.filter(product_category__name__contains=category).filter(product_name__icontains=query)
-    elif category == "":
+        products = Product.objects.filter(product_category__slug__icontains=category).filter(product_name__icontains=query)
+    if category == "":
         products = Product.objects.filter(product_name__icontains=query)
-    paginator = Paginator(products, 10) # Show 10 contacts per page.
-    page = request.GET.get('page',1)
 
+
+    paginator = Paginator(products,20)
     try:
-        page_obj = paginator.page(page)
-    except PageNotAnInteger:
-        page_obj = paginator.page(1)
-    except EmptyPage:
-        page_obj = paginator.page(paginator.num_pages)
+        page = request.GET.get('page','1')
+    except:
+        page = 1
+    try:
+        product_list = paginator.page(page)
+    except(EmptyPage, InvalidPage):
+        product_list = paginator.page(1)
+
+    index = product_list.number - 1
+    max_index = len(paginator.page_range)
+    start_index = index - 5 if index >= 5 else 0
+    end_index = index + 5 if index <= max_index - 5 else max_index
+    page_range = list(paginator.page_range)[start_index:end_index]
 
     total = products.count()
 
-    return render(request,'search/search_result.html',{'page_obj':page_obj,'total':total})
+    context = {
+        'product_list':product_list,
+        'total':total,
+        'page_range':page_range,
 
-def search_by_source(request):
-    source = request.GET.getlist('sourcecheck[]')
-    products = Product.objects.filter(product_source__slug__icontains=source)
-    paginator = Paginator(products, 10) # Show 10 contacts per page.
-    page = request.GET.get('page',1)
+    }
 
-    try:
-        page_obj = paginator.page(page)
-    except PageNotAnInteger:
-        page_obj = paginator.page(1)
-    except EmptyPage:
-        page_obj = paginator.page(paginator.num_pages)
+    return render(request,'search/search_result.html',context)
 
-    total = products.count()
 
-    return render(request,'search/search_result_by_source.html',{'page_obj':page_obj,'total':total})
 
 # class SearchListView(ListView):
 #     template_name = 'search/search_result.html'

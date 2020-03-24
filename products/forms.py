@@ -23,3 +23,7 @@ class ProductSourceForm(forms.Form):
         widget=forms.CheckboxSelectMultiple(attrs={'onchange': 'submit();','class':"checkmark" }),
         choices=SOURCE_CHOICES,
     )
+
+class ProductPriceForm(forms.Form):
+    min_price = forms.CharField(label="", required="",help_text="", widget=forms.TextInput(attrs={'id':'minamount'}))
+    max_price = forms.CharField(label="", required="",help_text="",widget=forms.TextInput(attrs={'id':'maxamount'}))

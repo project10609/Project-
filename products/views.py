@@ -6,7 +6,7 @@ from django.urls import reverse
 from products.models import Product,Categories,Source
 from django.views.generic import ListView,DetailView
 from django.views.generic.list import MultipleObjectMixin
-from .forms import ProductFilterForm,ProductSourceForm
+from .forms import ProductFilterForm,ProductSourceForm,ProductPriceForm
 
 class CategoryMixin(object):
     def get_categories(self):
@@ -37,18 +37,49 @@ class ProductDetailView(DetailView):
 def category_item(request,pk):
     category = get_object_or_404(Categories,pk=pk)
     products = Product.objects.filter(product_category__slug__icontains=category).order_by('?')
-    if request.method == 'GET' and 'filter_by' in request.GET or request.method == 'GET' and 'source' in request.GET:
+    if request.method == 'GET' and 'filter_by' in request.GET or request.method == 'GET' and 'source' in request.GET or request.method == 'GET' and 'min_price' in request.GET or request.method == 'GET' and 'max_price' in request.GET:
         sortingform = ProductFilterForm(request.GET)
         sourceform = ProductSourceForm(request.GET)
-        if sortingform.is_valid() or sourceform.is_valid():
+        priceform = ProductPriceForm(request.GET)
+        if sortingform.is_valid() or sourceform.is_valid() or priceform.is_valid():
+            min_price = request.GET.get('min_price',None)
+            max_price = request.GET.get('max_price',None)
             source = request.GET.getlist('source', None)
             sortby = sortingform.cleaned_data.get('filter_by')
             if sortby == 'PriceAsc':
-                products = products.filter(product_source__slug__in=source).order_by('product_price')
+                if source:
+                    if min_price and max_price:
+                        products = products.filter(product_source__slug__in=source).filter(product_price__range=(min_price,max_price)).order_by('product_price')
+                    else:
+                        products = products.filter(product_source__slug__in=source).order_by('product_price')
+                else:
+                    if min_price and max_price:
+                        products = products.filter(product_price__range=(min_price,max_price)).order_by('product_price')
+                    else:
+                        products = products.order_by('product_price')
             elif sortby == 'PriceDesc':
-                products = products.filter(product_source__slug__in=source).order_by('-product_price')
+                if source:
+                    if min_price and max_price:
+                        products = products.filter(product_source__slug__in=source).filter(product_price__range=(min_price,max_price)).order_by('-product_price')
+                    else:
+                        products = products.filter(product_source__slug__in=source).order_by('-product_price')
+                else:
+                    if min_price and max_price:
+                        products = products.filter(product_price__range=(min_price,max_price)).order_by('-product_price')
+                    else:
+                        products = products.order_by('-product_price')
             else:
-                products = products.filter(product_source__slug__in=source)
+                if source:
+                    if min_price and max_price:
+                        products = products.filter(product_source__slug__in=source).filter(product_price__range=(min_price,max_price)).order_by('?')
+                    else:
+                        products = products.filter(product_source__slug__in=source).order_by('?')
+                else:
+                    if min_price and max_price:
+                        products = Product.objects.filter(product_category__slug__icontains=category).filter(product_price__range=(min_price,max_price)).order_by('?')
+                    else:
+                        products = products.order_by('?')
+
 
 
         paginator = Paginator(products,20)
@@ -73,13 +104,15 @@ def category_item(request,pk):
             'page_range':page_range,
             'category':category,
             'sortingform':sortingform,
-            'sourceform':sourceform
+            'sourceform':sourceform,
+            'priceform':priceform,
         }
-        return render(request,'products/category.html',context)
+        return render(request,'products/category_box.html',context)
 
     else:
         sortingform = ProductFilterForm()
         sourceform = ProductSourceForm()
+        priceform = ProductPriceForm()
 
         paginator = Paginator(products,20)
         try:
@@ -103,9 +136,10 @@ def category_item(request,pk):
             'page_range':page_range,
             'category':category,
             'sortingform':sortingform,
-            'sourceform':sourceform
+            'sourceform':sourceform,
+            'priceform':priceform,
         }
-        return render(request,'products/category.html',context)
+        return render(request,'products/category_box.html',context)
 
 def source_sorting(request,category,source):
     category = get_object_or_404(Categories,pk=category)

@@ -32,6 +32,12 @@
 
                               </label>
                               {% endfor %}
+                              {% if request.GET.min_price %}
+                                  <input type="hidden" name="min_price" value="{{ request.GET.min_price }}">
+                              {% endif %}
+                              {% if request.GET.max_price %}
+                                  <input type="hidden" name="max_price" value="{{ request.GET.max_price }}">
+                              {% endif %}
                               <!-- {% if request.GET.filter_by %}
                               <input type="hidden" name="filter_by" value="{{ request.GET.filter_by }}">
                               {% endif %} -->
@@ -40,13 +46,13 @@
                       </div>
                   </div>
                 </form>
+              <form class="" action="{% url 'products:categories' category.pk %}" method="GET">
                 <div class="filter-widget">
                     <h4 class="fw-title">價格範圍</h4>
                     <div class="filter-range-wrap">
                         <div class="range-slider">
                             <div class="price-input">
-                                <input type="text" id="minamount">
-                                <input type="text" id="maxamount">
+                                {{ priceform }}
                             </div>
                         </div>
                         <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
@@ -56,8 +62,10 @@
                             <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
                         </div>
                     </div>
-                    <a href="#" class="filter-btn">套用</a>
+                    <input type="submit" name="" value="套用">
                 </div>
+              </form>
+
             </div>
             <div class="col-lg-9 order-1 order-lg-2">
                 <div class="product-show-option">
@@ -80,6 +88,12 @@
                                     <input type="hidden" name="source" value="{{ sources }}">
                                   {% endfor %}
                                 {% endif %}
+                                {% if request.GET.min_price %}
+                                    <input type="hidden" name="min_price" value="{{ request.GET.min_price }}">
+                                {% endif %}
+                                {% if request.GET.max_price %}
+                                    <input type="hidden" name="max_price" value="{{ request.GET.max_price }}">
+                                {% endif %}
                             </div>
 
                           <input type="image" src="{% static 'img/block.png' %}" width="25px"
@@ -95,10 +109,14 @@
                                 <span class="total-page-number">{{ product_list.paginator.num_pages }}</span>
                             </p>
                             {% if product_list.has_previous %}
-                            <a href="?page={{ product_list.previous_page_number }}{% if request.GET.filter_by %}&filter_by={{ request.GET.filter_by }}{% endif %}{% if request.GET.source %}&source={{ request.GET.source }}{% endif %}"  class="page-prev">&lt;</a>
+                            <a href="?{% url_replace next_page=product_list.previous_page_number %}"  class="page-prev">&lt;</a>
+                            {% else %}
+                            <a class="page-prev">&lt;</a>
                             {% endif %}
                             {% if product_list.has_next %}
-                            <a href="?page={{ product_list.next_page_number }}{% if request.GET.filter_by %}&filter_by={{ request.GET.filter_by }}{% endif %}{% if request.GET.source %}&source={{ request.GET.source }}{% endif %}" class="page-next">&gt;</a>
+                            <a href="?{% url_replace next_page=product_list.next_page_number %}" class="page-next">&gt;</a>
+                            {% else %}
+                            <a class="page-next">&gt;</a>
                             {% endif %}
 
                         </div>
@@ -156,17 +174,17 @@
 
 <div class="col-md-12 col-lg-12 product-bottom-page-controller text-center">
     {% if product_list.has_previous %}
-    <a href="?page={{ product_list.previous_page_number }}{% if request.GET.filter_by %}&filter_by={{ request.GET.filter_by }}{% endif %}{% if request.GET.source %}&source={% for a in request.GET|get_list:'source' %}{{a}}&source={% endfor %}{% endif %}">&lt;</a>
+    <a href="?{% url_replace next_page=product_list.previous_page_number %}">&lt;</a>
     {% endif %}
         {% for pg in page_range %}
             {% if product_list.number == pg %}
-                <a href="?page={{pg}}{% if request.GET.filter_by %}&filter_by={{ request.GET.filter_by }}{% endif %}{% if request.GET.source %}&source={% for a in request.GET|get_list:'source' %}{{a}}&source={% endfor %}{% endif %}" class="page-button-1 current-page">{{pg}}</a>
+                <a href="?{% url_replace next_page=pg %}" class="page-button-1 current">{{pg}}</a>
             {% else %}
-                <a href="?page={{pg}}{% if request.GET.filter_by %}&filter_by={{ request.GET.filter_by }}{% endif %}{% if request.GET.source %}&source={% for a in request.GET|get_list:'source' %}{{a}}&source={% endfor %}{% endif %}" class="page-button-1">{{pg}}</a>
+                <a href="?{% url_replace next_page=pg %}" class="page-button-1">{{pg}}</a>
             {% endif %}
         {% endfor %}
     {% if product_list.has_next %}
-        <a class="page-next" href="?page={{ product_list.next_page_number }}&filter_by={{ request.GET.filter_by }}{% if request.GET.source %}&source={% for a in request.GET|get_list:'source' %}{{a}}&source={% endfor %}{% endif %}">&gt;</a>
+        <a class="page-next" href="?{% url_replace next_page=product_list.next_page_number %}">&gt;</a>
     {% endif %}
 
       </div>
