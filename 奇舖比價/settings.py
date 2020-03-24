@@ -99,7 +99,6 @@ WSGI_APPLICATION = '奇舖比價.wsgi.application'
 
 DATABASES = {
     'default': {
-        dj_database_url.config(),
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'Project',
         'USER':'michael',
@@ -108,6 +107,9 @@ DATABASES = {
         'PORT':'3306',
         'OPTIONS': {'charset': 'utf8mb4'},
         }
+}
+DATABASES = {
+    'default': dj_database_url.config(conn_max_age=500),
 }
 
 PASSWORD_HASHERS = [
