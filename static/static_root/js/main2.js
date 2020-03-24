@@ -169,7 +169,7 @@
   });
 
   /*----------------------------------------------------
-     Language Flag js 
+     Language Flag js
     ----------------------------------------------------*/
   $(document).ready(function(e) {
     //no use
@@ -281,3 +281,21 @@
       .val(newVal);
   });
 })(jQuery);
+
+/*-------------------
+  Sorting
+--------------------- */
+$(document).ready(function(){
+    $("#block-btn").click(function() {
+        $("#straight-sorting").hide();
+        $("#block-sorting").show();
+        $("#straight-btn").css("background-color", "#ffffff");
+        $("#block-btn").css("background-color", "#f6f6f6");
+    });
+    $("#straight-btn").click(function() {
+        $("#block-sorting").hide();
+        $("#straight-sorting").show();
+        $("#straight-btn").css("background-color", "#f6f6f6");
+        $("#block-btn").css("background-color", "#ffffff");
+    });
+});

@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
+{% load static %}
 {% load get_list %}
 <section class="product-shop spad">
     <div class="container">
@@ -51,24 +52,23 @@
                                   <option value="">可靠性評估-高到低</option>
                                   <option value="">可靠性評估-低到高</option>
                               </select>
-                              <div>
-                                  <input type="image" src="img/sorting/block.png" width="25px"
-                                      style="margin-top:10px; margin-left: 10px;"></input>
-                                  <input type="image" src="img/sorting/Straight.png" width="25px"
-                                      style="margin-top:10px; margin-left: 15px;"></input>
+                              <div class="arrange">
+                                <input id="block-btn" type="image" src="{% static 'img/block.png' %}" width="40px"
+                                    style="margin-left:5px; padding:5px; "></input>
+                                <input id="straight-btn" type="image" src="{% static 'img/straight.png' %}" width="40px"
+                                    style="padding:5px;background-color:#f6f6f6;"></input>
                               </div>
+                              {% if request.GET.q %}
+                              <p class="product-search-result"><span>「{{ request.GET.q }}」</span>的商品有{{ total }}筆</p>
+                              {% elif request.GET.q == "" %}
+                              <p class="product-search-result"><span>「{{ request.GET.category }}」</span>的商品有{{ total }}</p>
+                              {% endif %}
                           </div>
                       </div>
                       <!-- <div class="col-lg-5 col-md-5 text-right">
 
                       </div> -->
                       <div class="col-lg-5 col-md-5 product-page-controller text-right">
-                        {% if request.GET.q  %}
-                          <h2>Search Result for "{{ request.GET.q }}"</h2>
-                        {% elif request.GET.q == "" %}
-                          <h2>Searching for {{ request.GET.category }}</h2>
-                        {% endif %}
-                          <p>Show {{ product_list.start_index }} - {{ product_list.end_index }} Of {{ total }} Product</p>
                         <p>
                             <span class="current-page-number">{{ product_list.number }}</span>
                             /
@@ -100,9 +100,9 @@
                       </div>
                       <div class="col-md-6">
                           <div class="px-text">
-                              <div class="product-name">{{result.product_name}}</div>
+                              <div class="product-name">{{result.product_name|truncatechars:20}}</div>
                               <div class="product-store">{{result.product_source.slug}}</div>
-                              <div class="product-price">{{ result.product_pridce}}</div>
+                              <div class="product-price">${{ result.product_price}}</div>
                               <button><a href="{{ result.product_url }}">前往網站瀏覽</a></button>
                           </div>
                       </div>

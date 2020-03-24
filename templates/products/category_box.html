@@ -95,11 +95,13 @@
                                     <input type="hidden" name="max_price" value="{{ request.GET.max_price }}">
                                 {% endif %}
                             </div>
-
-                          <input type="image" src="{% static 'img/block.png' %}" width="25px"
-                              style="margin-top:10px; margin-left: 10px;"></input>
-                          <input type="image" src="{% static 'img/straight.png' %}" width="25px"
-                              style="margin-top:10px; margin-left: 15px;"></input>
+                          </form>
+                          <div class="arrange">
+                            <input id="block-btn" type="image" src="{% static 'img/block.png' %}" width="40px"
+                                style="margin-left:5px; padding:5px; background-color:#f6f6f6;"></input>
+                            <input id="straight-btn" type="image" src="{% static 'img/straight.png' %}" width="40px"
+                                style="padding:5px;"></input>
+                          </div>
                         </div>
                         <div class="col-lg-5 col-md-5 product-page-controller text-right">
 
@@ -172,6 +174,46 @@
     </div>
 </div>
 
+<div class="product-list" id="straight-sorting" style="display: none;">
+                        <div class="row">
+                          {% for product in product_list %}
+                            <div class="col-md-4">
+                                <div class="product-image2">
+                                    <div class="pi-pic">
+                                        <img src="{{ product.product_images   }}" alt="">
+                                        <div class="sale pp-sale">{{ product.pk }}</div>
+                                        <div class="icon">
+                                            <i class="icon_heart_alt"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="px-text">
+                                    <div class="product-name">{{ product.product_name }}</div>
+                                    {% if product.product_source.slug == "Ruten" %}
+                                    <div class="product-store">Ruten</div>
+                                    {% endif %}
+                                    {% if product.product_source.slug == "Shopee" %}
+                                    <div class="product-store">Shopee</div>
+                                    {% endif %}
+                                    {% if product.product_source.slug == "Momo" %}
+                                    <div class="product-store">Momo</div>
+                                    {% endif %}
+                                    {% if product.product_source.slug == "Yahoo" %}
+                                    <div class="product-store">Yahoo</div>
+                                    {% endif %}
+                                    {% if product.product_source.slug == "ETMall" %}
+                                    <div class="product-store">ETMall</div>
+                                    {% endif %}
+                                    <div class="product-price">{{ product.product_price }}</div>
+                                    <button><a href="{{ product.product_url }}">前往網站瀏覽</a></button>
+                                </div>
+                              </div>
+                              {% endfor %}
+                            </div>
+                        </div>
+
 <div class="col-md-12 col-lg-12 product-bottom-page-controller text-center">
     {% if product_list.has_previous %}
     <a href="?{% url_replace next_page=product_list.previous_page_number %}">&lt;</a>
@@ -193,5 +235,7 @@
 </div>
 
 
+
 </section>
+
 {% endblock %}
