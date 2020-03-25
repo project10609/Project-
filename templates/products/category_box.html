@@ -73,16 +73,7 @@
                         <div class="col-lg-7 col-md-7">
                           <form action="{% url 'products:categories' category.pk %}" method="GET">
                             <div class="select-option">
-                              {{ sortingform }}
-                                <!-- <select name="sort" class="sorting">
-                                    <option value="priceAsc">價格-低到高</option>
-                                    <option value="priceDesc">價格-高到低</option>
-                                    <option value="">到貨時間-快到慢</option>
-                                    <option value="">到貨時間-慢到快</option>
-                                    <option value="">可靠性評估-高到低</option>
-                                    <option value="">可靠性評估-低到高</option>
-                                </select> -->
-                                <!-- <input type="submit" name="sortSubmit" value="套用"> -->
+                                {{ sortingform }}
                                 {% if request.GET.source %}
                                   {% for sources in request.GET|get_list:'source' %}
                                     <input type="hidden" name="source" value="{{ sources }}">
@@ -102,7 +93,10 @@
                             <input id="straight-btn" type="image" src="{% static 'img/Straight.png' %}" width="40px"
                                 style="padding:5px;"></input>
                           </div>
+                          <p class="product-search-result">Show {{ product_list.start_index }} - {{ product_list.end_index }} Of {{ products.count }} products</p>
+
                         </div>
+
                         <div class="col-lg-5 col-md-5 product-page-controller text-right">
 
                             <p>
@@ -122,11 +116,10 @@
                             {% endif %}
 
                         </div>
-                        <div class="col-lg-5 col-md-5 text-right">
-                            <p>Show {{ product_list.start_index }} - {{ product_list.end_index }} Of {{ products.count }} products</p>
-                        </div>
+
                     </div>
                 </div>
+              </div>
 <div class="product-list" id="block-sorting">
     <div class="row">
       {% for product in product_list %}
