@@ -23,7 +23,7 @@ from products import views
 
 urlpatterns = [
 
-    path('admin/', admin.site.urls),
+
     path('',views.ProductListView.as_view(),name='index'),
     path('account/', include('account.urls')),
     path('search/',include('search.urls')),
@@ -31,10 +31,7 @@ urlpatterns = [
     # path(r'/search', productSearch)
 ]
 if settings.ADMIN_ENABLED:
-    urlpatterns += patterns('',
-        (r'^admin/(.*)', include(admin.site.urls)),
-        # ..maybe other stuff you want to be dev-only, etc...
-        )
+    urlpatterns += path('admin/', admin.site.urls)
 
 
 urlpatterns += staticfiles_urlpatterns()
