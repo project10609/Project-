@@ -30,7 +30,11 @@ urlpatterns = [
     path('product/',include('products.urls')),
     # path(r'/search', productSearch)
 ]
-
+if settings.ADMIN_ENABLED:
+    urlpatterns += patterns('',
+        (r'^admin/(.*)', include(admin.site.urls)),
+        # ..maybe other stuff you want to be dev-only, etc...
+        )
 
 
 urlpatterns += staticfiles_urlpatterns()
