@@ -31,7 +31,7 @@ urlpatterns = [
     # path(r'/search', productSearch)
 ]
 if settings.ADMIN_ENABLED:
-    urlpatterns += path('admin/', admin.site.urls)
+    urlpatterns += [path('admin/', admin.site.urls)]
 
 
 urlpatterns += staticfiles_urlpatterns()

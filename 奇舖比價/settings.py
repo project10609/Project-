@@ -119,7 +119,7 @@ DATABASES = {
         'NAME': 'Project',
         'USER':'michael',
         'PASSWORD':'Baesuzy1',
-        'HOST':'database-2.cgojcag7lmmn.us-east-1.rds.amazonaws.com',
+        'HOST':'projectdatabase.ccew5rh7vbmj.us-east-1.rds.amazonaws.com',
         'PORT':'3306',
         'OPTIONS': {'charset': 'utf8mb4'},
         }
