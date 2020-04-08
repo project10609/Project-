@@ -1,9 +1,11 @@
 from django.shortcuts import render
 from products.models import Product,Categories
+from .models import Queries
 from django.db.models import Q
 from django.http import HttpResponse
 from django.views.generic import ListView,DetailView
 from django.core.paginator import Paginator,EmptyPage, PageNotAnInteger
+from django.contrib.auth.models import User
 # Create your views here.
 
 def search(request):
@@ -11,8 +13,12 @@ def search(request):
     query = request.GET.get('q',None)
     if category:
         products = Product.objects.filter(product_category__slug__icontains=category).filter(product_name__icontains=query)
+        result = Queries.objects.create(search=query,user=request.user)
+        result.save()
     if category == "":
         products = Product.objects.filter(product_name__icontains=query)
+        result = Queries.objects.create(search=query,user=request.user)
+        result.save()
 
 
     paginator = Paginator(products,20)
