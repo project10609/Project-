@@ -4,6 +4,7 @@ from .models import *
 
 class SubCategoriesAdmin(admin.ModelAdmin):
     list_display = ('subcategory_name', 'category', 'slug')
+    ordering = ('-category',)
 
 
 class CategoriesAdmin(admin.ModelAdmin):
