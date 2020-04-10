@@ -27,24 +27,24 @@ SECRET_KEY = '-2_fg*hd^kpdv%g%fx88v-&lu_zx@3(rs-nt)*9wm5pb-)8q!^'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-ALLOWED_HOSTS = ['evening-fortress-74505.herokuapp.com','*']
+ALLOWED_HOSTS = ['evening-fortress-74505.herokuapp.com', '*']
 
 ADMIN_ENABLED = True
-# LOGGING = {
-#     'version': 1,
-#     'disable_existing_loggers': False,
-#     'handlers': {
-#         'console': {
-#             'class': 'logging.StreamHandler',
-#         },
-#     },
-#     'loggers': {
-#         'django': {
-#             'handlers': ['console'],
-#              'level': os.getenv('DJANGO_LOG_LEVEL', 'DEBUG'),
-#         },
-#     },
-# }
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'level': os.getenv('DJANGO_LOG_LEVEL', 'DEBUG'),
+        },
+    },
+}
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
@@ -86,7 +86,7 @@ LANGUAGES = (
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [ os.path.join(BASE_DIR,'templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -98,8 +98,8 @@ TEMPLATES = [
                 'products.views.source_list',
             ],
             'libraries':{
-            'shuffle': 'products.shuffle',
-            'get_list': 'products.templatefilters'
+                'shuffle': 'products.shuffle',
+                'get_list': 'products.templatefilters'
 
             }
         },
@@ -117,43 +117,45 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'Project',
-        'USER':'michael',
-        'PASSWORD':'Baesuzy1',
-        'HOST':'projectdatabase.ccew5rh7vbmj.us-east-1.rds.amazonaws.com',
-        'PORT':'3306',
+        'USER': 'michael',
+        'PASSWORD': 'Baesuzy1',
+        'HOST': 'projectdatabase.ccew5rh7vbmj.us-east-1.rds.amazonaws.com',
+        'PORT': '3306',
         'OPTIONS': {'charset': 'utf8mb4'},
-        }
+    }
 }
 
 
 PASSWORD_HASHERS = [
-        'django.contrib.auth.hashers.Argon2PasswordHasher',
-        'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
-        'django.contrib.auth.hashers.BCryptPasswordHasher',
-        'django.contrib.auth.hashers.PBKDF2PasswordHasher',
-        'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
+    'django.contrib.auth.hashers.Argon2PasswordHasher',
+    'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
+    'django.contrib.auth.hashers.BCryptPasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2PasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
 
 ]
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME':'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
     },
     {
-        'NAME':'django.contrib.auth.password_validation.MinimumLengthValidator',
-        'OPTION':{'min_length':6},
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'OPTION': {'min_length': 6},
     },
     {
-        'NAME':'django.contrib.auth.password_validation.CommonPasswordValidator',
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
     },
     {
-        'NAME':'django.contrib.auth.password_validation.NumericPasswordValidator',
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 
 ]
 
+
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
+
 
 LANGUAGE_CODE = 'en'
 
@@ -171,18 +173,17 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR ,'static','media','full')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'static', 'media', 'full')
 
 LOCALE_PATHS = (
     os.path.join(BASE_DIR, 'locale'),
 )
 
 
-
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static','static_root'),
+    os.path.join(BASE_DIR, 'static', 'static_root'),
 ]
 
 # TEMPLATES_DIRS = (
