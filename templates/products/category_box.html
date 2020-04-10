@@ -15,11 +15,13 @@
           <ul class="filter-catagories">
             {% for category in categories %}
             <li><a href="{% url 'products:categories' category.pk %}">{{ category.name }}</a>
+              {% for subcategory in category.subcategory.all %}
               <ul>
-                {% for subcategory in category.subcategory.all %}
+
                 <li><a href="{% url 'products:subcategory' subcategory.pk %}">{{ subcategory.subcategory_name }}</a></li>
-                {% endfor %}
+
               </ul>
+              {% endfor %}
 
             </li>
             {% endfor %}
