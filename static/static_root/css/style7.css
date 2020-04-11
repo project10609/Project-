@@ -149,6 +149,27 @@ ol {
   margin: 0 auto;
 }
 
+.home-page-section-title {
+  color: #252525;
+  font-size: 25px;
+  font-weight: 500;
+  margin-bottom: 40px;
+  position: relative;
+  text-align: left;
+  margin-left: 50px;
+}
+
+.home-page-section-title:before {
+  position: absolute;
+  left: 10px;
+  bottom: -5px;
+  width: 220px;
+  height: 2px;
+  background: #fcbabb;
+  content: "";
+  margin: 0 auto;
+}
+
 .section-title p {
   color: #6e6e6e;
 }
@@ -1925,6 +1946,25 @@ ol {
   line-height: 39px;
 }
 
+.filter-widget .filter-catagories .list-btn {
+  border: solid #636363;
+  border-width: 0 4px 4px 0;
+  display: inline-block;
+  padding: 3px;
+  margin-left: 5px;
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+}
+
+.filter-widget .filter-catagories .list-btn:active {
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+}
+
+.filter-widget .filter-catagories .filter-sub-catagories li {
+  margin-left: 20px;
+}
+
 .filter-widget .fw-brand-check .bc-item {
   margin-bottom: 3px;
 }
@@ -2137,13 +2177,18 @@ ol {
 
 .filter-widget .fw-tags a {
   display: inline-block;
-  font-size: 16px;
-  color: #636363;
-  padding: 5px 15px;
-  border: 1px solid #ebebeb;
+  font-size: 18px;
+  color: #ffffff;
+  padding: 8px 15px;
+  background-color: rgba(252, 186, 187, 0.8);
   margin-right: 5px;
   margin-bottom: 9px;
-  border-radius: 2px;
+  border-radius: 3px;
+}
+
+.filter-widget .fw-tags a:hover {
+  font-size: 20px;
+  background-color: #fcbabb;
 }
 
 .checkmark:after {
@@ -2897,8 +2942,6 @@ ol {
 .related-products .section-title h2:before {
   display: none;
 }
-
-
 
 /*---------------------
   Shopping Cart

@@ -15,11 +15,16 @@
           <ul class="filter-catagories">
             {% for category in categories %}
             <li><a href="{% url 'products:categories' category.pk %}">{{ category.name }}({{category.products.count}})</a>
-              <ul>
+              {% if category.subcategory.count == 1 %}
+              {% else %}
+              <i class="list-btn"></i>
+              {% endif %}
+              <ul class="filter-sub-catagories">
                 {% for subcategory in category.subcategory.all %}
                 {% if subcategory.slug|lower == category.slug|lower %}
                 {% else %}
-                <li><a href="{% url 'products:subcategory' subcategory.pk %}">{{ subcategory.subcategory_name }} ({{ subcategory.subcategory.count }})</a></li>
+                <li><a href="{% url 'products:subcategory' subcategory.pk %}">{{ subcategory.subcategory_name }}
+                    ({{ subcategory.subcategory.count }})</a></li>
                 {% endif %}
                 {% endfor %}
               </ul>
@@ -99,7 +104,8 @@
                 <input id="block-btn" type="image" src="{% static 'img/block.png' %}" width="40px" style="margin-left:5px; padding:5px; background-color:#f6f6f6;"></input>
                 <input id="straight-btn" type="image" src="{% static 'img/Straight.png' %}" width="40px" style="padding:5px;"></input>
               </div>
-              <p class="product-search-result">Show {{ product_list.start_index }} - {{ product_list.end_index }} Of {{ products.count }} products</p>
+              <p class="product-search-result">Show {{ product_list.start_index }} - {{ product_list.end_index }} Of
+                {{ products.count }} products</p>
 
             </div>
 

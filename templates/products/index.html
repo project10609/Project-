@@ -1,155 +1,141 @@
 {% extends 'base.html' %}
 {% block content %}
 {% load shuffle %}
+{% load static %}
+{% load bootstrap3 %}
+{% load get_list %}
 
-<section class="product-shop spad">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-3 col-md-6 col-sm-8 order-2 order-lg-1 produts-sidebar-filter">
-                <div class="filter-widget">
-                    <h4 class="fw-title">所有分類</h4>
-                    <ul class="filter-catagories">
-                      {% for category in categories %}
-                        <li><a href="{% url 'products:categories' category.pk %}">{{ category.slug }}</a></li>
-                      {% endfor %}
-                    </ul>
-                </div>
-                <div class="filter-widget">
-                    <h4 class="fw-title">電商平台</h4>
-                    <div class="fw-brand-check">
-                        <div class="bc-item">
-                            <label for="bc-calvin">
-                                蝦皮拍賣
-                                <input type="checkbox" id="bc-calvin">
-                                <span class="checkmark"></span>
-                            </label>
-                        </div>
-                        <div class="bc-item">
-                            <label for="bc-diesel">
-                                露天拍賣
-                                <input type="checkbox" id="bc-diesel">
-                                <span class="checkmark"></span>
-                            </label>
-                        </div>
-                        <div class="bc-item">
-                            <label for="bc-polo">
-                                奇摩拍賣
-                                <input type="checkbox" id="bc-polo">
-                                <span class="checkmark"></span>
-                            </label>
-                        </div>
-                        <div class="bc-item">
-                            <label for="bc-tommy">
-                                東森購物
-                                <input type="checkbox" id="bc-tommy">
-                                <span class="checkmark"></span>
-                            </label>
-                        </div>
-                        <div class="bc-item">
-                            <label for="bc-tommy">
-                                Momo購物網
-                                <input type="checkbox" id="bc-tommy">
-                                <span class="checkmark"></span>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <div class="filter-widget">
-                    <h4 class="fw-title">價格範圍</h4>
-                    <div class="filter-range-wrap">
-                        <div class="range-slider">
-                            <div class="price-input">
-                                <input type="text" id="minamount">
-                                <input type="text" id="maxamount">
-                            </div>
-                        </div>
-                        <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
-                            data-min="1" data-max="9999">
-                            <div class="ui-slider-range ui-corner-all ui-widget-header"></div>
-                            <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
-                            <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
-                        </div>
-                    </div>
-                    <a href="#" class="filter-btn">套用</a>
-                </div>
+
+
+
+<!-- content Begin -->
+
+<div class="filter-widget" style="margin: 20px;">
+  <div class="home-page-section-title">
+    熱門關鍵字
+  </div>
+  <div class="fw-tags col-lg-12" style="margin-left: 50px; margin-right: 50px;">
+    <a href="#">情挑誘吻星鑽蜜唇膏</a>
+    <a href="#">YSL</a>
+    <a href="#">飛激長瞬翹防水睫毛膏</a>
+    <a href="#">蜜粉</a>
+    <a href="#">蘂花譚韓方水晶露</a>
+    <a href="#">雅詩蘭黛</a>
+  </div>
+</div>
+<div class="container-fluid" style="margin-top: 40px;">
+  <div class="home-page-section-title">
+    你可能會喜歡
+  </div>
+  <div class="row" style="margin-left: 50px; margin-right: 50px;">
+    <div class="col-lg-12">
+      <div class="product-slider owl-carousel">
+        <div class="product-item">
+          <div class="pi-pic">
+            <img class="home-page-img" src="img/products/women-1.jpg">
+            <ul>
+              <li class="quick-view"><a href="#">前往網站瀏覽</a></li>
+            </ul>
+          </div>
+          <div class="pi-text">
+            <a href="#">
+              <h5>Pure Pineapple</h5>
+            </a>
+            <div class="catagory-name">露天拍賣</div>
+            <div class="product-price">
+              $14.00
             </div>
-            <div class="col-lg-9 order-1 order-lg-2">
-                <div class="product-show-option">
-                    <div class="row">
-                        <div class="col-lg-7 col-md-7">
-                            <div class="select-option">
-                                <select class="sorting">
-                                    <option value="">價格-低到高</option>
-                                    <option value="">價格-高到低</option>
-                                    <option value="">到貨時間-快到慢</option>
-                                    <option value="">到貨時間-慢到快</option>
-                                    <option value="">可靠性評估-高到低</option>
-                                    <option value="">可靠性評估-低到高</option>
-                                </select>
-                                <div>
-                                    <!-- <input type="image" src="#" width="25px"
-                                        style="margin-top:10px; margin-left: 10px;"></input>
-                                    <input type="image" src="#" width="25px"
-                                        style="margin-top:10px; margin-left: 15px;"></input> -->
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-5 col-md-5 text-right">
-                            <p>Show 01- 09 Of {{ total }} Product</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="product-list">
-                    <div class="row">
-                {% for product in products %}
-                        <div class="col-md-4">
-                            <div class="product-image2">
-                                <div class="pi-pic">
-                                    <img src="{{product.product_images}}" alt="images">
-                                    <div class="sale pp-sale">{{ product.pk }}</div>
-                                    <div class="icon">
-                                        <i class="icon_heart_alt"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="px-text">
-                                <div class="product-name">{{product.product_name}}</div>
-                                {% if product.product_source.slug == "Ruten"%}
-                                  <div class="product-store">露天拍賣</div>
-                                {% elif product.product_source.slug == "Shopee" %}
-                                  <div class="product-store">蝦皮購物</div>
-                                {% endif %}
-                                <div class="product-price">{{ product.product_price }}</div>
-                                <button><a href="{{ product.product_url }}">前往網站瀏覽</a></button>
-                            </div>
-                        </div>
-                        <div class="col-md-12"><br></div>
-                        {% endfor %}
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
+          </div>
+        </div>
+        <div class="product-item">
+          <div class="pi-pic">
+            <img class="home-page-img" src="img/blog/blog-detail.jpg">
+            <ul>
+              <li class="quick-view"><a href="#">前往網站瀏覽</a></li>
+            </ul>
+          </div>
+          <div class="pi-text">
+            <a href="#">
+              <h5>Pure Pineapple</h5>
+            </a>
+            <div class="catagory-name">露天拍賣</div>
+            <div class="product-price">
+              $14.00
             </div>
-</section>
-
-        {% if is_paginated %}
-              <div class="pagination">
-                  <span class="page-links">
-                      {% if page_obj.has_previous %}
-                          <a href="{% url 'index' %}?page={{ page_obj.previous_page_number }}">previous</a>
-                      {% endif %}
-                      <span class="page-current">
-                          Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-                      </span>
-                      {% if page_obj.has_next %}
-                          <a href="{% url 'index' %}?page={{ page_obj.next_page_number }}">next</a>
-                      {% endif %}
-                  </span>
-              </div>
-          {% endif %}
-
+          </div>
+        </div>
+        <div class="product-item">
+          <div class="pi-pic">
+            <img class="home-page-img" src="img/blog/blog-1.jpg">
+            <ul>
+              <li class="quick-view"><a href="#">前往網站瀏覽</a></li>
+            </ul>
+          </div>
+          <div class="pi-text">
+            <a href="#">
+              <h5>Pure Pineapple</h5>
+            </a>
+            <div class="catagory-name">露天拍賣</div>
+            <div class="product-price">
+              $14.00
+            </div>
+          </div>
+        </div>
+        <div class="product-item">
+          <div class="pi-pic">
+            <img class="home-page-img" src="img/blog/blog-2.jpg">
+            <ul>
+              <li class="quick-view"><a href="#">前往網站瀏覽</a></li>
+            </ul>
+          </div>
+          <div class="pi-text">
+            <a href="#">
+              <h5>Pure Pineapple</h5>
+            </a>
+            <div class="catagory-name">露天拍賣</div>
+            <div class="product-price">
+              $14.00
+            </div>
+          </div>
+        </div>
+        <div class="product-item">
+          <div class="pi-pic">
+            <img class="home-page-img" src="img/blog/blog-detail.jpg">
+            <ul>
+              <li class="quick-view"><a href="#">前往網站瀏覽</a></li>
+            </ul>
+          </div>
+          <div class="pi-text">
+            <a href="#">
+              <h5>Pure Pineapple</h5>
+            </a>
+            <div class="catagory-name">露天拍賣</div>
+            <div class="product-price">
+              $14.00
+            </div>
+          </div>
+        </div>
+        <div class="product-item">
+          <div class="pi-pic">
+            <img class="home-page-img" src="img/blog/blog-detail.jpg">
+            <ul>
+              <li class="quick-view"><a href="#">前往網站瀏覽</a></li>
+            </ul>
+          </div>
+          <div class="pi-text">
+            <a href="#">
+              <h5>Pure Pineapple</h5>
+            </a>
+            <div class="catagory-name">露天拍賣</div>
+            <div class="product-price">
+              $14.00
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- content End -->
 
 {% endblock %}

@@ -299,3 +299,27 @@ $(document).ready(function(){
         $("#block-btn").css("background-color", "#ffffff");
     });
 });
+
+/*-------------------
+  filter-catagories
+ --------------------- */
+$(document).ready(function() {
+  $(".list-btn")
+    .hover(function() {
+      cursorChange(this);
+    })
+    .click(function() {
+      foldToggle(this);
+    })
+    .trigger("click");
+});
+
+function foldToggle(element) {
+  $(element)
+    .next("ul")
+    .slideToggle();
+}
+
+function cursorChange(element, cursorType) {
+  $(element).css("cursor", "pointer");
+}

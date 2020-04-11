@@ -15,11 +15,16 @@
           <ul class="filter-catagories">
             {% for category in categories %}
             <li><a href="{% url 'products:categories' category.pk %}">{{ category.name }}({{category.products.count}})</a>
-              <ul>
+              {% if category.subcategory.count == 1 %}
+              {% else %}
+              <i class="list-btn"></i>
+              {% endif %}
+              <ul class="filter-sub-catagories">
                 {% for subcategory in category.subcategory.all %}
                 {% if subcategory.slug|lower == category.slug|lower %}
                 {% else %}
-                <li><a href="{% url 'products:subcategory' subcategory.pk %}">{{ subcategory.subcategory_name }} ({{ subcategory.subcategory.count }})</a></li>
+                <li><a href="{% url 'products:subcategory' subcategory.pk %}">{{ subcategory.subcategory_name }}
+                    ({{ subcategory.subcategory.count }})</a></li>
                 {% endif %}
                 {% endfor %}
               </ul>
