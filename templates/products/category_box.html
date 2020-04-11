@@ -14,15 +14,15 @@
           <h4 class="fw-title">所有分類</h4>
           <ul class="filter-catagories">
             {% for category in categories %}
-            <li><a href="{% url 'products:categories' category.pk %}">{{ category.name }}</a>
-              {% for subcategory in category.subcategory.all %}
+            <li><a href="{% url 'products:categories' category.pk %}">{{ category.name }}({{category.products.count}})</a>
               <ul>
-
-                <li><a href="{% url 'products:subcategory' subcategory.pk %}">{{ subcategory.subcategory_name }}</a></li>
-
+                {% for subcategory in category.subcategory.all %}
+                {% if subcategory.slug|lower == category.slug|lower %}
+                {% else %}
+                <li><a href="{% url 'products:subcategory' subcategory.pk %}">{{ subcategory.subcategory_name }} ({{ subcategory.subcategory.count }})</a></li>
+                {% endif %}
+                {% endfor %}
               </ul>
-              {% endfor %}
-
             </li>
             {% endfor %}
           </ul>

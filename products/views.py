@@ -7,6 +7,7 @@ from products.models import Product, Categories, Source, Subcategories
 from django.views.generic import ListView, DetailView
 from django.views.generic.list import MultipleObjectMixin
 from .forms import ProductFilterForm, ProductSourceForm, ProductPriceForm
+from django.db.models import Count
 
 
 class CategoryMixin(object):
@@ -38,6 +39,7 @@ class ProductDetailView(DetailView):
 
 def category_item(request, pk):
     category = get_object_or_404(Categories, pk=pk)
+
     products = Product.objects.filter(
         product_category__slug__icontains=category).order_by('?')
     if request.method == 'GET' and 'filter_by' in request.GET or request.method == 'GET' and 'source' in request.GET or request.method == 'GET' and 'min_price' in request.GET or request.method == 'GET' and 'max_price' in request.GET:

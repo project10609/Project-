@@ -1,6 +1,7 @@
 from django.db import models
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.db.models import Count
 
 
 class Categories(models.Model):
@@ -8,7 +9,7 @@ class Categories(models.Model):
     slug = models.SlugField(unique=True, primary_key=True, db_column='slug')
 
     def __str__(self):
-        return self.name
+        return self.slug
 
     class Meta:
         db_table = 'CategoryList'
@@ -16,6 +17,10 @@ class Categories(models.Model):
 
     def get_absolute_url(self):
         return reverse('products:categories', kwargs={'pk': self.pk})
+    #
+    # def products_count(self):
+    #     # Your filter criteria can go here.
+    #     return self.products.count()
 
 
 class Subcategories(models.Model):
@@ -25,7 +30,7 @@ class Subcategories(models.Model):
         Categories, db_column='category', on_delete=models.CASCADE, related_name='subcategory')
 
     def __str__(self):
-        return self.subcategory_name
+        return self.slug
 
     class Meta:
         db_table = 'Subcategories'
@@ -33,6 +38,9 @@ class Subcategories(models.Model):
 
     def get_absolute_url(self):
         return reverse('products:subcategories', kwargs={'pk': self.pk})
+
+    # def get_products_count(self):
+    #     return self.subcategory.count()
 
 
 class Product(models.Model):
