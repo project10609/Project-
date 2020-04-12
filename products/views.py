@@ -11,6 +11,7 @@ from django.db.models import Count, Q
 from search.models import Queries
 from functools import reduce
 import operator
+import random
 
 
 class CategoryMixin(object):
@@ -24,19 +25,46 @@ class CategoryMixin(object):
 
 
 def index(request):
+
     products = Product.objects.all()
     queries_items = list(Queries.objects.values_list(
-        'search', flat=True).distinct())
+        'search', flat=True).annotate(counts=Count('search')).distinct())
     queries = Queries.objects.all().values(
         'search').annotate(counts=Count('search')).order_by('-counts')[:10]
-    for query in queries_items[1:]:
-        recommendItems = products.filter(product_name__icontains=query)[:7]
-    context = {
-        'queries': queries,
-        'recommendItems': recommendItems,
-    }
+    listitems = list(Queries.objects.values_list(
+        'search', flat=True).distinct().filter(user=request.user.id))
 
-    return render(request, 'products/index.html', context)
+    if queries_items and not listitems:
+        recommendItems = products.filter(
+            reduce(operator.or_, (Q(product_name__icontains=x['search']) for x in queries)))[:10]
+        context = {
+            'queries': queries,
+            'recommendItems': recommendItems,
+        }
+        return render(request, 'products/index.html', context)
+    elif listitems and not queries_items:
+        products = products.filter(
+            reduce(operator.or_, (Q(product_name__icontains=x) for x in listitems)))[:10]
+        context = {
+            'queries': queries,
+            'user_item': products,
+        }
+
+        return render(request, 'products/index.html', context)
+    elif queries_items and listitems:
+        recommendItems = products.filter(
+            reduce(operator.or_, (Q(product_name__icontains=x['search']) for x in queries)))[:10]
+        products = products.filter(
+            reduce(operator.or_, (Q(product_name__icontains=x) for x in listitems)))[:10]
+        context = {
+            'queries': queries,
+            'recommendItems': recommendItems,
+            'user_item': products,
+        }
+
+        return render(request, 'products/index.html', context)
+    else:
+        return render(request, 'products/index.html', {})
 
 
 class ProductDetailView(DetailView):

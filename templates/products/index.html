@@ -22,12 +22,13 @@
 </div>
 <div class="container-fluid" style="margin-top: 40px;">
   <div class="home-page-section-title">
-    你可能會喜歡
+    熱門商品
   </div>
   <div class="row" style="margin-left: 50px; margin-right: 50px;">
     <div class="col-lg-12">
       <div class="product-slider owl-carousel">
-        {% for item in recommendItems %}
+        {% if recommendItems %}
+        {% for item in recommendItems|shuffle %}
         <div class="product-item">
           <div class="pi-pic">
             <img class="home-page-img" src="{{ item.product_images }}">
@@ -46,10 +47,46 @@
           </div>
         </div>
         {% endfor %}
+        {% endif %}
       </div>
     </div>
   </div>
 </div>
+
+{% if request.user.is_authenticated %}
+<div class="container-fluid" style="margin-top: 40px;">
+  <div class="home-page-section-title">
+    猜你喜歡
+  </div>
+  <div class="row" style="margin-left: 50px; margin-right: 50px;">
+    <div class="col-lg-12">
+      <div class="product-slider owl-carousel">
+        {% if user_item %}
+        {% for item in user_item %}
+        <div class="product-item">
+          <div class="pi-pic">
+            <img class="home-page-img" src="{{ item.product_images }}">
+            <ul>
+              <li class="quick-view"><a href="{{ item.product_url }}">前往網站瀏覽</a></li>
+            </ul>
+          </div>
+          <div class="pi-text">
+            <a href="{{ item.product_url }}">
+              <h5>{{ item.product_name }}</h5>
+            </a>
+            <div class="catagory-name">{{ item.product_source }}</div>
+            <div class="product-price">
+              {{ item.product_price }}
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
 <!-- content End -->
 
 {% endblock %}
