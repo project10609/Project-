@@ -303,23 +303,34 @@ $(document).ready(function(){
 /*-------------------
   filter-catagories
  --------------------- */
-$(document).ready(function() {
-  $(".list-btn")
-    .hover(function() {
-      cursorChange(this);
-    })
-    .click(function() {
-      foldToggle(this);
-    })
-    .trigger("click");
-});
+ $(document).ready(function() {
+   $(".list-btn")
+     .hover(function() {
+       cursorChange(this);
+     })
+     .click(function() {
+       foldToggle(this);
+       turnArrow(this);
+     })
+     .trigger("click");
+ });
 
-function foldToggle(element) {
-  $(element)
-    .next("ul")
-    .slideToggle();
-}
+ function foldToggle(element) {
+   $(element)
+     .next("ul")
+     .slideToggle();
+ }
 
-function cursorChange(element, cursorType) {
-  $(element).css("cursor", "pointer");
-}
+ function cursorChange(element, cursorType) {
+   $(element).css("cursor", "pointer");
+ }
+
+ function turnArrow(element) {
+   if ($(element).hasClass("before-active")) {
+     $(element).removeClass("before-active");
+     $(element).addClass("after-active");
+   } else {
+     $(element).removeClass("after-active");
+     $(element).addClass("before-active");
+   }
+ }

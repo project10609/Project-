@@ -769,7 +769,7 @@ ol {
 
 .nav-item .nav-depart .depart-btn .depart-hover {
   position: absolute;
-  width: 100%;
+  width: 300px;
   background: #a99797;
   left: 0;
   top: 62px;
@@ -1952,11 +1952,14 @@ ol {
   display: inline-block;
   padding: 3px;
   margin-left: 5px;
+}
+
+.filter-widget .filter-catagories .before-active {
   transform: rotate(-45deg);
   -webkit-transform: rotate(-45deg);
 }
 
-.filter-widget .filter-catagories .list-btn:active {
+.filter-widget .filter-catagories .after-active {
   transform: rotate(45deg);
   -webkit-transform: rotate(45deg);
 }

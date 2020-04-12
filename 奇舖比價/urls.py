@@ -24,10 +24,10 @@ from products import views
 urlpatterns = [
 
 
-    path('',views.ProductListView.as_view(),name='index'),
+    path('', views.index, name='index'),
     path('account/', include('account.urls')),
-    path('search/',include('search.urls')),
-    path('product/',include('products.urls')),
+    path('search/', include('search.urls')),
+    path('product/', include('products.urls')),
     # path(r'/search', productSearch)
 ]
 if settings.ADMIN_ENABLED:

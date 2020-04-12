@@ -7,6 +7,7 @@ from django.views.generic import ListView, DetailView
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.models import User
 from products.forms import ProductFilterForm, ProductPriceForm, ProductSourceForm
+from django.db.models import Count
 # Create your views here.
 
 
@@ -86,11 +87,9 @@ def search(request):
             end_index = index + 5 if index <= max_index - 5 else max_index
             page_range = list(paginator.page_range)[start_index:end_index]
 
-            total = products.count()
-
             context = {
                 'product_list': product_list,
-                'total': total,
+
                 'page_range': page_range,
                 'category': category,
                 'sortingform': sortingform,
@@ -123,6 +122,7 @@ def search(request):
 
             context = {
                 'products': products,
+
                 'product_list': product_list,
                 'page_range': page_range,
                 'category': category,
@@ -187,6 +187,7 @@ def search(request):
                                 product_price__range=(min_price, max_price)).order_by('?')
                         else:
                             products = products.order_by('?')
+
             paginator = Paginator(products, 20)
             try:
                 page = request.GET.get('page', '1')
@@ -203,11 +204,9 @@ def search(request):
             end_index = index + 5 if index <= max_index - 5 else max_index
             page_range = list(paginator.page_range)[start_index:end_index]
 
-            total = products.count()
-
             context = {
                 'product_list': product_list,
-                'total': total,
+
                 'page_range': page_range,
                 'category': category,
                 'sortingform': sortingform,
@@ -221,6 +220,7 @@ def search(request):
             sortingform = ProductFilterForm()
             sourceform = ProductSourceForm()
             priceform = ProductPriceForm()
+            products = products.annotate(total_count=Count('product_name'))
 
             paginator = Paginator(products, 20)
             try:
@@ -241,6 +241,7 @@ def search(request):
             context = {
                 'products': products,
                 'product_list': product_list,
+
                 'page_range': page_range,
                 'category': category,
                 'sortingform': sortingform,

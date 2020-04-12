@@ -17,7 +17,7 @@
             <li><a href="{% url 'products:categories' category.pk %}">{{ category.name }}({{category.products.count}})</a>
               {% if category.subcategory.count == 1 %}
               {% else %}
-              <i class="list-btn"></i>
+              <i class="list-btn before-active"></i>
               {% endif %}
               <ul class="filter-sub-catagories">
                 {% for subcategory in category.subcategory.all %}

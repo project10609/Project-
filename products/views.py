@@ -7,7 +7,10 @@ from products.models import Product, Categories, Source, Subcategories
 from django.views.generic import ListView, DetailView
 from django.views.generic.list import MultipleObjectMixin
 from .forms import ProductFilterForm, ProductSourceForm, ProductPriceForm
-from django.db.models import Count
+from django.db.models import Count, Q
+from search.models import Queries
+from functools import reduce
+import operator
 
 
 class CategoryMixin(object):
@@ -20,16 +23,20 @@ class CategoryMixin(object):
         return context
 
 
-class ProductListView(CategoryMixin, ListView):
-    template_name = 'products/index.html'
-    model = Product
-    context_object_name = 'products'
-    paginate_by = 9
+def index(request):
+    products = Product.objects.all()
+    queries_items = list(Queries.objects.values_list(
+        'search', flat=True).distinct())
+    queries = Queries.objects.all().values(
+        'search').annotate(counts=Count('search')).order_by('-counts')[:10]
+    for query in queries_items[1:]:
+        recommendItems = products.filter(product_name__icontains=query)[:7]
+    context = {
+        'queries': queries,
+        'recommendItems': recommendItems,
+    }
 
-    def get_context_data(self, *, object_list=None, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['total'] = self.get_queryset().count
-        return context
+    return render(request, 'products/index.html', context)
 
 
 class ProductDetailView(DetailView):
@@ -268,6 +275,9 @@ def subcategory(request, pk):
             'priceform': priceform,
         }
         return render(request, 'products/subcategory.html', context)
+
+
+# def product_
 
 
 def category_list(request):

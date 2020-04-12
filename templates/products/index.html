@@ -15,12 +15,9 @@
     熱門關鍵字
   </div>
   <div class="fw-tags col-lg-12" style="margin-left: 50px; margin-right: 50px;">
-    <a href="#">情挑誘吻星鑽蜜唇膏</a>
-    <a href="#">YSL</a>
-    <a href="#">飛激長瞬翹防水睫毛膏</a>
-    <a href="#">蜜粉</a>
-    <a href="#">蘂花譚韓方水晶露</a>
-    <a href="#">雅詩蘭黛</a>
+    {% for query in queries %}
+    <a href="#">{{ query.search }}</a>
+    {% endfor %}
   </div>
 </div>
 <div class="container-fluid" style="margin-top: 40px;">
@@ -30,108 +27,25 @@
   <div class="row" style="margin-left: 50px; margin-right: 50px;">
     <div class="col-lg-12">
       <div class="product-slider owl-carousel">
+        {% for item in recommendItems %}
         <div class="product-item">
           <div class="pi-pic">
-            <img class="home-page-img" src="img/products/women-1.jpg">
+            <img class="home-page-img" src="{{ item.product_images }}">
             <ul>
-              <li class="quick-view"><a href="#">前往網站瀏覽</a></li>
+              <li class="quick-view"><a href="{{ item.product_url }}">前往網站瀏覽</a></li>
             </ul>
           </div>
           <div class="pi-text">
-            <a href="#">
-              <h5>Pure Pineapple</h5>
+            <a href="{{ item.product_url }}">
+              <h5>{{ item.product_name }}</h5>
             </a>
-            <div class="catagory-name">露天拍賣</div>
+            <div class="catagory-name">{{ item.product_source }}</div>
             <div class="product-price">
-              $14.00
+              {{ item.product_price }}
             </div>
           </div>
         </div>
-        <div class="product-item">
-          <div class="pi-pic">
-            <img class="home-page-img" src="img/blog/blog-detail.jpg">
-            <ul>
-              <li class="quick-view"><a href="#">前往網站瀏覽</a></li>
-            </ul>
-          </div>
-          <div class="pi-text">
-            <a href="#">
-              <h5>Pure Pineapple</h5>
-            </a>
-            <div class="catagory-name">露天拍賣</div>
-            <div class="product-price">
-              $14.00
-            </div>
-          </div>
-        </div>
-        <div class="product-item">
-          <div class="pi-pic">
-            <img class="home-page-img" src="img/blog/blog-1.jpg">
-            <ul>
-              <li class="quick-view"><a href="#">前往網站瀏覽</a></li>
-            </ul>
-          </div>
-          <div class="pi-text">
-            <a href="#">
-              <h5>Pure Pineapple</h5>
-            </a>
-            <div class="catagory-name">露天拍賣</div>
-            <div class="product-price">
-              $14.00
-            </div>
-          </div>
-        </div>
-        <div class="product-item">
-          <div class="pi-pic">
-            <img class="home-page-img" src="img/blog/blog-2.jpg">
-            <ul>
-              <li class="quick-view"><a href="#">前往網站瀏覽</a></li>
-            </ul>
-          </div>
-          <div class="pi-text">
-            <a href="#">
-              <h5>Pure Pineapple</h5>
-            </a>
-            <div class="catagory-name">露天拍賣</div>
-            <div class="product-price">
-              $14.00
-            </div>
-          </div>
-        </div>
-        <div class="product-item">
-          <div class="pi-pic">
-            <img class="home-page-img" src="img/blog/blog-detail.jpg">
-            <ul>
-              <li class="quick-view"><a href="#">前往網站瀏覽</a></li>
-            </ul>
-          </div>
-          <div class="pi-text">
-            <a href="#">
-              <h5>Pure Pineapple</h5>
-            </a>
-            <div class="catagory-name">露天拍賣</div>
-            <div class="product-price">
-              $14.00
-            </div>
-          </div>
-        </div>
-        <div class="product-item">
-          <div class="pi-pic">
-            <img class="home-page-img" src="img/blog/blog-detail.jpg">
-            <ul>
-              <li class="quick-view"><a href="#">前往網站瀏覽</a></li>
-            </ul>
-          </div>
-          <div class="pi-text">
-            <a href="#">
-              <h5>Pure Pineapple</h5>
-            </a>
-            <div class="catagory-name">露天拍賣</div>
-            <div class="product-price">
-              $14.00
-            </div>
-          </div>
-        </div>
+        {% endfor %}
       </div>
     </div>
   </div>
