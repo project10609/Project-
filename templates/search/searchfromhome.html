@@ -1,0 +1,257 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+{% load get_list %}
+<section class="product-shop spad">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3 col-md-6 col-sm-8 order-2 order-lg-1 produts-sidebar-filter">
+        <div class="filter-widget">
+          <h4 class="fw-title">所有分類</h4>
+          <ul class="filter-catagories">
+            {% for category in categories %}
+            <li><a href="{% url 'products:categories' category.pk %}">{{ category.name }}({{category.products.count}})</a>
+              {% if category.subcategory.count == 1 %}
+              {% else %}
+              <i class="list-btn"></i>
+              {% endif %}
+              <ul class="filter-sub-catagories">
+                {% for subcategory in category.subcategory.all %}
+                {% if subcategory.slug|lower == category.slug|lower %}
+                {% else %}
+                <li><a href="{% url 'products:subcategory' subcategory.pk %}">{{ subcategory.subcategory_name }}
+                    ({{ subcategory.subcategory.count }})</a></li>
+                {% endif %}
+                {% endfor %}
+              </ul>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+        <form class="" action="{% url 'search:search' %}" method="GET">
+          <div class="filter-widget">
+            <h4 class="fw-title">電商平台</h4>
+            <div class="fw-brand-check">
+              <div class="bc-item">
+                <li><a href="{% url 'index' %}">全部商品</a></li>
+                <!-- {{ sourceform.as_p }} -->
+                {% for field in sourceform.source %}
+                <label for="{{ field.id_for_label }}">
+                  {{ field }}
+                  <span class='checkmark'></span>
+
+                </label>
+                {% endfor %}
+                {% if request.GET.min_price %}
+                <input type="hidden" name="min_price" value="{{ request.GET.min_price }}">
+                {% endif %}
+                {% if request.GET.max_price %}
+                <input type="hidden" name="max_price" value="{{ request.GET.max_price }}">
+                {% endif %}
+                {% if request.GET.q %}
+                <input type="hidden" name="q" value="{{ request.GET.q }}">
+                {% endif %}
+                {% if request.GET.category %}
+                <input type="hidden" name="category" value="{{ request.GET.category }}">
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </form>
+        <form action="{% url 'search:search' %}" method="GET">
+          <div class="filter-widget">
+            <h4 class="fw-title">價格範圍</h4>
+            <div class="filter-range-wrap">
+              <div class="range-slider">
+                <div class="price-input">
+                  {{ priceform }}
+                </div>
+              </div>
+              <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content" data-min="1" data-max="9999">
+                <div class="ui-slider-range ui-corner-all ui-widget-header"></div>
+                <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
+                <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
+              </div>
+            </div>
+            {% if request.GET.source %}
+            {% for sources in request.GET|get_list:'source' %}
+            <input type="hidden" name="source" value="{{ sources }}">
+            {% endfor %}
+            {% endif %}
+            {% if request.GET.q %}
+            <input type="hidden" name="q" value="{{ request.GET.q }}">
+            {% endif %}
+            {% if request.GET.category %}
+            <input type="hidden" name="category" value="{{ request.GET.category }}">
+            {% endif %}
+            <input type="submit" name="" value="套用">
+          </div>
+        </form>
+      </div>
+      <div class="col-lg-9 order-1 order-lg-2">
+        <div class="product-show-option">
+          <div class="row">
+            <div class="col-lg-7 col-md-7">
+              <form action="{% url 'search:search' %}" method="GET">
+                <div class="select-option">
+                  {{ sortingform }}
+                  {% if request.GET.source %}
+                  {% for sources in request.GET|get_list:'source' %}
+                  <input type="hidden" name="source" value="{{ sources }}">
+                  {% endfor %}
+                  {% endif %}
+                  {% if request.GET.min_price %}
+                  <input type="hidden" name="min_price" value="{{ request.GET.min_price }}">
+                  {% endif %}
+                  {% if request.GET.max_price %}
+                  <input type="hidden" name="max_price" value="{{ request.GET.max_price }}">
+                  {% endif %}
+                  {% if request.GET.q %}
+                  <input type="hidden" name="q" value="{{ request.GET.q }}">
+                  {% endif %}
+                  {% if request.GET.category %}
+                  <input type="hidden" name="category" value="{{ request.GET.category }}">
+                  {% endif %}
+                </div>
+              </form>
+              <div class="arrange">
+                <input id="block-btn" type="image" src="{% static 'img/block.png' %}" width="40px" style="margin-left:5px; padding:5px; background-color:#f6f6f6;"></input>
+                <input id="straight-btn" type="image" src="{% static 'img/Straight.png' %}" width="40px" style="padding:5px;"></input>
+              </div>
+              {% if request.GET.q %}
+              <p class="product-search-result"><span>「{{ request.GET.q }}」</span>的商品有{{ products.count }}筆</p>
+              {% elif request.GET.q == "" %}
+              <p class="product-search-result"><span>「{{ request.GET.category }}」</span>的商品有{{ products.count }}</p>
+              {% endif %}
+            </div>
+            <div class="col-lg-5 col-md-5 product-page-controller text-right">
+              <p>
+                <span class="current-page-number">{{ product_list.number }}</span>
+                /
+                <span class="total-page-number">{{ product_list.paginator.num_pages }}</span>
+              </p>
+              {% if product_list.has_previous %}
+              <a href="?{% url_replace next_page=product_list.previous_page_number %}" class="page-prev">&lt;</a>
+              {% endif %}
+              {% if product_list.has_next %}
+              <a href="?{% url_replace next_page=product_list.next_page_number %}" class="page-next">&gt;</a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+
+
+
+        <div class="product-list" id="block-sorting">
+          <div class="row">
+            {% for result in product_list %}
+            <div class="col-lg-3 col-sm-6">
+              <div class="product-item">
+                <div class="pi-pic">
+                  <a href="{{ result.get_absolute_url }}"><img src="{{ result.product_images }}" alt="image"></a>
+                  <div class="sale pp-sale">{{ result.pk }}</div>
+                  <div class="icon">
+                    <i class="icon_heart_alt"></i>
+                  </div>
+                  <ul>
+                    <li class="quick-view"><a href="{{ result.product_url }}">前往網站瀏覽</a></li>
+                  </ul>
+                </div>
+                <div class="pi-text">
+                  <a href="{{ result.get_absolute_url }}">
+                    <h5>{{ result.product_name|truncatechars:20 }}</h5>
+
+                  </a>
+                  {% if result.product_source.slug == "Ruten" %}
+                  <div class="catagory-name">露天拍賣</div>
+                  {% endif %}
+                  {% if result.product_source.slug == "Shopee" %}
+                  <div class="catagory-name">蝦皮購物</div>
+                  {% endif %}
+                  {% if result.product_source.slug == "Yahoo" %}
+                  <div class="catagory-name">Yahoo拍賣</div>
+                  {% endif %}
+                  {% if result.product_source.slug == "ETMall" %}
+                  <div class="catagory-name">東森購物</div>
+                  {% endif %}
+                  {% if result.product_source.slug == "Momo" %}
+                  <div class="catagory-name">Momo購物</div>
+                  {% endif %}
+                  <div class="product-price">
+                    ${{ result.product_price }}
+                  </div>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+            {% if not product_list %}
+            <h1>It's Empty</h1>
+            {% endif %}
+          </div>
+        </div>
+
+        <div class="product-list" id="straight-sorting" style="display: none;">
+          <div class="row">
+            {% for result in product_list %}
+            <div class="col-md-4">
+              <div class="product-image2">
+                <div class="pi-pic">
+                  <img src="{{ result.product_images   }}" alt="">
+                  <div class="sale pp-sale">{{ result.pk }}</div>
+                  <div class="icon">
+                    <i class="icon_heart_alt"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="px-text">
+                <div class="product-name">{{ result.product_name }}</div>
+                {% if result.product_source.slug == "Ruten" %}
+                <div class="product-store">Ruten</div>
+                {% endif %}
+                {% if result.product_source.slug == "Shopee" %}
+                <div class="product-store">Shopee</div>
+                {% endif %}
+                {% if result.product_source.slug == "Momo" %}
+                <div class="product-store">Momo</div>
+                {% endif %}
+                {% if result.product_source.slug == "Yahoo" %}
+                <div class="product-store">Yahoo</div>
+                {% endif %}
+                {% if result.product_source.slug == "ETMall" %}
+                <div class="product-store">ETMall</div>
+                {% endif %}
+                <div class="product-price">{{ result.product_price }}</div>
+                <button><a href="{{ product.product_url }}">前往網站瀏覽</a></button>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="col-md-12 col-lg-12 product-bottom-page-controller text-center">
+    {% if product_list.has_previous %}
+    <a href="?{% url_replace next_page=product_list.previous_page_number %}">&lt;</a>
+    {% endif %}
+    {% for pg in page_range %}
+    {% if product_list.number == pg %}
+    <a href="?{% url_replace next_page=pg %}" class="page-button-1 current">{{pg}}</a>
+    {% else %}
+    <a href="?{% url_replace next_page=pg %}" class="page-button-1">{{pg}}</a>
+    {% endif %}
+    {% endfor %}
+    {% if product_list.has_next %}
+    <a class="page-next" href="?{% url_replace next_page=product_list.next_page_number %}">&gt;</a>
+    {% endif %}
+
+  </div>
+</section>
+
+
+
+
+{% endblock %}
