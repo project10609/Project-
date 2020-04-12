@@ -16,7 +16,7 @@
   </div>
   <div class="fw-tags col-lg-12" style="margin-left: 50px; margin-right: 50px;">
     {% for query in queries %}
-    <a href="#">{{ query.search }}</a>
+    <a href="{% url 'search:search_from_home' query.search %}">{{ query.search }}</a>
     {% endfor %}
   </div>
 </div>
