@@ -17,11 +17,12 @@ import operator
 def search(request):
     category = request.GET.get('category', None)
     query = request.GET.get('q', None)
+    if request.user.is_authenticated:
+        result = Queries.objects.create(search=query, user=request.user)
+        result.save()
     if category:
         products = Product.objects.filter(
             product_category__slug__icontains=category).filter(product_name__icontains=query)
-        result = Queries.objects.create(search=query, user=request.user)
-        result.save()
         if request.method == 'GET' and 'filter_by' in request.GET or request.method == 'GET' and 'source' in request.GET or request.method == 'GET' and 'min_price' in request.GET or request.method == 'GET' and 'max_price' in request.GET:
             sortingform = ProductFilterForm(request.GET)
             sourceform = ProductSourceForm(request.GET)
