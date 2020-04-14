@@ -13,8 +13,11 @@
         <div class="filter-widget">
           <h4 class="fw-title">所有分類</h4>
           <ul class="filter-catagories">
+            {% for image in img_list %}
             {% for category in categories %}
-            <li><a href="{% url 'products:categories' category.pk %}">{{ category.name }}({{category.products.count}})</a>
+            <li><a href="{% url 'products:categories' category.pk %}">
+                <img src="{{image}}" alt="">
+                {{ category.name }}({{category.products.count}})</a>
               {% if category.subcategory.count == 1 %}
               {% else %}
               <i class="list-btn"></i>
@@ -29,6 +32,7 @@
                 {% endfor %}
               </ul>
             </li>
+            {% endfor %}
             {% endfor %}
           </ul>
         </div>

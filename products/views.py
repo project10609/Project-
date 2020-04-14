@@ -12,6 +12,7 @@ from search.models import Queries
 from functools import reduce
 import operator
 import random
+import os
 
 
 class CategoryMixin(object):
@@ -73,8 +74,8 @@ class ProductDetailView(DetailView):
 
 
 def category_item(request, pk):
-    category = get_object_or_404(Categories, pk=pk)
 
+    category = get_object_or_404(Categories, pk=pk)
     products = Product.objects.filter(
         product_category__slug__icontains=category).order_by('?')
     if request.method == 'GET' and 'filter_by' in request.GET or request.method == 'GET' and 'source' in request.GET or request.method == 'GET' and 'min_price' in request.GET or request.method == 'GET' and 'max_price' in request.GET:
@@ -153,6 +154,7 @@ def category_item(request, pk):
             'sortingform': sortingform,
             'sourceform': sourceform,
             'priceform': priceform,
+
         }
         return render(request, 'products/category_box.html', context)
 
@@ -185,6 +187,7 @@ def category_item(request, pk):
             'sortingform': sortingform,
             'sourceform': sourceform,
             'priceform': priceform,
+
         }
         return render(request, 'products/category_box.html', context)
 
@@ -269,6 +272,7 @@ def subcategory(request, pk):
             'sortingform': sortingform,
             'sourceform': sourceform,
             'priceform': priceform,
+
         }
         return render(request, 'products/subcategory.html', context)
 
@@ -301,6 +305,7 @@ def subcategory(request, pk):
             'sortingform': sortingform,
             'sourceform': sourceform,
             'priceform': priceform,
+
         }
         return render(request, 'products/subcategory.html', context)
 
