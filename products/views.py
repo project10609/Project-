@@ -69,7 +69,7 @@ def index(request):
 
 
 class ProductDetailView(DetailView):
-    template_name = 'products/productDetail.html'
+    template_name = 'products/product_detail.html'
     model = Product
 
 

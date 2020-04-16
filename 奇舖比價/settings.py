@@ -173,7 +173,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'static', 'static_root', 'img')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'static', 'media', 'full')
 
 LOCALE_PATHS = (
     os.path.join(BASE_DIR, 'locale'),

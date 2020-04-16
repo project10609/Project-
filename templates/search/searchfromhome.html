@@ -11,7 +11,8 @@
           <ul class="filter-catagories">
             {% for category in categories %}
             <li><a href="{% url 'products:categories' category.pk %}">
-                {% if category.slug == "Blush" %}
+                <img src="{% static 'img/makeup-icon/1.png' %}" alt="">
+                <!-- {% if category.slug == "Blush" %}
                 <img src="{% static 'img/makeup-icon/1.png' %}" alt="">
                 {% elif category.slug == "Brow" %}
                 <img src="{% static 'img/makeup-icon/2.png' %}" alt="">
@@ -29,7 +30,7 @@
                 <img src="{% static 'img/makeup-icon/8.png' %}" alt="">
                 {% elif category.slug == "Remover" %}
                 <img src="{% static 'img/makeup-icon/9.png' %}" alt="">
-                {% endif %}
+                {% endif %} -->
                 {{ category.name }}({{category.products.count}})</a>
               {% if category.subcategory.count == 1 %}
               {% else %}
@@ -168,7 +169,7 @@
             <div class="col-lg-3 col-sm-6">
               <div class="product-item">
                 <div class="pi-pic">
-                  <a href="{{ result.get_absolute_url }}"><img src="{{ result.product_images }}" alt="image"></a>
+                  <a href="{% url 'products:product_detail' product.pk %}"><img src="{{ result.product_images }}" alt="image"></a>
                   <div class="sale pp-sale">{{ result.pk }}</div>
                   <div class="icon">
                     <i class="icon_heart_alt"></i>
@@ -178,7 +179,7 @@
                   </ul>
                 </div>
                 <div class="pi-text">
-                  <a href="{{ result.get_absolute_url }}">
+                  <a href="{% url 'products:product_detail' product.pk %}">
                     <h5>{{ result.product_name|truncatechars:20 }}</h5>
 
                   </a>
@@ -216,7 +217,7 @@
             <div class="col-md-4">
               <div class="product-image2">
                 <div class="pi-pic">
-                  <img src="{{ result.product_images   }}" alt="">
+                  <a href="{% url 'products:product_detail' product.pk %}"><img src="{{ result.product_images   }}" alt=""></a>
                   <div class="sale pp-sale">{{ result.pk }}</div>
                   <div class="icon">
                     <i class="icon_heart_alt"></i>
@@ -226,7 +227,7 @@
             </div>
             <div class="col-md-6">
               <div class="px-text">
-                <div class="product-name">{{ result.product_name }}</div>
+                <div class="product-name"><a href="{% url 'products:product_detail' product.pk %}">{{ result.product_name }}</a></div>
                 {% if result.product_source.slug == "Ruten" %}
                 <div class="product-store">Ruten</div>
                 {% endif %}
@@ -255,18 +256,19 @@
   </div>
   <div class="col-md-12 col-lg-12 product-bottom-page-controller text-center">
     {% if product_list.has_previous %}
-    <a href="?{% url_replace next_page=product_list.previous_page_number %}">&lt;</a>
+    <button class="page-prev"><a href="?{% url_replace next_page=product_list.previous_page_number %}">&lt;</a></button>
     {% endif %}
     {% for pg in page_range %}
     {% if product_list.number == pg %}
-    <a href="?{% url_replace next_page=pg %}" class="page-button-1 current">{{pg}}</a>
+    <button class="current-page">{{pg}}</button>
     {% else %}
-    <a href="?{% url_replace next_page=pg %}" class="page-button-1">{{pg}}</a>
+    <button><a href="?{% url_replace next_page=pg %}">{{pg}}</a></button>
     {% endif %}
     {% endfor %}
     {% if product_list.has_next %}
-    <a class="page-next" href="?{% url_replace next_page=product_list.next_page_number %}">&gt;</a>
+    <button class="page-next"><a href="?{% url_replace next_page=product_list.next_page_number %}">&gt;</a></button>
     {% endif %}
+
 
   </div>
 </section>
