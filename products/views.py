@@ -14,6 +14,9 @@ import operator
 import random
 import os
 
+# class Products(ListView):
+#     template = ""
+
 
 class CategoryMixin(object):
     def get_categories(self):
@@ -66,11 +69,6 @@ def index(request):
         return render(request, 'products/index.html', context)
     else:
         return render(request, 'products/index.html', {})
-
-
-class ProductDetailView(DetailView):
-    template_name = 'products/product_detail.html'
-    model = Product
 
 
 def category_item(request, pk):

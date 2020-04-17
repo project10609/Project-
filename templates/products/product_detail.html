@@ -170,45 +170,28 @@
             <div class="row">
               <div class="comment-option">
                 <div class="col-lg-12">
-                  <h4>評論(2)</h4>
+                  <h4>評論({{ comment_count }})</h4>
                 </div>
                 <div class="col-lg-12 col-md-12">
+                  {% for rating in ratings %}
                   <div class="co-item">
                     <div class="avatar-pic">
                       <img src="img/product-single/avatar-1.png" alt="">
                     </div>
                     <div class="avatar-text">
                       <div class="at-rating">
-                        <span class="point">4.0</span><span class="point2">/5</span>
+                        <span class="point">{{ rating.price_rating }}</span><span class="point2">/5</span>
                         <i class="fa fa-star"></i>
                         <i class="fa fa-star"></i>
                         <i class="fa fa-star"></i>
                         <i class="fa fa-star"></i>
                         <i class="fa fa-star-o"></i>
                       </div>
-                      <h5>Brandon Kelley <span>2019.04.14</span></h5>
-                      <div class="at-reply">Nice !</div>
+                      <h5>{{ rating.user }} <span>{{ rating.created_on }}</span></h5>
+                      <div class="at-reply">{{ rating.comment }}</div>
                     </div>
                   </div>
-                  <div class="co-item">
-                    <div class="avatar-pic">
-                      <img src="img/product-single/avatar-2.png" alt="">
-                    </div>
-                    <div class="avatar-text">
-                      <div class="at-rating">
-                        <span class="point">4.1</span><span class="point2">/5</span>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star-o"></i>
-                      </div>
-                      <h5>Roy Banks <span>2019.04.14</span></h5>
-                      <div class="at-reply">
-                        <p>這個商品很不錯，有良好的出貨速度，優秀的品質，非常值得推薦！這個商品很不錯，有良好的出貨速度，優秀的品質，非常值得推薦！</p>
-                      </div>
-                    </div>
-                  </div>
+                  {% endfor %}
                 </div>
                 <div class="col-lg-12 text-right product-details-page">
                   <p>
