@@ -141,7 +141,7 @@
                   <a href="{% url 'products:product_detail' product.pk %}"><img src="{{ product.product_images }}" alt="image"></a>
                   <div class="sale pp-sale">{{ product.pk }}</div>
                   <div class="icon">
-                    <i class="icon_heart_alt"></i>
+                    <i class="favorite-heart-icon icon_heart_alt"></i>
                   </div>
                   <ul>
                     <li class="quick-view"><a href="{{ product.product_url }}">前往網站瀏覽</a></li>
@@ -150,6 +150,7 @@
                 <div class="pi-text">
                   <a href="{% url 'products:product_detail' product.pk %}">
                     <h5>{{ product.product_name|truncatechars:20 }}</h5>
+
                   </a>
                   {% if product.product_source.slug == "Ruten" %}
                   <div class="catagory-name">露天拍賣</div>
@@ -169,7 +170,6 @@
                   <div class="product-price">
                     ${{ product.product_price }}
                   </div>
-
                 </div>
               </div>
             </div>
@@ -181,9 +181,10 @@
         </div>
 
         <div class="product-list" id="straight-sorting" style="display: none;">
+
+          {% for product in product_list %}
           <div class="row">
-            {% for product in product_list %}
-            <div class="col-md-4">
+            <div class="col-md-3">
               <div class="product-image2">
                 <div class="pi-pic">
                   <a href="{% url 'products:product_detail' product.pk %}"><img src="{{ product.product_images }}" alt=""></a>
@@ -194,23 +195,24 @@
                 </div>
               </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-9">
               <div class="px-text">
+
                 <div class="product-name"><a href="{% url 'products:product_detail' product.pk %}">{{ product.product_name }}</a></div>
                 {% if product.product_source.slug == "Ruten" %}
-                <div class="product-store">Ruten</div>
+                <div class="product-store">露天拍賣</div>
                 {% endif %}
                 {% if product.product_source.slug == "Shopee" %}
-                <div class="product-store">Shopee</div>
+                <div class="product-store">蝦皮購物</div>
                 {% endif %}
                 {% if product.product_source.slug == "Momo" %}
-                <div class="product-store">Momo</div>
+                <div class="product-store">Momo購物</div>
                 {% endif %}
                 {% if product.product_source.slug == "Yahoo" %}
-                <div class="product-store">Yahoo</div>
+                <div class="product-store">Yahoo拍賣</div>
                 {% endif %}
                 {% if product.product_source.slug == "ETMall" %}
-                <div class="product-store">ETMall</div>
+                <div class="product-store">東森購物</div>
                 {% endif %}
                 <div class="product-price">${{ product.product_price }}</div>
                 <div class="pd-rating">
@@ -227,8 +229,9 @@
                 </div>
               </div>
             </div>
-            {% endfor %}
           </div>
+          <hr>
+          {% endfor %}
         </div>
 
         <div class="col-md-12 col-lg-12 product-bottom-page-controller text-center">

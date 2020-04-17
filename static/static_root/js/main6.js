@@ -9,11 +9,11 @@
 
 "use strict";
 
-(function($) {
+(function ($) {
   /*------------------
         Preloader
     --------------------*/
-  $(window).on("load", function() {
+  $(window).on("load", function () {
     $(".loader").fadeOut();
     $("#preloder").delay(200).fadeOut("slow");
   });
@@ -21,7 +21,7 @@
   /*------------------
         Background Set
     --------------------*/
-  $(".set-bg").each(function() {
+  $(".set-bg").each(function () {
     var bg = $(this).data("setbg");
     $(this).css("background-image", "url(" + bg + ")");
   });
@@ -155,7 +155,7 @@
   // Use this for real timer date
   /* var timerdate = "2020/01/01"; */
 
-  $("#countdown").countdown(timerdate, function(event) {
+  $("#countdown").countdown(timerdate, function (event) {
     $(this).html(
       event.strftime(
         "<div class='cd-item'><span>%D</span> <p>Days</p> </div>" +
@@ -169,13 +169,13 @@
   /*----------------------------------------------------
      Language Flag js
     ----------------------------------------------------*/
-  $(document).ready(function(e) {
+  $(document).ready(function (e) {
     //no use
     try {
       var pages = $("#pages")
         .msDropdown({
           on: {
-            change: function(data, ui) {
+            change: function (data, ui) {
               var val = data.value;
               if (val != "") window.location = val;
             },
@@ -209,10 +209,10 @@
     min: minPrice,
     max: maxPrice,
     values: [minPrice, maxPrice],
-    slide: function(event, ui) {
+    slide: function (event, ui) {
       minamount.val("$" + ui.values[0]);
       maxamount.val("$" + ui.values[1]);
-    }
+    },
   });
   minamount.val(rangeSlider.slider("values", 0));
   maxamount.val(rangeSlider.slider("values", 1));
@@ -222,7 +222,7 @@
 	--------------------- */
   $(".fw-size-choose .sc-item label, .pd-size-choose .sc-item label").on(
     "click",
-    function() {
+    function () {
       $(
         ".fw-size-choose .sc-item label, .pd-size-choose .sc-item label"
       ).removeClass("active");
@@ -238,7 +238,7 @@
   /*------------------
 		Single Product
 	--------------------*/
-  $(".product-thumbs-track .pt").on("click", function() {
+  $(".product-thumbs-track .pt").on("click", function () {
     $(".product-thumbs-track .pt").removeClass("active");
     $(this).addClass("active");
     var imgurl = $(this).data("imgbigurl");
@@ -246,7 +246,7 @@
     if (imgurl != bigImg) {
       $(".product-big-img").attr({ src: imgurl });
       $(".zoomImg").attr({ src: imgurl });
-    },
+    }
   });
 
   $(".product-pic-zoom").zoom();
@@ -257,7 +257,7 @@
   var proQty = $(".pro-qty");
   proQty.prepend('<span class="dec qtybtn">-</span>');
   proQty.append('<span class="inc qtybtn">+</span>');
-  proQty.on("click", ".qtybtn", function() {
+  proQty.on("click", ".qtybtn", function () {
     var $button = $(this);
     var oldValue = $button.parent().find("input").val();
     if ($button.hasClass("inc")) {
@@ -277,55 +277,55 @@
 /*-------------------
   Sorting
 --------------------- */
-$(document).ready(function(){
-    $("#block-btn").click(function() {
-        $("#straight-sorting").hide();
-        $("#block-sorting").show();
-        $("#straight-btn").css("background-color", "#ffffff");
-        $("#block-btn").css("background-color", "#f6f6f6");
-    });
-    $("#straight-btn").click(function() {
-        $("#block-sorting").hide();
-        $("#straight-sorting").show();
-        $("#straight-btn").css("background-color", "#f6f6f6");
-        $("#block-btn").css("background-color", "#ffffff");
-    });
+$(document).ready(function () {
+  $("#block-btn").click(function () {
+    $("#straight-sorting").hide();
+    $("#block-sorting").show();
+    $("#straight-btn").css("background-color", "#ffffff");
+    $("#block-btn").css("background-color", "#f6f6f6");
+  });
+  $("#straight-btn").click(function () {
+    $("#block-sorting").hide();
+    $("#straight-sorting").show();
+    $("#straight-btn").css("background-color", "#f6f6f6");
+    $("#block-btn").css("background-color", "#ffffff");
+  });
 });
 
 /*-------------------
   filter-catagories
  --------------------- */
- $(document).ready(function() {
-   $(".list-btn")
-     .hover(function() {
-       cursorChange(this);
-     })
-     .click(function() {
-       foldToggle(this);
-       turnArrow(this);
-     })
-     .trigger("click");
- });
+$(document).ready(function () {
+  $(".list-btn")
+    .hover(function () {
+      cursorChange(this);
+    })
+    .click(function () {
+      foldToggle(this);
+      turnArrow(this);
+    })
+    .trigger("click");
+});
 
- function foldToggle(element) {
-   $(element).next("ul").slideToggle();
- }
+function foldToggle(element) {
+  $(element).next("ul").slideToggle();
+}
 
- function cursorChange(element, cursorType) {
-   $(element).css("cursor", "pointer");
- }
+function cursorChange(element, cursorType) {
+  $(element).css("cursor", "pointer");
+}
 
- function turnArrow(element) {
-   if ($(element).hasClass("before-active")) {
-     $(element).removeClass("before-active");
-     $(element).addClass("after-active");
-   } else {
-     $(element).removeClass("after-active");
-     $(element).addClass("before-active");
-   }
- }
+function turnArrow(element) {
+  if ($(element).hasClass("before-active")) {
+    $(element).removeClass("before-active");
+    $(element).addClass("after-active");
+  } else {
+    $(element).removeClass("after-active");
+    $(element).addClass("before-active");
+  }
+}
 
- /*-------------------
+/*-------------------
 		rating
   --------------------- */
 $(document).ready(function () {

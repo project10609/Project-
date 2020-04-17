@@ -4972,12 +4972,12 @@ ol {
 
   .search-input .search-select {
     height: 50px;
-    width: 26%;
+    width: 20%;
     padding-left: 0px;
   }
 
   .search-input .search-text {
-    width: 62%;
+    width: 64%;
   }
 }
 
