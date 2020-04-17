@@ -14,7 +14,8 @@
           <h4 class="fw-title">所有分類</h4>
           <ul class="filter-catagories">
             {% for category in categories %}
-            <li><a href="{% url 'products:categories' category.pk %}">{{ category.name }}({{category.products.count}})</a>
+            <li><a
+                href="{% url 'products:categories' category.pk %}">{{ category.name }}({{category.products.count}})</a>
               {% if category.subcategory.count == 1 %}
               {% else %}
               <i class="list-btn before-active"></i>
@@ -69,7 +70,8 @@
                   {{ priceform }}
                 </div>
               </div>
-              <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content" data-min="1" data-max="9999">
+              <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
+                data-min="1" data-max="9999">
                 <div class="ui-slider-range ui-corner-all ui-widget-header"></div>
                 <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
                 <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
@@ -83,9 +85,9 @@
       <div class="col-lg-9 order-1 order-lg-2">
         <div class="product-show-option">
           <div class="row">
-            <div class="col-lg-7 col-md-7">
-              <form action="{% url 'products:subcategory' category.pk %}" method="GET">
-                <div class="select-option">
+            <div class="col-lg-8 col-md-8">
+              <div class="select-option">
+                <form action="{% url 'products:subcategory' category.pk %}" method="GET">
                   {{ sortingform }}
                   {% if request.GET.source %}
                   {% for sources in request.GET|get_list:'source' %}
@@ -98,18 +100,19 @@
                   {% if request.GET.max_price %}
                   <input type="hidden" name="max_price" value="{{ request.GET.max_price }}">
                   {% endif %}
+                </form>
+                <div class="arrange">
+                  <input id="block-btn" type="image" src="{% static 'img/block.png' %}" width="40px"
+                    style="margin-left:5px; padding:5px; background-color:#f6f6f6;"></input>
+                  <input id="straight-btn" type="image" src="{% static 'img/Straight.png' %}" width="40px"
+                    style="padding:5px;"></input>
                 </div>
-              </form>
-              <div class="arrange">
-                <input id="block-btn" type="image" src="{% static 'img/block.png' %}" width="40px" style="margin-left:5px; padding:5px; background-color:#f6f6f6;"></input>
-                <input id="straight-btn" type="image" src="{% static 'img/Straight.png' %}" width="40px" style="padding:5px;"></input>
+                <p class="product-search-result">Show {{ product_list.start_index }} - {{ product_list.end_index }} Of
+                  {{ products.count }} products</p>
               </div>
-              <p class="product-search-result">Show {{ product_list.start_index }} - {{ product_list.end_index }} Of
-                {{ products.count }} products</p>
-
             </div>
 
-            <div class="col-lg-5 col-md-5 product-page-controller text-right">
+            <div class="col-lg-4 col-md-4 product-page-controller text-right">
 
               <p>
                 <span class="current-page-number">{{ product_list.number }}</span>
@@ -117,12 +120,14 @@
                 <span class="total-page-number">{{ product_list.paginator.num_pages }}</span>
               </p>
               {% if product_list.has_previous %}
-              <button class="page-prev"><a href="?{% url_replace next_page=product_list.previous_page_number %}">&lt;</a></button>
+              <button class="page-prev"><a
+                  href="?{% url_replace next_page=product_list.previous_page_number %}">&lt;</a></button>
               {% else %}
               <button class="page-prev">&lt;</button>
               {% endif %}
               {% if product_list.has_next %}
-              <button class="page-next"><a href="?{% url_replace next_page=product_list.next_page_number %}">&gt;</a></button>
+              <button class="page-next"><a
+                  href="?{% url_replace next_page=product_list.next_page_number %}">&gt;</a></button>
               {% else %}
 
               <button class="page-next">&gt;</button>
@@ -139,7 +144,8 @@
             <div class="col-lg-3 col-sm-6">
               <div class="product-item">
                 <div class="pi-pic">
-                  <a href="{% url 'products:product_detail' product.pk %}"><img src="{{ product.product_images }}" alt="image"></a>
+                  <a href="{% url 'products:product_detail' product.pk %}"><img src="{{ product.product_images }}"
+                      alt="image"></a>
                   <div class="sale pp-sale">{{ product.pk }}</div>
                   <div class="icon">
                     <i class="icon_heart_alt"></i>
@@ -187,7 +193,8 @@
             <div class="col-md-4">
               <div class="product-image2">
                 <div class="pi-pic">
-                  <a href="{% url 'products:product_detail' product.pk %}"><img src="{{ product.product_images }}" alt=""></a>
+                  <a href="{% url 'products:product_detail' product.pk %}"><img src="{{ product.product_images }}"
+                      alt=""></a>
                   <div class="sale pp-sale">{{ product.pk }}</div>
                   <div class="icon">
                     <i class="icon_heart_alt"></i>
@@ -197,7 +204,8 @@
             </div>
             <div class="col-md-6">
               <div class="px-text">
-                <div class="product-name"><a href="{% url 'products:product_detail' product.pk %}">{{ product.product_name }}</a></div>
+                <div class="product-name"><a
+                    href="{% url 'products:product_detail' product.pk %}">{{ product.product_name }}</a></div>
                 {% if product.product_source.slug == "Ruten" %}
                 <div class="product-store">Ruten</div>
                 {% endif %}
@@ -223,7 +231,8 @@
 
         <div class="col-md-12 col-lg-12 product-bottom-page-controller text-center">
           {% if product_list.has_previous %}
-          <button class="page-prev"><a href="?{% url_replace next_page=product_list.previous_page_number %}">&lt;</a></button>
+          <button class="page-prev"><a
+              href="?{% url_replace next_page=product_list.previous_page_number %}">&lt;</a></button>
           {% else %}
           <button class="page-prev">&lt;</button>
           {% endif %}
@@ -235,7 +244,8 @@
           {% endif %}
           {% endfor %}
           {% if product_list.has_next %}
-          <button class="page-next"><a href="?{% url_replace next_page=product_list.next_page_number %}">&gt;</a></button>
+          <button class="page-next"><a
+              href="?{% url_replace next_page=product_list.next_page_number %}">&gt;</a></button>
           {% else %}
           <button class="page-next">&lt;</button>
           {% endif %}

@@ -88,7 +88,8 @@
                   {{ priceform }}
                 </div>
               </div>
-              <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content" data-min="1" data-max="9999">
+              <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
+                data-min="1" data-max="9999">
                 <div class="ui-slider-range ui-corner-all ui-widget-header"></div>
                 <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
                 <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
@@ -112,9 +113,9 @@
       <div class="col-lg-9 order-1 order-lg-2">
         <div class="product-show-option">
           <div class="row">
-            <div class="col-lg-7 col-md-7">
-              <form action="{% url 'search:search' %}" method="GET">
-                <div class="select-option">
+            <div class="col-lg-8 col-md-8">
+              <div class="select-option">
+                <form action="{% url 'search:search' %}" method="GET">
                   {{ sortingform }}
                   {% if request.GET.source %}
                   {% for sources in request.GET|get_list:'source' %}
@@ -133,43 +134,43 @@
                   {% if request.GET.category %}
                   <input type="hidden" name="category" value="{{ request.GET.category }}">
                   {% endif %}
+                </form>
+                <div class="arrange">
+                  <input id="block-btn" type="image" src="{% static 'img/block.png' %}" width="40px"
+                    style="margin-left:5px; padding:5px; background-color:#f6f6f6;"></input>
+                  <input id="straight-btn" type="image" src="{% static 'img/Straight.png' %}" width="40px"
+                    style="padding:5px;"></input>
                 </div>
-              </form>
-              <div class="arrange">
-                <input id="block-btn" type="image" src="{% static 'img/block.png' %}" width="40px" style="margin-left:5px; padding:5px; background-color:#f6f6f6;"></input>
-                <input id="straight-btn" type="image" src="{% static 'img/Straight.png' %}" width="40px" style="padding:5px;"></input>
+                {% if request.GET.q %}
+                <p class="product-search-result"><span>「{{ request.GET.q }}」</span>的商品有{{ products.count }}筆</p>
+                {% elif request.GET.q == "" %}
+                <p class="product-search-result"><span>「{{ request.GET.category }}」</span>的商品有{{ products.count }}</p>
+                {% endif %}
               </div>
-              {% if request.GET.q %}
-              <p class="product-search-result"><span>「{{ request.GET.q }}」</span>的商品有{{ products.count }}筆</p>
-              {% elif request.GET.q == "" %}
-              <p class="product-search-result"><span>「{{ request.GET.category }}」</span>的商品有{{ products.count }}</p>
-              {% endif %}
             </div>
-            <div class="col-lg-5 col-md-5 product-page-controller text-right">
+            <div class="col-lg-4 col-md-4 product-page-controller text-right">
               <p>
                 <span class="current-page-number">{{ product_list.number }}</span>
                 /
                 <span class="total-page-number">{{ product_list.paginator.num_pages }}</span>
               </p>
               {% if product_list.has_previous %}
-              <a href="?{% url_replace next_page=product_list.previous_page_number %}" class="page-prev">&lt;</a>
+              <button class="page-prev"><a href="?{% url_replace next_page=product_list.previous_page_number %}">&lt;</a></button>
               {% endif %}
               {% if product_list.has_next %}
-              <a href="?{% url_replace next_page=product_list.next_page_number %}" class="page-next">&gt;</a>
+              <button class="page-next"><a href="?{% url_replace next_page=product_list.next_page_number %}">&gt;</a></button>
               {% endif %}
             </div>
           </div>
         </div>
-
-
-
         <div class="product-list" id="block-sorting">
           <div class="row">
             {% for result in product_list %}
             <div class="col-lg-3 col-sm-6">
               <div class="product-item">
                 <div class="pi-pic">
-                  <a href="{% url 'products:product_detail' product.pk %}"><img src="{{ result.product_images }}" alt="image"></a>
+                  <a href="{% url 'products:product_detail' product.pk %}"><img src="{{ result.product_images }}"
+                      alt="image"></a>
                   <div class="sale pp-sale">{{ result.pk }}</div>
                   <div class="icon">
                     <i class="icon_heart_alt"></i>
@@ -217,7 +218,8 @@
             <div class="col-md-4">
               <div class="product-image2">
                 <div class="pi-pic">
-                  <a href="{% url 'products:product_detail' product.pk %}"><img src="{{ result.product_images   }}" alt=""></a>
+                  <a href="{% url 'products:product_detail' product.pk %}"><img src="{{ result.product_images   }}"
+                      alt=""></a>
                   <div class="sale pp-sale">{{ result.pk }}</div>
                   <div class="icon">
                     <i class="icon_heart_alt"></i>
@@ -227,7 +229,8 @@
             </div>
             <div class="col-md-6">
               <div class="px-text">
-                <div class="product-name"><a href="{% url 'products:product_detail' product.pk %}">{{ result.product_name }}</a></div>
+                <div class="product-name"><a
+                    href="{% url 'products:product_detail' product.pk %}">{{ result.product_name }}</a></div>
                 {% if result.product_source.slug == "Ruten" %}
                 <div class="product-store">Ruten</div>
                 {% endif %}

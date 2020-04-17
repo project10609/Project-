@@ -495,7 +495,7 @@ ol {
 }
 
 .inner-header .advanced-search .input-group {
-  max-width: 70%;
+  max-width: 90%;
   height: 100%;
 }
 
@@ -518,6 +518,35 @@ ol {
   background: #fcbabb;
   padding: 12px 16px 12px;
   cursor: pointer;
+}
+
+.search-input {
+  margin-top: 10px;
+}
+
+.search-input .search-select {
+  border: 1px solid #d1d1d1;
+  padding-left: 10px;
+}
+
+.search-input .search-text {
+  border: 1px solid #d1d1d1;
+  width: 70%;
+  height: 50px;
+  padding-left: 10px;
+  border-right: none;
+  border-left: none;
+}
+
+.search-input .search-submit {
+  background-position: center;
+  background-size: 25px 25px;
+  background-repeat: no-repeat;
+  background-color: #fcbabb;
+  padding: 15px 15px 15px 15px;
+  height: 50px;
+  width: 50px;
+  border: none;
 }
 
 .inner-header .nav-right {
@@ -2370,7 +2399,7 @@ ol {
   background-color: #ecb3b4;
 }
 
-.product-bottom-page-controller button{
+.product-bottom-page-controller button {
   margin-left: 10px;
   background-color: #ffffff;
   font-size: 18px;
@@ -2421,7 +2450,6 @@ ol {
   color: #ffffff;
 }
 
-
 /*---------------------
   Product Details
 -----------------------*/
@@ -2462,15 +2490,13 @@ ol {
   margin-top: 20px;
 }
 
-.product-shop .product-btn button a{
+.product-shop .product-btn button a {
   color: #ffffff;
 }
 
 .product-shop .product-btn button:hover {
   background-color: #ecb3b4;
 }
-
-
 
 .product-shop.page-details {
   padding-bottom: 60px;
@@ -2579,7 +2605,7 @@ ol {
 .product-details .pd-title .product-name {
   font-size: 30px;
   font-weight: 600;
-  width:90%;
+  width: 90%;
 }
 
 .product-details .pd-title .product-store {
@@ -4634,6 +4660,13 @@ ol {
   .product-details-page {
     width: 720px;
   }
+  .search-input .search-select {
+    width: 150px;
+  }
+
+  .search-input .search-text {
+    width: 450px;
+  }
 }
 
 @media only screen and (max-width: 991px) {
@@ -4758,6 +4791,14 @@ ol {
 
   .product-details-page {
     width: 720px;
+  }
+
+  .search-input .search-select {
+    width: 100px;
+  }
+
+  .search-input .search-text {
+    width: 300px;
   }
 }
 
@@ -4958,6 +4999,16 @@ ol {
   .product-details-page {
     width: 100%;
   }
+
+  .search-input .search-select {
+    height: 50px;
+    width: 26%;
+    padding-left: 0px;
+  }
+
+  .search-input .search-text {
+    width: 62%;
+  }
 }
 
 /* Small Device: 320px */
@@ -5068,6 +5119,18 @@ ol {
 
   .product-details-page {
     width: 100%;
+  }
+
+  .search-input .search-select {
+    height: 50px;
+    width: 27%;
+    padding-left: 0px;
+  }
+
+  .search-input .search-text {
+    width: 60%;
+    height: 50px;
+    padding-left: 10px;
   }
 }
 
