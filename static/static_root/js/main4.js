@@ -15,9 +15,7 @@
     --------------------*/
   $(window).on("load", function() {
     $(".loader").fadeOut();
-    $("#preloder")
-      .delay(200)
-      .fadeOut("slow");
+    $("#preloder").delay(200).fadeOut("slow");
   });
 
   /*------------------
@@ -33,7 +31,7 @@
 	--------------------*/
   $(".mobile-menu").slicknav({
     prependTo: "#mobile-menu-wrap",
-    allowParentLinks: true
+    allowParentLinks: true,
   });
 
   /*------------------
@@ -49,11 +47,11 @@
     animateIn: "fadeIn",
     navText: [
       '<i class="ti-angle-left"></i>',
-      '<i class="ti-angle-right"></i>'
+      '<i class="ti-angle-right"></i>',
     ],
     smartSpeed: 1200,
     autoHeight: false,
-    autoplay: true
+    autoplay: true,
   });
 
   /*------------------
@@ -67,25 +65,25 @@
     dots: true,
     navText: [
       '<i class="ti-angle-left"></i>',
-      '<i class="ti-angle-right"></i>'
+      '<i class="ti-angle-right"></i>',
     ],
     smartSpeed: 1200,
     autoHeight: false,
     autoplay: true,
     responsive: {
       0: {
-        items: 1
+        items: 1,
       },
       576: {
-        items: 2
+        items: 2,
       },
       992: {
-        items: 2
+        items: 2,
       },
       1200: {
-        items: 3
-      }
-    }
+        items: 3,
+      },
+    },
   });
 
   /*------------------
@@ -99,7 +97,7 @@
     dots: false,
     navText: [
       '<i class="ti-angle-left"></i>',
-      '<i class="ti-angle-right"></i>'
+      '<i class="ti-angle-right"></i>',
     ],
     smartSpeed: 1200,
     autoHeight: false,
@@ -107,12 +105,12 @@
     autoplay: true,
     responsive: {
       0: {
-        items: 3
+        items: 3,
       },
       768: {
-        items: 5
-      }
-    }
+        items: 5,
+      },
+    },
   });
 
   /*-----------------------
@@ -126,11 +124,11 @@
     dots: false,
     navText: [
       '<i class="fa fa-angle-left"></i>',
-      '<i class="fa fa-angle-right"></i>'
+      '<i class="fa fa-angle-right"></i>',
     ],
     smartSpeed: 1200,
     autoHeight: false,
-    autoplay: true
+    autoplay: true,
   });
 
   /*------------------
@@ -180,8 +178,8 @@
             change: function(data, ui) {
               var val = data.value;
               if (val != "") window.location = val;
-            }
-          }
+            },
+          },
         })
         .data("dd");
 
@@ -248,7 +246,7 @@
     if (imgurl != bigImg) {
       $(".product-big-img").attr({ src: imgurl });
       $(".zoomImg").attr({ src: imgurl });
-    }
+    },
   });
 
   $(".product-pic-zoom").zoom();
@@ -261,10 +259,7 @@
   proQty.append('<span class="inc qtybtn">+</span>');
   proQty.on("click", ".qtybtn", function() {
     var $button = $(this);
-    var oldValue = $button
-      .parent()
-      .find("input")
-      .val();
+    var oldValue = $button.parent().find("input").val();
     if ($button.hasClass("inc")) {
       var newVal = parseFloat(oldValue) + 1;
     } else {
@@ -275,10 +270,7 @@
         newVal = 0;
       }
     }
-    $button
-      .parent()
-      .find("input")
-      .val(newVal);
+    $button.parent().find("input").val(newVal);
   });
 })(jQuery);
 
@@ -316,9 +308,7 @@ $(document).ready(function(){
  });
 
  function foldToggle(element) {
-   $(element)
-     .next("ul")
-     .slideToggle();
+   $(element).next("ul").slideToggle();
  }
 
  function cursorChange(element, cursorType) {
@@ -373,5 +363,25 @@ function starNumer(element) {
   if ($(element).attr("id") == "delivery-star") {
     $("#delivery-rating").val(n);
     $("#delivery-rating-span").text(n);
+  }
+}
+
+/*-------------------
+		icon-heart
+  --------------------- */
+
+$(document).ready(function () {
+  $(".favorite-heart-icon").click(function () {
+    clickHeart(this);
+  });
+});
+
+function clickHeart(element) {
+  if ($(element).hasClass("icon_heart_alt")) {
+    $(element).removeClass("icon_heart_alt");
+    $(element).addClass("icon_heart");
+  } else {
+    $(element).removeClass("icon_heart");
+    $(element).addClass("icon_heart_alt");
   }
 }

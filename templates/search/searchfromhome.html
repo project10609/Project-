@@ -132,19 +132,20 @@
                   {% endif %}
                   {% if request.GET.category %}
                   <input type="hidden" name="category" value="{{ request.GET.category }}">
+                </form>
+                <div class="arrange">
+                  <input id="block-btn" type="image" src="{% static 'img/block.png' %}" width="40px" style="margin-left:5px; padding:5px; background-color:#f6f6f6;"></input>
+                  <input id="straight-btn" type="image" src="{% static 'img/Straight.png' %}" width="40px" style="padding:5px;"></input>
+                  {% if request.GET.q %}
+                  <p class="product-search-result"><span>「{{ request.GET.q }}」</span>的商品有{{ products.count }}筆</p>
+                  {% elif request.GET.q == "" %}
+                  <p class="product-search-result"><span>「{{ request.GET.category }}」</span>的商品有{{ products.count }}</p>
                   {% endif %}
-              </div>
-              </form>
-              <div class="arrange">
-                <input id="block-btn" type="image" src="{% static 'img/block.png' %}" width="40px" style="margin-left:5px; padding:5px; background-color:#f6f6f6;"></input>
-                <input id="straight-btn" type="image" src="{% static 'img/Straight.png' %}" width="40px" style="padding:5px;"></input>
+                  {% endif %}
+                </div>
 
               </div>
-              {% if request.GET.q %}
-              <p class="product-search-result"><span>「{{ request.GET.q }}」</span>的商品有{{ products.count }}筆</p>
-              {% elif request.GET.q == "" %}
-              <p class="product-search-result"><span>「{{ request.GET.category }}」</span>的商品有{{ products.count }}</p>
-              {% endif %}
+
             </div>
             <div class="col-lg-4 col-md-4 product-page-controller text-right">
               <p>

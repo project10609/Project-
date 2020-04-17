@@ -112,17 +112,18 @@
                   {% if request.GET.category %}
                   <input type="hidden" name="category" value="{{ request.GET.category }}">
                   {% endif %}
+                </form>
+                <div class="arrange">
+                  <input id="block-btn" type="image" src="{% static 'img/block.png' %}" width="40px" style="margin-left:5px; padding:5px; background-color:#f6f6f6;"></input>
+                  <input id="straight-btn" type="image" src="{% static 'img/Straight.png' %}" width="40px" style="padding:5px;"></input>
+                  {% if request.GET.q %}
+                  <p class="product-search-result"><span>「{{ request.GET.q }}」</span>的商品有{{ products.count }}筆</p>
+                  {% elif request.GET.q == "" %}
+                  <p class="product-search-result"><span>「{{ request.GET.category }}」</span>的商品有{{ products.count }}</p>
+                  {% endif %}
+                </div>
               </div>
-              </form>
-              <div class="arrange">
-                <input id="block-btn" type="image" src="{% static 'img/block.png' %}" width="40px" style="margin-left:5px; padding:5px; background-color:#f6f6f6;"></input>
-                <input id="straight-btn" type="image" src="{% static 'img/Straight.png' %}" width="40px" style="padding:5px;"></input>
-                {% if request.GET.q %}
-                <p class="product-search-result"><span>「{{ request.GET.q }}」</span>的商品有{{ products.count }}筆</p>
-                {% elif request.GET.q == "" %}
-                <p class="product-search-result"><span>「{{ request.GET.category }}」</span>的商品有{{ products.count }}</p>
-                {% endif %}
-              </div>
+
 
             </div>
             <div class="col-lg-4 col-md-4 product-page-controller text-right">
@@ -225,7 +226,15 @@
                 <div class="product-store">ETMall</div>
                 {% endif %}
                 <div class="product-price">{{ result.product_price }}</div>
-                <button><a href="{{ product.product_url }}">前往網站瀏覽</a></button>
+                <div class="pd-rating">
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star-o"></i>
+                  <span>(5)</span>
+                </div>
+                <button><a href="{{ result.product_url }}">前往網站瀏覽</a></button>
               </div>
             </div>
             {% endfor %}

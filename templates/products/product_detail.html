@@ -16,17 +16,23 @@
           <h4 class="fw-title">所有分類</h4>
           <ul class="filter-catagories">
             {% for category in categories %}
-            <li><a href="{% url 'products:categories' category.pk %}">{{ category.name }}({{category.products.count}})</a>
-              {% if category.subcategory.count == 1 %}
-              {% else %}
+            <li>
+              <a href="{% url 'products:categories' category.pk %}">
+                {{ category.name }}({{category.products.count}})</a>
+              {% if category.subcategory.count != 1 %}
+              {% comment %} {% else %} {% endcomment %}
               <i class="list-btn before-active"></i>
               {% endif %}
               <ul class="filter-sub-catagories">
                 {% for subcategory in category.subcategory.all %}
-                {% if subcategory.slug|lower == category.slug|lower %}
-                {% else %}
-                <li><a href="{% url 'products:subcategory' subcategory.pk %}">{{ subcategory.subcategory_name }}
-                    ({{ subcategory.subcategory.count }})</a></li>
+                {% if subcategory.slug|lower != category.slug|lower %}
+                {% comment %} {% else %} {% endcomment %}
+                <li>
+                  <a href="{% url 'products:subcategory' subcategory.pk %}">
+                    {{ subcategory.subcategory_name }}
+                    ({{subcategory.subcategory.count }})
+                  </a>
+                </li>
                 {% endif %}
                 {% endfor %}
               </ul>
@@ -37,7 +43,7 @@
             <h4 class="fw-title">熱門商品</h4>
             <div class="product-item">
               <div class="pi-pic">
-                <img src="img/products/product-1.jpg">
+                <img src="img/products/product-1.jpg" />
                 <ul>
                   <li class="quick-view"><a href="#">前往網站瀏覽</a></li>
                 </ul>
@@ -60,8 +66,9 @@
           <div class="col-lg-5">
             <img class="product-img" src="{{ product.product_images }}" alt="">
             <div class="product-btn">
-
-              <button><a href="{{ product.product_url }}">前往網站瀏覽</a></button>
+              <button>
+                <a href="{{ product.product_url }}">前往網站瀏覽</a>
+              </button>
             </div>
           </div>
           <div class="col-lg-7">
@@ -72,23 +79,19 @@
                 <div class="product-store">
                   {% if product.product_source.slug == "Ruten" %}
                   <div class="catagory-name">露天拍賣</div>
-                  {% endif %}
-                  {% if product.product_source.slug == "Shopee" %}
+                  {% endif %} {% if product.product_source.slug == "Shopee" %}
                   <div class="catagory-name">蝦皮購物</div>
-                  {% endif %}
-                  {% if product.product_source.slug == "Yahoo" %}
+                  {% endif %} {% if product.product_source.slug == "Yahoo" %}
                   <div class="catagory-name">Yahoo拍賣</div>
-                  {% endif %}
-                  {% if product.product_source.slug == "ETMall" %}
+                  {% endif %} {% if product.product_source.slug == "ETMall" %}
                   <div class="catagory-name">東森購物</div>
-                  {% endif %}
-                  {% if product.product_source.slug == "Momo" %}
+                  {% endif %} {% if product.product_source.slug == "ETMall" %}
                   <div class="catagory-name">Momo購物</div>
                   {% endif %}
                 </div>
                 <div class="product-price">${{ product.product_price }}</div>
                 <div class="text-right">
-                  <button class="heart-icon"><i class="icon_heart_alt"></i></button>
+                  <i class="favorite-heart-icon icon_heart_alt"></i>
                 </div>
 
               </div>
@@ -99,7 +102,9 @@
                   <table>
                     <tr>
                       <td class="p-catagory">評價總分</td>
-                      <td class="rating-point"><span class="integer">4.</span><span class="decimal">1</span>/5</td>
+                      <td class="rating-point">
+                        <span class="integer">4.</span><span class="decimal">1</span>/5
+                      </td>
                       <td>
                         <div class="pd-rating">
                           <i class="fa fa-star"></i>
@@ -129,7 +134,9 @@
                     </tr>
                     <tr>
                       <td class="p-catagory">購物平台評價</td>
-                      <td class="rating-point"><span class="integer">4.</span><span class="decimal">1</span>/5</td>
+                      <td class="rating-point">
+                        <span class="integer">4.</span><span class="decimal">1</span>/5
+                      </td>
                       <td class="p-rating">
                         <div class="pd-rating">
                           <i class="fa fa-star"></i>
@@ -143,7 +150,9 @@
                     </tr>
                     <tr>
                       <td class="p-catagory">出貨速度評價</td>
-                      <td class="rating-point"><span class="integer">4.</span><span class="decimal">1</span>/5</td>
+                      <td class="rating-point">
+                        <span class="integer">4.</span><span class="decimal">1</span>/5
+                      </td>
                       <td>
                         <div class="pd-rating">
                           <i class="fa fa-star"></i>
@@ -158,7 +167,9 @@
                     <tr>
                       <td class="p-catagory">分類</td>
                       <td rowspan="2" colspan="2">
-                        <div class="p-stock">{{ product.product_category.name }}</div>
+                        <div class="p-stock">
+                          {{ product.product_category.name }}
+                        </div>
                       </td>
                     </tr>
                   </table>
@@ -176,7 +187,7 @@
                   {% for rating in ratings %}
                   <div class="co-item">
                     <div class="avatar-pic">
-                      <img src="img/product-single/avatar-1.png" alt="">
+                      <img src="img/product-single/avatar-1.png" alt="" />
                     </div>
                     <div class="avatar-text">
                       <div class="at-rating">
@@ -188,7 +199,9 @@
                         <i class="fa fa-star-o"></i>
                       </div>
                       <h5>{{ rating.user }} <span>{{ rating.created_on }}</span></h5>
-                      <div class="at-reply">{{ rating.comment }}</div>
+                      <div class="at-reply">
+                        <p>{{ rating.comment }}</p>
+                      </div>
                     </div>
                   </div>
                   {% endfor %}
@@ -229,7 +242,7 @@
                         </td>
                         <td>
                           <div class="add-rating">
-                            <input type="hidden" value="1" id="price-rating">
+                            <input type="hidden" value="1" id="price-rating" />
                             <i class="rating-star fa fa-star" id="price-star"></i>
                             <i class="rating-star fa fa-star-o" id="price-star"></i>
                             <i class="rating-star fa fa-star-o" id="price-star"></i>
@@ -245,7 +258,7 @@
                         </td>
                         <td>
                           <div class="add-rating">
-                            <input type="hidden" value="1" id="store-rating">
+                            <input type="hidden" value="1" id="store-rating" />
                             <i class="rating-star fa fa-star" id="store-star"></i>
                             <i class="rating-star fa fa-star-o" id="store-star"></i>
                             <i class="rating-star fa fa-star-o" id="store-star"></i>
@@ -261,7 +274,7 @@
                         </td>
                         <td>
                           <div class="add-rating">
-                            <input type="hidden" value="1" id="delivery-rating">
+                            <input type="hidden" value="1" id="delivery-rating" />
                             <i class="rating-star fa fa-star" id="delivery-star"></i>
                             <i class="rating-star fa fa-star-o" id="delivery-star"></i>
                             <i class="rating-star fa fa-star-o" id="delivery-star"></i>
