@@ -9,21 +9,19 @@
 
 "use strict";
 
-(function($) {
+(function ($) {
   /*------------------
         Preloader
     --------------------*/
-  $(window).on("load", function() {
+  $(window).on("load", function () {
     $(".loader").fadeOut();
-    $("#preloder")
-      .delay(200)
-      .fadeOut("slow");
+    $("#preloder").delay(200).fadeOut("slow");
   });
 
   /*------------------
         Background Set
     --------------------*/
-  $(".set-bg").each(function() {
+  $(".set-bg").each(function () {
     var bg = $(this).data("setbg");
     $(this).css("background-image", "url(" + bg + ")");
   });
@@ -33,7 +31,7 @@
 	--------------------*/
   $(".mobile-menu").slicknav({
     prependTo: "#mobile-menu-wrap",
-    allowParentLinks: true
+    allowParentLinks: true,
   });
 
   /*------------------
@@ -49,11 +47,11 @@
     animateIn: "fadeIn",
     navText: [
       '<i class="ti-angle-left"></i>',
-      '<i class="ti-angle-right"></i>'
+      '<i class="ti-angle-right"></i>',
     ],
     smartSpeed: 1200,
     autoHeight: false,
-    autoplay: true
+    autoplay: true,
   });
 
   /*------------------
@@ -67,25 +65,25 @@
     dots: true,
     navText: [
       '<i class="ti-angle-left"></i>',
-      '<i class="ti-angle-right"></i>'
+      '<i class="ti-angle-right"></i>',
     ],
     smartSpeed: 1200,
     autoHeight: false,
     autoplay: true,
     responsive: {
       0: {
-        items: 1
+        items: 1,
       },
       576: {
-        items: 2
+        items: 2,
       },
       992: {
-        items: 2
+        items: 2,
       },
       1200: {
-        items: 3
-      }
-    }
+        items: 3,
+      },
+    },
   });
 
   /*------------------
@@ -99,7 +97,7 @@
     dots: false,
     navText: [
       '<i class="ti-angle-left"></i>',
-      '<i class="ti-angle-right"></i>'
+      '<i class="ti-angle-right"></i>',
     ],
     smartSpeed: 1200,
     autoHeight: false,
@@ -107,12 +105,12 @@
     autoplay: true,
     responsive: {
       0: {
-        items: 3
+        items: 3,
       },
       768: {
-        items: 5
-      }
-    }
+        items: 5,
+      },
+    },
   });
 
   /*-----------------------
@@ -126,11 +124,11 @@
     dots: false,
     navText: [
       '<i class="fa fa-angle-left"></i>',
-      '<i class="fa fa-angle-right"></i>'
+      '<i class="fa fa-angle-right"></i>',
     ],
     smartSpeed: 1200,
     autoHeight: false,
-    autoplay: true
+    autoplay: true,
   });
 
   /*------------------
@@ -157,7 +155,7 @@
   // Use this for real timer date
   /* var timerdate = "2020/01/01"; */
 
-  $("#countdown").countdown(timerdate, function(event) {
+  $("#countdown").countdown(timerdate, function (event) {
     $(this).html(
       event.strftime(
         "<div class='cd-item'><span>%D</span> <p>Days</p> </div>" +
@@ -171,17 +169,17 @@
   /*----------------------------------------------------
      Language Flag js
     ----------------------------------------------------*/
-  $(document).ready(function(e) {
+  $(document).ready(function (e) {
     //no use
     try {
       var pages = $("#pages")
         .msDropdown({
           on: {
-            change: function(data, ui) {
+            change: function (data, ui) {
               var val = data.value;
               if (val != "") window.location = val;
-            }
-          }
+            },
+          },
         })
         .data("dd");
 
@@ -211,10 +209,10 @@
     min: minPrice,
     max: maxPrice,
     values: [minPrice, maxPrice],
-    slide: function(event, ui) {
+    slide: function (event, ui) {
       minamount.val("$" + ui.values[0]);
       maxamount.val("$" + ui.values[1]);
-    }
+    },
   });
   minamount.val(rangeSlider.slider("values", 0));
   maxamount.val(rangeSlider.slider("values", 1));
@@ -224,7 +222,7 @@
 	--------------------- */
   $(".fw-size-choose .sc-item label, .pd-size-choose .sc-item label").on(
     "click",
-    function() {
+    function () {
       $(
         ".fw-size-choose .sc-item label, .pd-size-choose .sc-item label"
       ).removeClass("active");
@@ -240,7 +238,7 @@
   /*------------------
 		Single Product
 	--------------------*/
-  $(".product-thumbs-track .pt").on("click", function() {
+  $(".product-thumbs-track .pt").on("click", function () {
     $(".product-thumbs-track .pt").removeClass("active");
     $(this).addClass("active");
     var imgurl = $(this).data("imgbigurl");
@@ -259,12 +257,9 @@
   var proQty = $(".pro-qty");
   proQty.prepend('<span class="dec qtybtn">-</span>');
   proQty.append('<span class="inc qtybtn">+</span>');
-  proQty.on("click", ".qtybtn", function() {
+  proQty.on("click", ".qtybtn", function () {
     var $button = $(this);
-    var oldValue = $button
-      .parent()
-      .find("input")
-      .val();
+    var oldValue = $button.parent().find("input").val();
     if ($button.hasClass("inc")) {
       var newVal = parseFloat(oldValue) + 1;
     } else {
@@ -275,67 +270,62 @@
         newVal = 0;
       }
     }
-    $button
-      .parent()
-      .find("input")
-      .val(newVal);
+    $button.parent().find("input").val(newVal);
   });
 })(jQuery);
 
 /*-------------------
   Sorting
 --------------------- */
-$(document).ready(function(){
-    $("#block-btn").click(function() {
-        $("#straight-sorting").hide();
-        $("#block-sorting").show();
-        $("#straight-btn").css("background-color", "#ffffff");
-        $("#block-btn").css("background-color", "#f6f6f6");
-    });
-    $("#straight-btn").click(function() {
-        $("#block-sorting").hide();
-        $("#straight-sorting").show();
-        $("#straight-btn").css("background-color", "#f6f6f6");
-        $("#block-btn").css("background-color", "#ffffff");
-    });
+$(document).ready(function () {
+  $("#block-btn").click(function () {
+    $("#straight-sorting").hide();
+    $("#block-sorting").show();
+    $("#straight-btn").css("background-color", "#ffffff");
+    $("#block-btn").css("background-color", "#f6f6f6");
+  });
+  $("#straight-btn").click(function () {
+    $("#block-sorting").hide();
+    $("#straight-sorting").show();
+    $("#straight-btn").css("background-color", "#f6f6f6");
+    $("#block-btn").css("background-color", "#ffffff");
+  });
 });
 
 /*-------------------
   filter-catagories
  --------------------- */
- $(document).ready(function() {
-   $(".list-btn")
-     .hover(function() {
-       cursorChange(this);
-     })
-     .click(function() {
-       foldToggle(this);
-       turnArrow(this);
-     })
-     .trigger("click");
- });
+$(document).ready(function () {
+  $(".list-btn")
+    .hover(function () {
+      cursorChange(this);
+    })
+    .click(function () {
+      foldToggle(this);
+      turnArrow(this);
+    })
+    .trigger("click");
+});
 
- function foldToggle(element) {
-   $(element)
-     .next("ul")
-     .slideToggle();
- }
+function foldToggle(element) {
+  $(element).next("ul").slideToggle();
+}
 
- function cursorChange(element, cursorType) {
-   $(element).css("cursor", "pointer");
- }
+function cursorChange(element, cursorType) {
+  $(element).css("cursor", "pointer");
+}
 
- function turnArrow(element) {
-   if ($(element).hasClass("before-active")) {
-     $(element).removeClass("before-active");
-     $(element).addClass("after-active");
-   } else {
-     $(element).removeClass("after-active");
-     $(element).addClass("before-active");
-   }
- }
+function turnArrow(element) {
+  if ($(element).hasClass("before-active")) {
+    $(element).removeClass("before-active");
+    $(element).addClass("after-active");
+  } else {
+    $(element).removeClass("after-active");
+    $(element).addClass("before-active");
+  }
+}
 
- /*-------------------
+/*-------------------
 		rating
   --------------------- */
 $(document).ready(function () {
@@ -373,5 +363,25 @@ function starNumer(element) {
   if ($(element).attr("id") == "delivery-star") {
     $("#delivery-rating").val(n);
     $("#delivery-rating-span").text(n);
+  }
+}
+
+/*-------------------
+		icon-heart
+  --------------------- */
+
+$(document).ready(function () {
+  $(".favorite-heart-icon").click(function () {
+    clickHeart(this);
+  });
+});
+
+function clickHeart(element) {
+  if ($(element).hasClass("icon_heart_alt")) {
+    $(element).removeClass("icon_heart_alt");
+    $(element).addClass("icon_heart");
+  } else {
+    $(element).removeClass("icon_heart");
+    $(element).addClass("icon_heart_alt");
   }
 }

@@ -13,10 +13,8 @@
         <div class="filter-widget">
           <h4 class="fw-title">所有分類</h4>
           <ul class="filter-catagories">
-
             {% for category in categories %}
             <li><a href="{% url 'products:categories' category.pk %}">
-
                 {{ category.name }}({{category.products.count}})</a>
               {% if category.subcategory.count == 1 %}
               {% else %}
@@ -80,10 +78,9 @@
                 <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
               </div>
             </div>
-            <input type="submit" name="" value="套用">
+            <input class="filter-submit" type="submit" name="" value="套用">
           </div>
         </form>
-
       </div>
       <div class="col-lg-9 order-1 order-lg-2">
         <div class="product-show-option">
@@ -132,12 +129,9 @@
               {% else %}
               <button class="page-next">&gt;</button>
               {% endif %}
-
             </div>
-
           </div>
         </div>
-
         <div class="product-list" id="block-sorting">
           <div class="row">
             {% for product in product_list %}
@@ -148,7 +142,7 @@
                       alt="image"></a>
                   <div class="sale pp-sale">{{ product.pk }}</div>
                   <div class="icon">
-                    <i class="icon_heart_alt"></i>
+                    <i class="favorite-heart-icon icon_heart_alt"></i>
                   </div>
                   <ul>
                     <li class="quick-view"><a href="{{ product.product_url }}">前往網站瀏覽</a></li>
@@ -157,7 +151,6 @@
                 <div class="pi-text">
                   <a href="{% url 'products:product_detail' product.pk %}">
                     <h5>{{ product.product_name|truncatechars:20 }}</h5>
-
                   </a>
                   {% if product.product_source.slug == "Ruten" %}
                   <div class="catagory-name">露天拍賣</div>
@@ -186,25 +179,20 @@
             {% endif %}
           </div>
         </div>
-
         <div class="product-list" id="straight-sorting" style="display: none;">
+          {% for product in product_list %}
           <div class="row">
-            {% for product in product_list %}
-            <div class="col-md-4">
+            <div class="col-md-3">
               <div class="product-image2">
                 <div class="pi-pic">
                   <a href="{% url 'products:product_detail' product.pk %}"><img src="{{ product.product_images }}"
                       alt=""></a>
                   <div class="sale pp-sale">{{ product.pk }}</div>
-                  <div class="icon">
-                    <i class="icon_heart_alt"></i>
-                  </div>
                 </div>
               </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-9">
               <div class="px-text">
-
                 <div class="product-name"><a
                     href="{% url 'products:product_detail' product.pk %}">{{ product.product_name }}</a></div>
                 {% if product.product_source.slug == "Ruten" %}
@@ -222,18 +210,32 @@
                 {% if product.product_source.slug == "ETMall" %}
                 <div class="product-store">ETMall</div>
                 {% endif %}
-                <div class="product-price">{{ product.product_price }}</div>
-                <button><a href="{{ product.product_url }}">前往網站瀏覽</a></button>
+                <div class="product-price">${{ product.product_price }}</div>
+                <div class="pd-rating">
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star-o"></i>
+                  <span>(5)</span>
+                </div>
+                <button class="product-url"><a href="{{ product.product_url }}">前往網站瀏覽</a></button>
+                <div class="text-right">
+                  <i class="favorite-heart-icon icon_heart_alt"></i>
+                </div>
               </div>
             </div>
-            {% endfor %}
           </div>
+          <hr>
+          {% endfor %}
         </div>
 
         <div class="col-md-12 col-lg-12 product-bottom-page-controller text-center">
           {% if product_list.has_previous %}
           <button class="page-prev"><a
               href="?{% url_replace next_page=product_list.previous_page_number %}">&lt;</a></button>
+          {% else %}
+          <button class="page-prev">&lt;</button>
           {% endif %}
           {% for pg in page_range %}
           {% if product_list.number == pg %}
