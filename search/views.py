@@ -258,7 +258,6 @@ def search(request):
 
 
 def search_from_home(request, pk):
-    files = os.listdir(os.path.join(settings.STATIC_ROOT, "img/makeup-icon"))
     products = Product.objects.all()
     query = Queries.objects.filter(search=pk).values('search')
     products = products.filter(
