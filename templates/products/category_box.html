@@ -73,7 +73,7 @@
                   {{ priceform }}
                 </div>
               </div>
-              <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content" data-min="1" data-max="9999">
+              <div <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content" data-min="1" data-max="9999">>
                 <div class="ui-slider-range ui-corner-all ui-widget-header"></div>
                 <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
                 <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
@@ -87,9 +87,9 @@
       <div class="col-lg-9 order-1 order-lg-2">
         <div class="product-show-option">
           <div class="row">
-            <div class="col-lg-7 col-md-7">
-              <form action="{% url 'products:categories' category.pk %}" method="GET">
-                <div class="select-option">
+            <div class="col-lg-8 col-md-8">
+              <div class="select-option">
+                <form action="{% url 'products:categories' category.pk %}" method="GET">
                   {{ sortingform }}
                   {% if request.GET.source %}
                   {% for sources in request.GET|get_list:'source' %}
@@ -102,147 +102,145 @@
                   {% if request.GET.max_price %}
                   <input type="hidden" name="max_price" value="{{ request.GET.max_price }}">
                   {% endif %}
-                </div>
+              </div>
               </form>
               <div class="arrange">
                 <input id="block-btn" type="image" src="{% static 'img/block.png' %}" width="40px" style="margin-left:5px; padding:5px; background-color:#f6f6f6;"></input>
                 <input id="straight-btn" type="image" src="{% static 'img/Straight.png' %}" width="40px" style="padding:5px;"></input>
+                <p class="product-search-result">Show {{ product_list.start_index }} - {{ product_list.end_index }} Of
+                  {{ products.count }} products</p>
               </div>
-              <p class="product-search-result">Show {{ product_list.start_index }} - {{ product_list.end_index }} Of {{ products.count }} products</p>
+
+              <div class="col-lg-4 col-md-4 product-page-controller text-right">
+                <p>
+                  <span class="current-page-number">{{ product_list.number }}</span>
+                  /
+                  <span class="total-page-number">{{ product_list.paginator.num_pages }}</span>
+                </p>
+                {% if product_list.has_previous %}
+                <button class="page-prev"><a href="?{% url_replace next_page=product_list.previous_page_number %}">&lt;</a></button>
+                {% else %}
+                <button class="page-prev">&lt;</button>
+                {% endif %}
+                {% if product_list.has_next %}
+                <button class="page-next"><a href="?{% url_replace next_page=product_list.next_page_number %}">&gt;</a></button>
+                {% else %}
+                <button class="page-next">&gt;</button>
+                {% endif %}
+
+              </div>
 
             </div>
-
-            <div class="col-lg-5 col-md-5 product-page-controller text-right">
-
-              <p>
-                <span class="current-page-number">{{ product_list.number }}</span>
-                /
-                <span class="total-page-number">{{ product_list.paginator.num_pages }}</span>
-              </p>
-              {% if product_list.has_previous %}
-              <a href="?{% url_replace next_page=product_list.previous_page_number %}" class="page-prev">&lt;</a>
-              {% else %}
-              <a class="page-prev">&lt;</a>
-              {% endif %}
-              {% if product_list.has_next %}
-              <a href="?{% url_replace next_page=product_list.next_page_number %}" class="page-next">&gt;</a>
-              {% else %}
-              <a class="page-next">&gt;</a>
-              {% endif %}
-
-            </div>
-
           </div>
-        </div>
 
-        <div class="product-list" id="block-sorting">
-          <div class="row">
-            {% for product in product_list %}
-            <div class="col-lg-3 col-sm-6">
-              <div class="product-item">
-                <div class="pi-pic">
-                  <a href="{% url 'products:product_detail' product.pk %}"><img src="{{ product.product_images }}" alt="image"></a>
-                  <div class="sale pp-sale">{{ product.pk }}</div>
-                  <div class="icon">
-                    <i class="icon_heart_alt"></i>
+          <div class="product-list" id="block-sorting">
+            <div class="row">
+              {% for product in product_list %}
+              <div class="col-lg-3 col-sm-6">
+                <div class="product-item">
+                  <div class="pi-pic">
+                    <a href="{% url 'products:product_detail' product.pk %}"><img src="{{ product.product_images }}" alt="image"></a>
+                    <div class="sale pp-sale">{{ product.pk }}</div>
+                    <div class="icon">
+                      <i class="icon_heart_alt"></i>
+                    </div>
+                    <ul>
+                      <li class="quick-view"><a href="{{ product.product_url }}">前往網站瀏覽</a></li>
+                    </ul>
                   </div>
-                  <ul>
-                    <li class="quick-view"><a href="{{ product.product_url }}">前往網站瀏覽</a></li>
-                  </ul>
-                </div>
-                <div class="pi-text">
-                  <a href="{% url 'products:product_detail' product.pk %}">
-                    <h5>{{ product.product_name|truncatechars:20 }}</h5>
+                  <div class="pi-text">
+                    <a href="{% url 'products:product_detail' product.pk %}">
+                      <h5>{{ product.product_name|truncatechars:20 }}</h5>
 
-                  </a>
+                    </a>
+                    {% if product.product_source.slug == "Ruten" %}
+                    <div class="catagory-name">露天拍賣</div>
+                    {% endif %}
+                    {% if product.product_source.slug == "Shopee" %}
+                    <div class="catagory-name">蝦皮購物</div>
+                    {% endif %}
+                    {% if product.product_source.slug == "Yahoo" %}
+                    <div class="catagory-name">Yahoo拍賣</div>
+                    {% endif %}
+                    {% if product.product_source.slug == "ETMall" %}
+                    <div class="catagory-name">東森購物</div>
+                    {% endif %}
+                    {% if product.product_source.slug == "Momo" %}
+                    <div class="catagory-name">Momo購物</div>
+                    {% endif %}
+                    <div class="product-price">
+                      ${{ product.product_price }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+              {% if not product_list %}
+              <h1>It's Empty</h1>
+              {% endif %}
+            </div>
+          </div>
+
+          <div class="product-list" id="straight-sorting" style="display: none;">
+            <div class="row">
+              {% for product in product_list %}
+              <div class="col-md-4">
+                <div class="product-image2">
+                  <div class="pi-pic">
+                    <a href="{% url 'products:product_detail' product.pk %}"><img src="{{ product.product_images }}" alt=""></a>
+                    <div class="sale pp-sale">{{ product.pk }}</div>
+                    <div class="icon">
+                      <i class="icon_heart_alt"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="px-text">
+
+                  <div class="product-name"><a href="{% url 'products:product_detail' product.pk %}">{{ product.product_name }}</a></div>
                   {% if product.product_source.slug == "Ruten" %}
-                  <div class="catagory-name">露天拍賣</div>
+                  <div class="product-store">Ruten</div>
                   {% endif %}
                   {% if product.product_source.slug == "Shopee" %}
-                  <div class="catagory-name">蝦皮購物</div>
-                  {% endif %}
-                  {% if product.product_source.slug == "Yahoo" %}
-                  <div class="catagory-name">Yahoo拍賣</div>
-                  {% endif %}
-                  {% if product.product_source.slug == "ETMall" %}
-                  <div class="catagory-name">東森購物</div>
+                  <div class="product-store">Shopee</div>
                   {% endif %}
                   {% if product.product_source.slug == "Momo" %}
-                  <div class="catagory-name">Momo購物</div>
+                  <div class="product-store">Momo</div>
                   {% endif %}
-                  <div class="product-price">
-                    ${{ product.product_price }}
-                  </div>
+                  {% if product.product_source.slug == "Yahoo" %}
+                  <div class="product-store">Yahoo</div>
+                  {% endif %}
+                  {% if product.product_source.slug == "ETMall" %}
+                  <div class="product-store">ETMall</div>
+                  {% endif %}
+                  <div class="product-price">{{ product.product_price }}</div>
+                  <button><a href="{{ product.product_url }}">前往網站瀏覽</a></button>
                 </div>
               </div>
+              {% endfor %}
             </div>
-            {% endfor %}
-            {% if not product_list %}
-            <h1>It's Empty</h1>
+          </div>
+
+          <div class="col-md-12 col-lg-12 product-bottom-page-controller text-center">
+            {% if product_list.has_previous %}
+            <button class="page-prev"><a href="?{% url_replace next_page=product_list.previous_page_number %}">&lt;</a></button>
             {% endif %}
-          </div>
-        </div>
-
-        <div class="product-list" id="straight-sorting" style="display: none;">
-          <div class="row">
-            {% for product in product_list %}
-            <div class="col-md-4">
-              <div class="product-image2">
-                <div class="pi-pic">
-                  <a href="{% url 'products:product_detail' product.pk %}"><img src="{{ product.product_images }}" alt=""></a>
-                  <div class="sale pp-sale">{{ product.pk }}</div>
-                  <div class="icon">
-                    <i class="icon_heart_alt"></i>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="px-text">
-
-                <div class="product-name"><a href="{% url 'products:product_detail' product.pk %}">{{ product.product_name }}</a></div>
-                {% if product.product_source.slug == "Ruten" %}
-                <div class="product-store">Ruten</div>
-                {% endif %}
-                {% if product.product_source.slug == "Shopee" %}
-                <div class="product-store">Shopee</div>
-                {% endif %}
-                {% if product.product_source.slug == "Momo" %}
-                <div class="product-store">Momo</div>
-                {% endif %}
-                {% if product.product_source.slug == "Yahoo" %}
-                <div class="product-store">Yahoo</div>
-                {% endif %}
-                {% if product.product_source.slug == "ETMall" %}
-                <div class="product-store">ETMall</div>
-                {% endif %}
-                <div class="product-price">{{ product.product_price }}</div>
-                <button><a href="{{ product.product_url }}">前往網站瀏覽</a></button>
-              </div>
-            </div>
+            {% for pg in page_range %}
+            {% if product_list.number == pg %}
+            <button class="current-page">{{pg}}</button>
+            {% else %}
+            <button><a href="?{% url_replace next_page=pg %}">{{pg}}</a></button>
+            {% endif %}
             {% endfor %}
+            {% if product_list.has_next %}
+            <button class="page-next"><a href="?{% url_replace next_page=product_list.next_page_number %}">&gt;</a></button>
+            {% endif %}
+
           </div>
-        </div>
-
-        <div class="col-md-12 col-lg-12 product-bottom-page-controller text-center">
-          {% if product_list.has_previous %}
-          <button class="page-prev"><a href="?{% url_replace next_page=product_list.previous_page_number %}">&lt;</a></button>
-          {% endif %}
-          {% for pg in page_range %}
-          {% if product_list.number == pg %}
-          <button class="current-page">{{pg}}</button>
-          {% else %}
-          <button><a href="?{% url_replace next_page=pg %}">{{pg}}</a></button>
-          {% endif %}
-          {% endfor %}
-          {% if product_list.has_next %}
-          <button class="page-next"><a href="?{% url_replace next_page=product_list.next_page_number %}">&gt;</a></button>
-          {% endif %}
-
         </div>
       </div>
     </div>
-  </div>
 
 
 

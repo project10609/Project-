@@ -22,7 +22,7 @@
   <link rel="stylesheet" href="{% static 'css/nice-select.css' %}" type="text/css">
   <link rel="stylesheet" href="{% static 'css/jquery-ui.min.css' %}" type="text/css">
   <link rel="stylesheet" href="{% static 'css/slicknav.min.css' %}" type="text/css">
-  <link rel="stylesheet" href="{% static 'css/style10.css' %}" type="text/css">
+  <link rel="stylesheet" href="{% static 'css/style11.css' %}" type="text/css">
 
 </head>
 
@@ -65,17 +65,15 @@
           </div>
           <div class="col-lg-9 col-md-9">
             <form id="searchform" name="searchform" method="GET" action="{% url 'search:search' %}">
-              <div class="input-group search-input" style=" margin-top: 10px;">
-                <select class="search-select" name="category" style="border: 1px solid #d1d1d1; padding-left: 10px;">
+              <div class="input-group search-input">
+                <select class="search-select" name="category">
                   <option value="">全部</option>
                   {% for category in categories %}
                   <option value="{{ category.pk }}" {% if request.GET.category == category.pk %}selected{% endif %}>{{ category.name }}</option>
                   {% endfor %}
                 </select>
-                <input id='searcher' class="search-text" type="text" placeholder="請輸入關鍵字搜尋比價" name="q" value="{{ request.GET.q }}"
-                  style="border: 1px solid #d1d1d1; width: 70%; height: 50px; padding-left: 10px; border-right: none; border-left: none;">
-                <input class="search-submit" type="submit" id="submit" value=""
-                  style="background-position: center;background-size: 25px 25px;background-image:url({% static 'img/search.png' %});background-repeat:no-repeat;background-color: #fcbabb; padding: 15px 15px 15px 15px; height: 50px; width: 50px;border:none;">
+                <input id='searcher' class="search-text" type="text" placeholder="請輸入關鍵字搜尋比價" name="q" value="{{ request.GET.q }}">
+                <input class="search-submit" type="submit" id="submit" value="" style="background-image:url({% static 'img/search.png' %});">
               </div>
             </form>
 
