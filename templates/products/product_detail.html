@@ -103,7 +103,7 @@
                     <tr>
                       <td class="p-catagory">評價總分</td>
                       <td class="rating-point">
-                        <span class="integer">4.</span><span class="decimal">1</span>/5
+                        <span class="integer">{{ overall_rating|floatformat:1 }}</span><span class="decimal"></span>/5
                       </td>
                       <td>
                         <div class="pd-rating">
@@ -119,7 +119,11 @@
                     <tr>
                       <td class="p-catagory">價格品質評價</td>
                       <td class="rating-point">
-                        <span class="integer">4.</span><span class="decimal">1</span>/5
+                        <span class="integer">{% for key,value in price_rating.items %}
+
+                          {{ value|floatformat:1 }}
+
+                          {% endfor %}</span><span class="decimal"></span>/5
                       </td>
                       <td>
                         <div class="pd-rating">
@@ -135,7 +139,11 @@
                     <tr>
                       <td class="p-catagory">購物平台評價</td>
                       <td class="rating-point">
-                        <span class="integer">4.</span><span class="decimal">1</span>/5
+                        <span class="integer">{% for key,value in source_rating.items %}
+
+                          {{ value|floatformat:1 }}
+
+                          {% endfor %}</span><span class="decimal"></span>/5
                       </td>
                       <td class="p-rating">
                         <div class="pd-rating">
@@ -151,7 +159,11 @@
                     <tr>
                       <td class="p-catagory">出貨速度評價</td>
                       <td class="rating-point">
-                        <span class="integer">4.</span><span class="decimal">1</span>/5
+                        <span class="integer">{% for key,value in speed_rating.items %}
+
+                          {{ value|floatformat:1 }}
+
+                          {% endfor %}</span><span class="decimal"></span>/5
                       </td>
                       <td>
                         <div class="pd-rating">
@@ -191,7 +203,7 @@
                     </div>
                     <div class="avatar-text">
                       <div class="at-rating">
-                        <span class="point">{{ rating.price_rating }}</span><span class="point2">/5</span>
+                        <span class="point">{{ rating.user_rating }}</span><span class="point2">/5</span>
                         <i class="fa fa-star"></i>
                         <i class="fa fa-star"></i>
                         <i class="fa fa-star"></i>

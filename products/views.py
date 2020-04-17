@@ -315,11 +315,8 @@ def subcategory(request, pk):
 
 def category_list(request):
     categories = Categories.objects.all()
-    category_count = Product.objects.filter(
-        product_category__slug__icontains=categories).annotate(counts=Count('product_name')).get('counts')
     subcategory = Subcategories.objects.all()
     context = {
-        "category_count": category_count,
         "categories": categories,
         "subcategory": subcategory,
     }
