@@ -74,6 +74,7 @@ def index(request):
 def category_item(request, pk):
 
     category = get_object_or_404(Categories, pk=pk)
+
     products = Product.objects.filter(
         product_category__slug__icontains=category).order_by('?')
     if request.method == 'GET' and 'filter_by' in request.GET or request.method == 'GET' and 'source' in request.GET or request.method == 'GET' and 'min_price' in request.GET or request.method == 'GET' and 'max_price' in request.GET:
@@ -145,6 +146,7 @@ def category_item(request, pk):
         page_range = list(paginator.page_range)[start_index:end_index]
 
         context = {
+
             'products': products,
             'product_list': product_list,
             'page_range': page_range,
@@ -313,8 +315,11 @@ def subcategory(request, pk):
 
 def category_list(request):
     categories = Categories.objects.all()
+    category_count = Product.objects.filter(
+        product_category__slug__icontains=categories).annotate(counts=Count('product_name')).get('counts')
     subcategory = Subcategories.objects.all()
     context = {
+        "category_count": category_count,
         "categories": categories,
         "subcategory": subcategory,
     }
