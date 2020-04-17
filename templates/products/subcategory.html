@@ -212,8 +212,19 @@
                 {% if product.product_source.slug == "ETMall" %}
                 <div class="product-store">ETMall</div>
                 {% endif %}
-                <div class="product-price">{{ product.product_price }}</div>
-                <button><a href="{{ product.product_url }}">前往網站瀏覽</a></button>
+                <div class="product-price">${{ product.product_price }}</div>
+                <div class="pd-rating">
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star-o"></i>
+                  <span>(5)</span>
+                </div>
+                <button class="product-url"><a href="{{ product.product_url }}">前往網站瀏覽</a></button>
+                <div class="text-right">
+                  <i class="favorite-heart-icon icon_heart_alt"></i>
+                </div>
               </div>
             </div>
             {% endfor %}

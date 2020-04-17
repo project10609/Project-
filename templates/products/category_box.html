@@ -202,19 +202,19 @@
 
                 <div class="product-name"><a href="{% url 'products:product_detail' product.pk %}">{{ product.product_name }}</a></div>
                 {% if product.product_source.slug == "Ruten" %}
-                <div class="product-store">Ruten</div>
+                <div class="product-store">露天拍賣</div>
                 {% endif %}
                 {% if product.product_source.slug == "Shopee" %}
-                <div class="product-store">Shopee</div>
+                <div class="product-store">蝦皮購物</div>
                 {% endif %}
                 {% if product.product_source.slug == "Momo" %}
-                <div class="product-store">Momo</div>
+                <div class="product-store">Momo購物</div>
                 {% endif %}
                 {% if product.product_source.slug == "Yahoo" %}
-                <div class="product-store">Yahoo</div>
+                <div class="product-store">Yahoo拍賣</div>
                 {% endif %}
                 {% if product.product_source.slug == "ETMall" %}
-                <div class="product-store">ETMall</div>
+                <div class="product-store">東森購物</div>
                 {% endif %}
                 <div class="product-price">${{ product.product_price }}</div>
                 <div class="pd-rating">
