@@ -103,7 +103,7 @@
                     <tr>
                       <td class="p-catagory">評價總分</td>
                       <td class="rating-point">
-                        <span class="integer">{{ overall_rating|floatformat:1 }}</span><span class="decimal"></span>/5
+                        <span class="integer">{% if overall_rating == 0 %}0{% else %}{{ overall_rating|floatformat:1 }}{% endif %}</span><span class="decimal"></span>/5
                       </td>
                       <td>
                         <div class="pd-rating">
@@ -120,9 +120,11 @@
                       <td class="p-catagory">價格品質評價</td>
                       <td class="rating-point">
                         <span class="integer">{% for key,value in price_rating.items %}
-
+                          {% if value %}
                           {{ value|floatformat:1 }}
-
+                          {% else %}
+                          0
+                          {% endif %}
                           {% endfor %}</span><span class="decimal"></span>/5
                       </td>
                       <td>
@@ -140,9 +142,11 @@
                       <td class="p-catagory">購物平台評價</td>
                       <td class="rating-point">
                         <span class="integer">{% for key,value in source_rating.items %}
-
+                          {% if value %}
                           {{ value|floatformat:1 }}
-
+                          {% else %}
+                          0
+                          {% endif %}
                           {% endfor %}</span><span class="decimal"></span>/5
                       </td>
                       <td class="p-rating">
@@ -160,9 +164,11 @@
                       <td class="p-catagory">出貨速度評價</td>
                       <td class="rating-point">
                         <span class="integer">{% for key,value in speed_rating.items %}
-
+                          {% if value %}
                           {{ value|floatformat:1 }}
-
+                          {% else %}
+                          0
+                          {% endif %}
                           {% endfor %}</span><span class="decimal"></span>/5
                       </td>
                       <td>

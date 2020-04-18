@@ -21,7 +21,6 @@ from django.db.models.functions import Cast
 
 def product_detail(request, pk):
     product = get_object_or_404(Product, pk=pk)
-    ratings = Rating.objects.filter(product=product)
     ratings = Rating.objects.filter(product=product).annotate(
         user_rating=(F('price_rating') + F('speed_rating') + F('source_rating')) / 3)
     price_rating = Rating.objects.filter(product=product).aggregate(
@@ -31,8 +30,11 @@ def product_detail(request, pk):
     source_rating = Rating.objects.filter(product=product).aggregate(
         source_sum=Sum('source_rating', output_field=FloatField()) / Count('product', output_field=FloatField()))
 
-    overall_rating = float((price_rating['price_sum'] +
-                            speed_rating['speed_sum'] + source_rating['source_sum'])) / 3
+    if ratings:
+        overall_rating = float((price_rating['price_sum'] +
+                                speed_rating['speed_sum'] + source_rating['source_sum'])) / 3
+    else:
+        overall_rating = int(0)
 
     comment_count = ratings.aggregate(counts=Count('comment')).get('counts')
 
