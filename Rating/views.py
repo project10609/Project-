@@ -8,19 +8,34 @@ from products.models import Product, Categories, Source, Subcategories
 from django.views.generic import ListView, DetailView
 from django.views.generic.list import MultipleObjectMixin
 from products.forms import ProductFilterForm, ProductSourceForm, ProductPriceForm
-from django.db.models import Count, Q
+from django.db.models import Count, Q, F, Sum, FloatField
 from search.models import Queries
 from functools import reduce
 import operator
 import random
 import os
+from django.db.models.functions import Cast
 
 # Create your views here.
 
 
 def product_detail(request, pk):
     product = get_object_or_404(Product, pk=pk)
-    ratings = Rating.objects.filter(product=product)
+    ratings = Rating.objects.filter(product=product).annotate(
+        user_rating=(F('price_rating') + F('speed_rating') + F('source_rating')) / 3)
+    price_rating = Rating.objects.filter(product=product).aggregate(
+        price_sum=Sum('price_rating', output_field=FloatField()) / Count('product', output_field=FloatField()))
+    speed_rating = Rating.objects.filter(product=product).aggregate(
+        speed_sum=Sum('speed_rating', output_field=FloatField()) / Count('product', output_field=FloatField()))
+    source_rating = Rating.objects.filter(product=product).aggregate(
+        source_sum=Sum('source_rating', output_field=FloatField()) / Count('product', output_field=FloatField()))
+
+    if ratings:
+        overall_rating = float((price_rating['price_sum'] +
+                                speed_rating['speed_sum'] + source_rating['source_sum'])) / 3
+    else:
+        overall_rating = int(0)
+
     comment_count = ratings.aggregate(counts=Count('comment')).get('counts')
 
     paginator = Paginator(ratings, 4)
@@ -40,6 +55,10 @@ def product_detail(request, pk):
     page_range = list(paginator.page_range)[start_index:end_index]
 
     context = {
+        'overall_rating': overall_rating,
+        'price_rating': price_rating,
+        'speed_rating': speed_rating,
+        'source_rating': source_rating,
         'product': product,
         'ratings': rating_list,
         'comment_count': comment_count,
