@@ -15,6 +15,7 @@ import operator
 import random
 import os
 from django.db.models.functions import Cast
+from .forms import RatingForm
 
 # Create your views here.
 
@@ -29,14 +30,27 @@ def product_detail(request, pk):
         speed_sum=Sum('speed_rating', output_field=FloatField()) / Count('product', output_field=FloatField()))
     source_rating = Rating.objects.filter(product=product).aggregate(
         source_sum=Sum('source_rating', output_field=FloatField()) / Count('product', output_field=FloatField()))
-
     if ratings:
         overall_rating = float((price_rating['price_sum'] +
                                 speed_rating['speed_sum'] + source_rating['source_sum'])) / 3
     else:
         overall_rating = int(0)
 
-    comment_count = ratings.aggregate(counts=Count('comment')).get('counts')
+    if request.method == "POST":
+        form = RatingForm(request.POST)
+        if form.is_valid:
+            price_comment = request.POST.get('price_rating', None)
+            speed_comment = request.POST.get('source_rating', None)
+            source_comment = request.POST.get('source_rating', None)
+            comment = request.POST.get('comment', None)
+            new_comment = Rating.objects.create(user=request.user, product=product, price_rating=price_comment,
+                                                speed_rating=speed_comment, source_rating=source_comment, comment=comment)
+            new_comment.save()
+
+    else:
+        form = RatingForm()
+
+    comment_count = ratings.aggregate(counts=Count('product')).get('counts')
 
     paginator = Paginator(ratings, 4)
     try:
@@ -55,6 +69,7 @@ def product_detail(request, pk):
     page_range = list(paginator.page_range)[start_index:end_index]
 
     context = {
+        'form': form,
         'overall_rating': overall_rating,
         'price_rating': price_rating,
         'speed_rating': speed_rating,

@@ -209,7 +209,7 @@
                     </div>
                     <div class="avatar-text">
                       <div class="at-rating">
-                        <span class="point">{{ rating.user_rating }}</span><span class="point2">/5</span>
+                        <span class="point">{{ rating.user_rating|floatformat:1 }}</span><span class="point2">/5</span>
                         <i class="fa fa-star"></i>
                         <i class="fa fa-star"></i>
                         <i class="fa fa-star"></i>
@@ -218,7 +218,13 @@
                       </div>
                       <h5>{{ rating.user }} <span>{{ rating.created_on }}</span></h5>
                       <div class="at-reply">
-                        <p>{{ rating.comment }}</p>
+                        <p>
+                          {% if rating.comment is None %}
+
+                          {% else %}
+                          {{ rating.comment }}
+                          {% endif %}
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -249,7 +255,9 @@
           <div class="col-lg-12 customer-review-option">
             <div class="leave-comment">
               <h4>留下你的評價</h4>
-              <form action="#" class="comment-form">
+              <form action="{% url 'products:product_detail' product.pk %}" class="comment-form" method="POST">
+
+                {% csrf_token %}
                 <div class="row">
                   <div class="col-lg-12">
                     <table>
@@ -260,7 +268,8 @@
                         </td>
                         <td>
                           <div class="add-rating">
-                            <input type="hidden" value="1" id="price-rating" />
+                            {{ form.price_rating }}
+                            <!-- <input type="hidden" name="price_comment" value="1" id="price-rating" /> -->
                             <i class="rating-star fa fa-star" id="price-star"></i>
                             <i class="rating-star fa fa-star-o" id="price-star"></i>
                             <i class="rating-star fa fa-star-o" id="price-star"></i>
@@ -276,7 +285,8 @@
                         </td>
                         <td>
                           <div class="add-rating">
-                            <input type="hidden" value="1" id="store-rating" />
+                            {{ form.source_rating }}
+                            <!-- <input type="hidden" name="source_comment" value="1" id="store-rating" /> -->
                             <i class="rating-star fa fa-star" id="store-star"></i>
                             <i class="rating-star fa fa-star-o" id="store-star"></i>
                             <i class="rating-star fa fa-star-o" id="store-star"></i>
@@ -292,7 +302,7 @@
                         </td>
                         <td>
                           <div class="add-rating">
-                            <input type="hidden" value="1" id="delivery-rating" />
+                            {{ form.speed_rating }}
                             <i class="rating-star fa fa-star" id="delivery-star"></i>
                             <i class="rating-star fa fa-star-o" id="delivery-star"></i>
                             <i class="rating-star fa fa-star-o" id="delivery-star"></i>
@@ -303,8 +313,10 @@
                       </tr>
                     </table>
                   </div>
+
                   <div class="col-lg-12">
-                    <textarea placeholder="寫下你的評論......"></textarea>
+                    {{ form.comment }}
+                    <!-- <textarea name="comment" placeholder="寫下你的評論......"></textarea> -->
                   </div>
                   <div class="col-lg-12 submit-part">
                     <button type="submit" class="site-btn">送出</button>

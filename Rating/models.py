@@ -15,7 +15,8 @@ class Rating(models.Model):
         default=1, null=True, blank=True, db_column="source_rating")
     speed_rating = models.FloatField(
         default=1, null=True, blank=True, db_column="speed_rating")
-    comment = models.TextField(null=True, blank=True, db_column="comment")
+    comment = models.CharField(
+        max_length=255, null=True, blank=True, db_column="comment")
     created_on = models.DateTimeField(
         auto_now_add=True, db_column="created_on")
 
