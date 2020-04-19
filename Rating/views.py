@@ -17,6 +17,7 @@ import os
 from django.db.models.functions import Cast
 from .forms import RatingForm
 from django.contrib import messages
+from django.utils import timezone
 
 # Create your views here.
 
@@ -48,7 +49,7 @@ def product_detail(request, pk):
                 messages.error(request, '你已經在此商品評價過！')
             else:
                 new_comment = Rating.objects.create(user=request.user, product=product, price_rating=price_comment,
-                                                    speed_rating=speed_comment, source_rating=source_comment, comment=comment)
+                                                    speed_rating=speed_comment, source_rating=source_comment, comment=comment, created_on=timezone.now())
                 new_comment.save()
                 messages.success(request, '成功新增評價！')
 
