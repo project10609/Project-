@@ -72,7 +72,7 @@ def index(request):
 
 
 def product_list(request):
-    products = Product.objects.all()
+    products = Product.objects.all().order_by('?')
     if request.method == 'GET' and 'filter_by' in request.GET or request.method == 'GET' and 'source' in request.GET or request.method == 'GET' and 'min_price' in request.GET or request.method == 'GET' and 'max_price' in request.GET:
         sortingform = ProductFilterForm(request.GET)
         sourceform = ProductSourceForm(request.GET)
