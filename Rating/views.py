@@ -44,10 +44,13 @@ def product_detail(request, pk):
             speed_comment = request.POST.get('source_rating', None)
             source_comment = request.POST.get('source_rating', None)
             comment = request.POST.get('comment', None)
-            new_comment = Rating.objects.create(user=request.user, product=product, price_rating=price_comment,
-                                                speed_rating=speed_comment, source_rating=source_comment, comment=comment)
-            new_comment.save()
-            messages.success(request, '成功新增評價！')
+            if Rating.objects.filter(product=product, user=request.user).exists():
+                messages.error(request, '你已經在此商品評價過！')
+            else:
+                new_comment = Rating.objects.create(user=request.user, product=product, price_rating=price_comment,
+                                                    speed_rating=speed_comment, source_rating=source_comment, comment=comment)
+                new_comment.save()
+                messages.success(request, '成功新增評價！')
 
     else:
         form = RatingForm()
@@ -81,3 +84,10 @@ def product_detail(request, pk):
         'comment_count': comment_count,
     }
     return render(request, 'products/product_detail.html', context)
+
+
+def delete_rating(request, pk, id):
+    product = get_object_or_404(Product, pk=pk)
+    rating = Rating.objects.get(pk=id).delete()
+    messages.success(request, "刪除成功！")
+    return HttpResponseRedirect(reverse('products:product_detail', args=(product.pk,)))
