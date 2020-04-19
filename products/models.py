@@ -2,6 +2,8 @@ from django.db import models
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.db.models import Count
+from Rating.models import Rating
+from django.db.models import Count, Q, F, Sum, FloatField
 
 
 class Categories(models.Model):
@@ -64,6 +66,21 @@ class Product(models.Model):
 
     def get_success_url(self):
         return self.object.get_absolute_url + '?source=%s&filter_by=%s' % self.request.GET.get('source'), self.request.GET.get('filter_by')
+
+    def get_rating(self):
+        ratings = Rating.objects.filter(product=self.pk)
+        price_rating = Rating.objects.filter(product=self.pk).aggregate(
+            price_sum=Sum('price_rating', output_field=FloatField()) / Count('product', output_field=FloatField()))
+        speed_rating = Rating.objects.filter(product=self.pk).aggregate(
+            speed_sum=Sum('speed_rating', output_field=FloatField()) / Count('product', output_field=FloatField()))
+        source_rating = Rating.objects.filter(product=self.pk).aggregate(
+            source_sum=Sum('source_rating', output_field=FloatField()) / Count('product', output_field=FloatField()))
+        if ratings:
+            overall_rating = float((price_rating['price_sum'] +
+                                    speed_rating['speed_sum'] + source_rating['source_sum'])) / 3
+        else:
+            overall_rating = int(0)
+        return overall_rating
 
     class Meta:
         db_table = 'Product'

@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from products.models import Product
+from django.shortcuts import render, get_object_or_404
 
 # Create your models here.
 
@@ -8,7 +8,7 @@ from products.models import Product
 class Rating(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, db_column="user")
     product = models.ForeignKey(
-        Product, on_delete=models.CASCADE, db_column="product")
+        to='products.Product', on_delete=models.CASCADE, db_column="product", related_name="rating")
     price_rating = models.FloatField(
         default=1, null=True, blank=True, db_column="price_rating")
     source_rating = models.FloatField(
