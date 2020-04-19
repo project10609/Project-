@@ -268,7 +268,7 @@
                     <i class="fa fa-star"></i>
                     <i class="fa fa-star"></i>
                     <i class="fa fa-star-o"></i>
-                    <span>{{ product.rating.get_rating|floatformat:1 }}</span>
+                    <span>{{ product.get_rating|floatformat:1 }}</span>
                   </div>
                   <button class="product-url"><a href="{{ product.product_url }}">前往網站瀏覽</a></button>
                   <div class="text-right">

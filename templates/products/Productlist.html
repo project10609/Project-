@@ -32,12 +32,12 @@
             {% endfor %}
           </ul>
         </div>
-        <form action="{% url 'products:subcategory' category.pk %}" method="GET">
+        <form action="{% url 'products:allproduct' %}" method="GET">
           <div class="filter-widget">
             <h4 class="fw-title">電商平台</h4>
             <div class="fw-brand-check">
               <div class="bc-item">
-                <li><a href="{% url 'products:categories' category.pk %}">全部商品</a></li>
+                <li><a href="{% url 'products:allproduct' %}">全部商品</a></li>
                 <!-- {{ sourceform.as_p }} -->
                 {% for field in sourceform.source %}
                 <label for="{{ field.id_for_label }}">
@@ -60,7 +60,7 @@
             </div>
           </div>
         </form>
-        <form class="" action="{% url 'products:subcategory' category.pk %}" method="GET">
+        <form class="" action="{% url 'products:allproduct' %}" method="GET">
           <div class="filter-widget">
             <h4 class="fw-title">價格範圍</h4>
             <div class="filter-range-wrap">
@@ -85,7 +85,7 @@
           <div class="row">
             <div class="col-lg-8 col-md-8">
               <div class="select-option">
-                <form action="{% url 'products:subcategory' category.pk %}" method="GET">
+                <form action="{% url 'products:allproduct' %}" method="GET">
                   {{ sortingform }}
                   {% if request.GET.source %}
                   {% for sources in request.GET|get_list:'source' %}
