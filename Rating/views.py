@@ -16,6 +16,7 @@ import random
 import os
 from django.db.models.functions import Cast
 from .forms import RatingForm
+from django.contrib import messages
 
 # Create your views here.
 
@@ -46,6 +47,7 @@ def product_detail(request, pk):
             new_comment = Rating.objects.create(user=request.user, product=product, price_rating=price_comment,
                                                 speed_rating=speed_comment, source_rating=source_comment, comment=comment)
             new_comment.save()
+            messages.success(request, '成功新增評價！')
 
     else:
         form = RatingForm()

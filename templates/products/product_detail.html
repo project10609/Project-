@@ -9,6 +9,9 @@
 
 <!-- Product Shop Section Begin -->
 <section class="product-shop spad page-details">
+  {% for message in message %}
+  {{ message.success }}
+  {% endfor %}
   <div class="container">
     <div class="row">
       <div class="col-lg-3 product-sidebar">
@@ -99,6 +102,7 @@
             <div class="tab-item-content">
               <div class="tab-content">
                 <div class="specification-table">
+                  {% if overall_rating != 0 %}
                   <table>
                     <tr>
                       <td class="p-catagory">評價總分</td>
@@ -191,10 +195,15 @@
                       </td>
                     </tr>
                   </table>
+                  {% else %}
+                  <p>此商品尚無評價</p>
+                  {% endif %}
                 </div>
+
               </div>
             </div>
           </div>
+
           <div class="col-lg-12 customer-review-option">
             <div class="row">
               <div class="comment-option">
