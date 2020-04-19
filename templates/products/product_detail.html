@@ -261,12 +261,12 @@
                     <span class="total-page-number">{{ rating_list.paginator.num_pages }}</span>
                   </p>
                   {% if rating_list.has_previous %}
-                  <button class="page-prev"><a href="?{% url_replace next_page=product_list.previous_page_number %}">&lt;</a></button>
+                  <button class="page-prev"><a href="?{% url_replace next_page=rating_list.previous_page_number %}">&lt;</a></button>
                   {% else %}
                   <button class="page-prev">&lt;</button>
                   {% endif %}
                   {% if rating_list.has_next %}
-                  <button class="page-next"><a href="?{% url_replace next_page=product_list.next_page_number %}">&gt;</a></button>
+                  <button class="page-next"><a href="?{% url_replace next_page=rating_list.next_page_number %}">&gt;</a></button>
                   {% else %}
                   <button class="page-next">&gt;</button>
                   {% endif %}
