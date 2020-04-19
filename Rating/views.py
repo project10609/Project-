@@ -82,6 +82,7 @@ def product_detail(request, pk):
         'product': product,
         'ratings': rating_list,
         'comment_count': comment_count,
+        'rating_list': rating_list,
     }
     return render(request, 'products/product_detail.html', context)
 

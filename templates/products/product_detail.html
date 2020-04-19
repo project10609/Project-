@@ -214,8 +214,8 @@
                 <div class="col-lg-12">
                   <h4>評論({{ comment_count }})</h4>
                 </div>
+                {% for rating in rating_list %}
                 <div class="col-lg-12 col-md-12">
-                  {% for rating in ratings %}
                   <div class="co-item">
                     <div class="avatar-pic">
                       <img src="img/product-single/avatar-1.png" alt="" />
@@ -242,23 +242,32 @@
                     </div>
                   </div>
                   {% if rating.user == request.user %}
-                  <div class="">
+                  <div class="text-right">
                     <button class="btn btn-warning"><a href="#">修改評價</a></button>
                     <button class="btn btn-danger"><a href="{% url 'products:delete_rating' rating.product.pk rating.pk %}">刪除評價</a></button>
-
                   </div>
 
                   {% endif %}
-                  {% endfor %}
                 </div>
+                <hr>
+                {% endfor %}
+
                 <div class="col-lg-12 text-right product-details-page">
                   <p>
-                    <sapn class="current-page-number">1</sapn>
+                    <span class="current-page-number">{{ rating_list.number }}</span>
                     /
-                    <span class="total-page-number">100</span>
+                    <span class="total-page-number">{{ rating_list.paginator.num_pages }}</span>
                   </p>
-                  <button class="page-prev" title="上一頁">&lt;</button>
-                  <button class="page-next" title="下一頁">&gt;</button>
+                  {% if rating_list.has_previous %}
+                  <button class="page-prev"><a href="?{% url_replace next_page=product_list.previous_page_number %}">&lt;</a></button>
+                  {% else %}
+                  <button class="page-prev">&lt;</button>
+                  {% endif %}
+                  {% if rating_list.has_next %}
+                  <button class="page-next"><a href="?{% url_replace next_page=product_list.next_page_number %}">&gt;</a></button>
+                  {% else %}
+                  <button class="page-next">&gt;</button>
+                  {% endif %}
                 </div>
               </div>
             </div>
