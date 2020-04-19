@@ -43,7 +43,7 @@ def product_detail(request, pk):
         if form.is_valid:
             price_comment = request.POST.get('price_rating', None)
             speed_comment = request.POST.get('source_rating', None)
-            source_comment = request.POST.get('source_rating', None)
+            source_comment = request.POST.get('speed_rating', None)
             comment = request.POST.get('comment', None)
             if Rating.objects.filter(product=product, user=request.user).exists():
                 messages.error(request, '你已經在此商品評價過！')
