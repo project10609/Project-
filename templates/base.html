@@ -96,7 +96,7 @@
         <div class="nav-depart">
           <div class="depart-btn">
             <i class="ti-menu"></i>
-            <span>所有類別</span>
+            <span><a href="{% url 'products:allproduct' %}">所有類別</a></span>
             <ul class="depart-hover">
               {% for category in categories %}
               <li><a href="{{ category.get_absolute_url }}">{{ category.name }}</a></li>
