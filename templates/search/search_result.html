@@ -139,7 +139,7 @@
               <div class="product-item">
                 <div class="pi-pic">
                   <a href="{% url 'products:product_detail' result.pk %}"><img src="{{ result.product_images }}" alt="image"></a>
-                  <div class="sale pp-sale">{{ result.get_rating }}</div>
+                  <div class="sale pp-sale">{{ result.get_rating|floatformat }}</div>
                   <div class="icon">
                     <i class="favorite-heart-icon icon_heart_alt"></i>
                   </div>
