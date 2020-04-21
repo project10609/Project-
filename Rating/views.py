@@ -15,11 +15,15 @@ import operator
 import random
 import os
 from django.db.models.functions import Cast
-from .forms import RatingForm
+from .forms import RatingForm, RatingUpdateForm
 from django.contrib import messages
 from django.utils import timezone
-
+from django.views.generic.edit import UpdateView
+from django.contrib.auth.models import User
 # Create your views here.
+
+
+user = User.objects.all()
 
 
 def product_detail(request, pk):
@@ -45,13 +49,10 @@ def product_detail(request, pk):
             speed_comment = request.POST.get('source_rating', None)
             source_comment = request.POST.get('speed_rating', None)
             comment = request.POST.get('comment', None)
-            if Rating.objects.filter(product=product, user=request.user).exists():
-                messages.error(request, '你已經在此商品評價過！')
-            else:
-                new_comment = Rating.objects.create(user=request.user, product=product, price_rating=price_comment,
-                                                    speed_rating=speed_comment, source_rating=source_comment, comment=comment, created_on=timezone.now())
-                new_comment.save()
-                messages.success(request, '成功新增評價！')
+            new_comment = Rating.objects.create(user=request.user, product=product, price_rating=price_comment,
+                                                speed_rating=speed_comment, source_rating=source_comment, comment=comment, created_on=timezone.now())
+            new_comment.save()
+            messages.success(request, '成功新增評價！')
 
     else:
         form = RatingForm()
@@ -93,3 +94,29 @@ def delete_rating(request, pk, id):
     rating = Rating.objects.get(pk=id).delete()
     messages.success(request, "刪除成功！")
     return HttpResponseRedirect(reverse('products:product_detail', args=(product.pk,)))
+
+
+def update_rating(request, pk, id):
+    product = Product.objects.get(pk=pk)
+    rating = Rating.objects.get(pk=id)
+    if request.method == 'POST':
+        form = RatingForm(request.POST)
+        if form.is_valid:
+            form = RatingForm(request.POST, instance=rating)
+            form.save()
+            messages.success(request, '評價更改成功')
+    else:
+        form = RatingForm()
+
+    return render(request, 'Rating/rating_update.html', {'form': form, 'product': product, })
+
+
+# class UpdateRating(UpdateView):
+#     model = Rating
+#     form_class = RatingForm
+#     template_name = 'Rating/rating_update.html'
+#
+#     def get_context_data(self, **kwargs):
+#         context = super(UpdateRating, self).get_context_data(**kwargs)
+#         context['product'] = Product.objects.get(pk=)
+#         return context
