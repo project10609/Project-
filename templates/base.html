@@ -23,10 +23,16 @@
   <link rel="stylesheet" href="{% static 'css/jquery-ui.min.css' %}" type="text/css">
   <link rel="stylesheet" href="{% static 'css/slicknav.min.css' %}" type="text/css">
   <link rel="stylesheet" href="{% static 'css/style11.css' %}" type="text/css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css" rel="stylesheet">
 
 </head>
 
 <body>
+  {% if messages %}
+        {% for message in messages %}
+          <script>toastr.{{ message.tags }}('{{ message }}');</script>   
+        {% endfor %}
+  {% endif %}
   <header class="header-section">
     <div class="header-top">
       <div class="container">
@@ -142,7 +148,8 @@
   <script src="{% static 'js/main6.js' %}"></script>
   <script type='text/javascript' src="{% static 'js/autocomplete.js' %}"></script>
   <script src="{% static 'js/jquery.min.js' %}"></script>
-
+  <script type="text/javascript" src="{% static 'js/toastr.min.js' %}"></script>  
+  <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
 </body>
 
 </html>
