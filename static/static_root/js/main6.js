@@ -159,9 +159,9 @@
     $(this).html(
       event.strftime(
         "<div class='cd-item'><span>%D</span> <p>Days</p> </div>" +
-          "<div class='cd-item'><span>%H</span> <p>Hrs</p> </div>" +
-          "<div class='cd-item'><span>%M</span> <p>Mins</p> </div>" +
-          "<div class='cd-item'><span>%S</span> <p>Secs</p> </div>"
+        "<div class='cd-item'><span>%H</span> <p>Hrs</p> </div>" +
+        "<div class='cd-item'><span>%M</span> <p>Mins</p> </div>" +
+        "<div class='cd-item'><span>%S</span> <p>Secs</p> </div>"
       )
     );
   });
@@ -193,7 +193,9 @@
     $("#ver").html(msBeautify.version.msDropdown);
 
     //convert
-    $(".language_drop").msDropdown({ roundedBorder: false });
+    $(".language_drop").msDropdown({
+      roundedBorder: false
+    });
     $("#tech").data("dd");
   });
   /*-------------------
@@ -244,8 +246,12 @@
     var imgurl = $(this).data("imgbigurl");
     var bigImg = $(".product-big-img").attr("src");
     if (imgurl != bigImg) {
-      $(".product-big-img").attr({ src: imgurl });
-      $(".zoomImg").attr({ src: imgurl });
+      $(".product-big-img").attr({
+        src: imgurl
+      });
+      $(".zoomImg").attr({
+        src: imgurl
+      });
     }
   });
 
@@ -366,6 +372,43 @@ function starNumer(element) {
   }
 }
 
+window.onload = function setStarNumber() {
+  $(document).ready(function () {
+    $(".pd-rating .rating-point").each(function () {
+      var n = $(this).text();
+      var rounded = (n | 0)
+      var decimal = n-rounded
+      for(var j = 0;j<4-rounded; j++){
+        $(this).after("<i class='fa fa-star-o'></i>")
+      }
+      if(decimal){
+        $(this).after("<i class='fa fa-star-half-o'></i>");
+      }else{
+        $(this).after("<i class='fa fa-star-o'></i>");
+      }
+      for (var i = 0; i < rounded; i++) {
+        $(this).after("<i class='fa fa-star'></i>");
+      }
+    });
+    $(".at-rating .rating-point").each(function () {
+      var n = $(this).text();
+      var rounded = (n | 0)
+      var decimal = n-rounded
+      for(var j = 0;j<4-rounded; j++){
+        $(this).after("<i class='fa fa-star-o'></i>")
+      }
+      if(decimal){
+        $(this).after("<i class='fa fa-star-half-o'></i>");
+      }else{
+        $(this).after("<i class='fa fa-star-o'></i>");
+      }
+      for (var i = 0; i < rounded; i++) {
+        $(this).after("<i class='fa fa-star'></i>");
+      }
+    });
+  });
+};
+
 /*-------------------
 		icon-heart
   --------------------- */
@@ -384,4 +427,26 @@ function clickHeart(element) {
     $(element).removeClass("icon_heart");
     $(element).addClass("icon_heart_alt");
   }
+}
+
+/*-------------------
+		shoe-messages
+  --------------------- */
+
+toastr.options = {
+  "closeButton": false,
+  "debug": false,
+  "newestOnTop": false,
+  "progressBar": false,
+  "positionClass": "toast-top-right",
+  "preventDuplicates": false,
+  "onclick": null,
+  "showDuration": "300",
+  "hideDuration": "1000",
+  "timeOut": "1000",
+  "extendedTimeOut": "5000",
+  "showEasing": "swing",
+  "hideEasing": "linear",
+  "showMethod": "fadeIn",
+  "hideMethod": "fadeOut"
 }

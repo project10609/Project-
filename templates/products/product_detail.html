@@ -6,16 +6,8 @@
 {% load bootstrap3 %}
 {% load get_list %}
 
-
 <!-- Product Shop Section Begin -->
 <section class="product-shop spad page-details">
-  {% if messages %}
-  <ul class="messages">
-    {% for message in messages %}
-    <li class="{{ message.tags }}">{{ message }}</li>
-    {% endfor %}
-  </ul>
-  {% endif %}
   <div class="container">
     <div class="row">
       <div class="col-lg-3 product-sidebar">
@@ -111,15 +103,11 @@
                     <tr>
                       <td class="p-catagory">評價總分</td>
                       <td class="rating-point">
-                        <span class="integer">{% if overall_rating == 0 %}0{% else %}{{ overall_rating|floatformat:1 }}{% endif %}</span><span class="decimal"></span>/5
+                        <span>{% if overall_rating == 0 %}0{% else %}{{ overall_rating|floatformat:1 }}{% endif %}</span>/5
                       </td>
                       <td>
                         <div class="pd-rating">
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star-o"></i>
+                          <span class="rating-point">{% if overall_rating == 0 %}0{% else %}{{ overall_rating|floatformat:1 }}{% endif %}</span>
                           <span>(5)</span>
                         </div>
                       </td>
@@ -127,21 +115,11 @@
                     <tr>
                       <td class="p-catagory">價格品質評價</td>
                       <td class="rating-point">
-                        <span class="integer">{% for key,value in price_rating.items %}
-                          {% if value %}
-                          {{ value|floatformat:1 }}
-                          {% else %}
-                          0
-                          {% endif %}
-                          {% endfor %}</span><span class="decimal"></span>/5
+                        <span>{% for key,value in price_rating.items %}{% if value %}{{ value|floatformat:1}}{% else %}0{% endif %}{% endfor %}</span>/5
                       </td>
                       <td>
                         <div class="pd-rating">
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star-o"></i>
+                          <span class="rating-point">{% for key,value in price_rating.items %}{% if value %}{{ value|floatformat:1}}{% else %}0{% endif %}{% endfor %}</span>
                           <span>(5)</span>
                         </div>
                       </td>
@@ -149,21 +127,11 @@
                     <tr>
                       <td class="p-catagory">購物平台評價</td>
                       <td class="rating-point">
-                        <span class="integer">{% for key,value in source_rating.items %}
-                          {% if value %}
-                          {{ value|floatformat:1 }}
-                          {% else %}
-                          0
-                          {% endif %}
-                          {% endfor %}</span><span class="decimal"></span>/5
+                        <span>{% for key,value in source_rating.items %}{% if value %}{{ value|floatformat:1 }}{% else %}{% endif %}{% endfor %}</span>/5
                       </td>
-                      <td class="p-rating">
+                      <td class="pd-rating">
                         <div class="pd-rating">
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star-o"></i>
+                          <span class="rating-point">{% for key,value in source_rating.items %}{% if value %}{{ value|floatformat:1 }}{% else %}{% endif %}{% endfor %}</span>
                           <span>(5)</span>
                         </div>
                       </td>
@@ -171,21 +139,11 @@
                     <tr>
                       <td class="p-catagory">出貨速度評價</td>
                       <td class="rating-point">
-                        <span class="integer">{% for key,value in speed_rating.items %}
-                          {% if value %}
-                          {{ value|floatformat:1 }}
-                          {% else %}
-                          0
-                          {% endif %}
-                          {% endfor %}</span><span class="decimal"></span>/5
+                        <span>{% for key,value in speed_rating.items %}{% if value %}{{ value|floatformat:1 }}{% else %}0{% endif %}{% endfor %}</span>/5
                       </td>
                       <td>
                         <div class="pd-rating">
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star-o"></i>
+                          <span class="rating-point">{% for key,value in speed_rating.items %}{% if value %}{{ value|floatformat:1 }}{% else %}0{% endif %}{% endfor %}</span>
                           <span>(5)</span>
                         </div>
                       </td>
@@ -224,11 +182,7 @@
                     <div class="avatar-text">
                       <div class="at-rating">
                         <span class="point">{{ rating.user_rating|floatformat:1 }}</span><span class="point2">/5</span>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star-o"></i>
+                        <span class="rating-point">{{ rating.user_rating|floatformat:1 }}</span>
                       </div>
                       <h5>{{ rating.user }} <span>{{ rating.created_on }}</span></h5>
                       <div class="at-reply">
