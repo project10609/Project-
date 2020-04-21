@@ -6,8 +6,18 @@
 {% load bootstrap3 %}
 {% load get_list %}
 
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css" rel="stylesheet">
+<script type="text/javascript" src="{% static 'js/toastr.min.js' %}"></script>
+
 <!-- Product Shop Section Begin -->
 <section class="product-shop spad page-details">
+  {% if messages %}
+        {% for message in messages %}
+        <script>toastr.{{ message.tags }}('{{ message }}')</script>
+        {% endfor %}
+  {% endif %}
+
   <div class="container">
     <div class="row">
       <div class="col-lg-3 product-sidebar">
@@ -318,6 +328,8 @@
     </div>
   </div>
 </section>
+
+
 
 <!-- Product Shop Section End -->
 
