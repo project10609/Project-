@@ -1,4 +1,4 @@
-/******************************************************************
+  /******************************************************************
   Template Name: Fashi
   Description: Fashi eCommerce HTML Template
   Author: Colorlib
@@ -884,7 +884,10 @@ ol {
   display: none;
 }
 
+<<<<<<< HEAD:staticfiles/css/style11.css
 
+=======
+>>>>>>> projectClass:static/static_root/css/style11.css
 .favorite-heart-icon-main {
   background-color: #ffffff;
   border: none;
@@ -1514,10 +1517,13 @@ ol {
   color: #999591;
 }
 
+<<<<<<< HEAD:staticfiles/css/style11.css
 .pd-rating .rating-point {
   display: none;
 }
 
+=======
+>>>>>>> projectClass:static/static_root/css/style11.css
 .product-item .pi-text .product-price span {
   font-size: 14px;
   font-weight: 400;
@@ -2621,9 +2627,12 @@ ol {
   cursor: pointer;
 }
 
+<<<<<<< HEAD:staticfiles/css/style11.css
 
 .product-details .pd-title .heart-icon i {}
 
+=======
+>>>>>>> projectClass:static/static_root/css/style11.css
 .product-details .pd-title .product-name {
   font-size: 24px;
   font-weight: 600;
@@ -3034,7 +3043,11 @@ ol {
 }
 
 .customer-review-option .comment-option .co-item .avatar-text .at-rating span.point2 {
+<<<<<<< HEAD:staticfiles/css/style11.css
   margin-right: 3px;
+=======
+  margin-right: 5px;
+>>>>>>> projectClass:static/static_root/css/style11.css
 }
 
 .customer-review-option .comment-option .co-item .avatar-text .at-rating {

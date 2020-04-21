@@ -1,4 +1,4 @@
-/******************************************************************
+  /******************************************************************
   Template Name: Fashi
   Description: Fashi eCommerce HTML Template
   Author: Colorlib
@@ -1518,6 +1518,7 @@ ol {
   display: none;
 }
 
+
 .product-item .pi-text .product-price span {
   font-size: 14px;
   font-weight: 400;
@@ -3034,7 +3035,9 @@ ol {
 }
 
 .customer-review-option .comment-option .co-item .avatar-text .at-rating span.point2 {
-  margin-right: 3px;
+
+  margin-right: 5px;
+
 }
 
 .customer-review-option .comment-option .co-item .avatar-text .at-rating {

@@ -13,10 +13,8 @@
         <div class="filter-widget">
           <h4 class="fw-title">所有分類</h4>
           <ul class="filter-catagories">
-
             {% for category in categories %}
             <li><a href="{% url 'products:categories' category.pk %}">
-
                 {{ category.name }}({{category.products.count}})</a>
               {% if category.subcategory.count == 1 %}
               {% else %}
@@ -82,7 +80,6 @@
             <input class="filter-submit" type="submit" name="" value="套用">
           </div>
         </form>
-
       </div>
       <div class="col-lg-9 order-1 order-lg-2">
         <div class="product-show-option">
@@ -128,12 +125,9 @@
               {% else %}
               <button class="page-next">&gt;</button>
               {% endif %}
-
             </div>
-
           </div>
         </div>
-
         <div class="product-list" id="block-sorting">
           <div class="row">
             {% for product in product_list %}
@@ -152,7 +146,6 @@
                 <div class="pi-text">
                   <a href="{% url 'products:product_detail' product.pk %}">
                     <h5>{{ product.product_name|truncatechars:20 }}</h5>
-
                   </a>
                   {% if product.product_source.slug == "Ruten" %}
                   <div class="catagory-name">露天拍賣</div>
@@ -181,7 +174,6 @@
             {% endif %}
           </div>
         </div>
-
         <div class="product-list" id="straight-sorting" style="display: none;">
 
           {% for product in product_list %}
@@ -191,9 +183,6 @@
                 <div class="pi-pic">
                   <a href="{% url 'products:product_detail' product.pk %}"><img src="{{ product.product_images }}" alt=""></a>
                   <div class="sale pp-sale">{{ product.pk }}</div>
-                  <div class="icon">
-                    <i class="icon_heart_alt"></i>
-                  </div>
                 </div>
               </div>
             </div>

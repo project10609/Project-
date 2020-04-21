@@ -73,7 +73,7 @@
       <div class="col-lg-9">
         <div class="row">
           <div class="col-lg-5">
-            <img class="product-img" src="{{ product.product_images }}" alt="">
+            <img class="product-img" src="{{ product.product_images }}" alt="" />
             <div class="product-btn">
               <button>
                 <a href="{{ product.product_url }}">前往網站瀏覽</a>
@@ -84,7 +84,6 @@
             <div class="product-details">
               <div class="pd-title">
                 <div class="product-name">{{ product.product_name }}</div>
-
                 <div class="product-store">
                   {% if product.product_source.slug == "Ruten" %}
                   <div class="catagory-name">露天拍賣</div>
@@ -102,7 +101,6 @@
                 <div class="text-right">
                   <i class="favorite-heart-icon icon_heart_alt"></i>
                 </div>
-
               </div>
             </div>
             <div class="tab-item-content">
