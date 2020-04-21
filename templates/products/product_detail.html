@@ -209,7 +209,7 @@
                   </div>
                   {% if rating.user == request.user %}
                   <div class="text-right">
-                    <button class="btn btn-warning"><a href="{% url 'products:update_rating' rating.product.pk rating.pk %}">修改評價</a></button>
+                    <button class="btn btn-warning"><a href="#">修改評價</a></button>
                     <button class="btn btn-danger"><a href="{% url 'products:delete_rating' rating.product.pk rating.pk %}">刪除評價</a></button>
                   </div>
 
