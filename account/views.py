@@ -4,7 +4,7 @@ from django.urls import reverse
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, HttpResponse
-from django.contrib.auth import authenticate,login,logout
+from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from account.models import UserProfile
 
@@ -14,14 +14,14 @@ def profile(request, pk):
     user = get_object_or_404(User, pk=pk)
     return render(request, 'account/profile.html', {'user': user})
 
+
 @login_required
 def user_logout(request):
     logout(request)
     return HttpResponseRedirect(reverse('index'))
 
-def register(request):
 
-    registered = False
+def register(request):
 
     if request.method == "POST":
         user_form = UserForm(request.POST)
@@ -32,18 +32,20 @@ def register(request):
             password = user_form.cleaned_data['password2']
             first_name = user_form.cleaned_data['first_name']
 
-            user = User.objects.create_user(username=username, password=password, email=email,first_name=first_name)
+            user = User.objects.create_user(
+                username=username, password=password, email=email, first_name=first_name)
             user.set_password(user.password)
             user_profile = UserProfile(user=user)
             user_profile.save()
 
-            registered = True
+            return HttpResponseRedirect(reverse('account:user_login'))
         else:
             print(user_form.errors)
     else:
         user_form = UserForm()
 
-    return render(request,'account/registration.html', {'user_form':user_form,'registered':registered,})
+    return render(request, 'account/registration.html', {'user_form': user_form, })
+
 
 def user_login(request):
 
@@ -51,11 +53,11 @@ def user_login(request):
         username = request.POST.get('username')
         password = request.POST.get('password')
 
-        user = authenticate(username=username,password=password)
+        user = authenticate(username=username, password=password)
 
         if user:
             if user.is_active:
-                login(request,user)
+                login(request, user)
                 return HttpResponseRedirect(reverse('index'))
             else:
                 return HttpResponse("Account Not Active")
@@ -63,6 +65,6 @@ def user_login(request):
         else:
             print('Failed login Detected')
             message = 'Invalid Login Info'
-            return render(request,'account/login.html',{'message':message})
+            return render(request, 'account/login.html', {'message': message})
     else:
-        return render(request,'account/login.html',{})
+        return render(request, 'account/login.html', {})

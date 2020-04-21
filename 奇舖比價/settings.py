@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     'products',
     'account',
     'search',
+    'Rating',
     'bootstrap3',
 
 ]
@@ -159,7 +160,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Taipei'
 
 USE_I18N = True
 

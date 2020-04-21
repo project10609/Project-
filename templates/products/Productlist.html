@@ -1,7 +1,11 @@
 {% extends 'base.html' %}
 {% block content %}
+{% load shuffle %}
 {% load static %}
+{% load bootstrap3 %}
 {% load get_list %}
+
+
 <section class="product-shop spad">
   <div class="container">
     <div class="row">
@@ -13,7 +17,7 @@
             <li><a href="{% url 'products:categories' category.pk %}">{{ category.name }}({{category.products.count}})</a>
               {% if category.subcategory.count == 1 %}
               {% else %}
-              <i class="list-btn"></i>
+              <i class="list-btn before-active"></i>
               {% endif %}
               <ul class="filter-sub-catagories">
                 {% for subcategory in category.subcategory.all %}
@@ -28,12 +32,12 @@
             {% endfor %}
           </ul>
         </div>
-        <form class="" action="{% url 'search:search' %}" method="GET">
+        <form action="{% url 'products:allproduct' %}" method="GET">
           <div class="filter-widget">
             <h4 class="fw-title">電商平台</h4>
             <div class="fw-brand-check">
               <div class="bc-item">
-                <li><a href="{% url 'index' %}">全部商品</a></li>
+                <li><a href="{% url 'products:allproduct' %}">全部商品</a></li>
                 <!-- {{ sourceform.as_p }} -->
                 {% for field in sourceform.source %}
                 <label for="{{ field.id_for_label }}">
@@ -48,13 +52,15 @@
                 {% if request.GET.max_price %}
                 <input type="hidden" name="max_price" value="{{ request.GET.max_price }}">
                 {% endif %}
-                <input type="hidden" name="category" value="{{ request.GET.category }}">
-                <input type="hidden" name="q" value="{{ request.GET.q }}">
+                <!-- {% if request.GET.filter_by %}
+                              <input type="hidden" name="filter_by" value="{{ request.GET.filter_by }}">
+                              {% endif %} -->
+                <!-- <input type="submit" name="sourceSubmit" value="套用"> -->
               </div>
             </div>
           </div>
         </form>
-        <form action="{% url 'search:search' %}" method="GET">
+        <form class="" action="{% url 'products:allproduct' %}" method="GET">
           <div class="filter-widget">
             <h4 class="fw-title">價格範圍</h4>
             <div class="filter-range-wrap">
@@ -69,23 +75,17 @@
                 <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
               </div>
             </div>
-            {% if request.GET.source %}
-            {% for sources in request.GET|get_list:'source' %}
-            <input type="hidden" name="source" value="{{ sources }}">
-            {% endfor %}
-            {% endif %}
-            <input type="hidden" name="category" value="{{ request.GET.category }}">
-            <input type="hidden" name="q" value="{{ request.GET.q }}">
             <input type="submit" name="" value="套用">
           </div>
         </form>
+
       </div>
       <div class="col-lg-9 order-1 order-lg-2">
         <div class="product-show-option">
           <div class="row">
             <div class="col-lg-8 col-md-8">
               <div class="select-option">
-                <form action="{% url 'search:search' %}" method="GET">
+                <form action="{% url 'products:allproduct' %}" method="GET">
                   {{ sortingform }}
                   {% if request.GET.source %}
                   {% for sources in request.GET|get_list:'source' %}
@@ -98,21 +98,18 @@
                   {% if request.GET.max_price %}
                   <input type="hidden" name="max_price" value="{{ request.GET.max_price }}">
                   {% endif %}
-                  <input type="hidden" name="category" value="{{ request.GET.category }}">
-                  <input type="hidden" name="q" value="{{ request.GET.q }}">
                 </form>
                 <div class="arrange">
                   <input id="block-btn" type="image" src="{% static 'img/block.png' %}" width="40px" style="margin-left:5px; padding:5px; background-color:#f6f6f6;"></input>
                   <input id="straight-btn" type="image" src="{% static 'img/Straight.png' %}" width="40px" style="padding:5px;"></input>
-                  {% if request.GET.q %}
-                  <p class="product-search-result"><span>「{{ request.GET.q }}」</span>的商品有{{ products.count }}筆</p>
-                  {% elif request.GET.q == "" %}
-                  <p class="product-search-result"><span>「{{ request.GET.category }}」</span>的商品有{{ products.count }}</p>
-                  {% endif %}
+                  <p class="product-search-result">Show {{ product_list.start_index }} - {{ product_list.end_index }} Of
+                    {{ products.count }} products</p>
                 </div>
               </div>
             </div>
+
             <div class="col-lg-4 col-md-4 product-page-controller text-right">
+
               <p>
                 <span class="current-page-number">{{ product_list.number }}</span>
                 /
@@ -126,48 +123,52 @@
               {% if product_list.has_next %}
               <button class="page-next"><a href="?{% url_replace next_page=product_list.next_page_number %}">&gt;</a></button>
               {% else %}
+
               <button class="page-next">&gt;</button>
               {% endif %}
+
             </div>
+
           </div>
         </div>
 
         <div class="product-list" id="block-sorting">
           <div class="row">
-            {% for result in product_list %}
+            {% for product in product_list %}
             <div class="col-lg-3 col-sm-6">
               <div class="product-item">
                 <div class="pi-pic">
-                  <a href="{% url 'products:product_detail' result.pk %}"><img src="{{ result.product_images }}" alt="image"></a>
+                  <a href="{% url 'products:product_detail' product.pk %}"><img src="{{ product.product_images }}" alt="image"></a>
                   <div class="sale pp-sale">{{ product.get_rating|floatformat:1 }}<i class="fa fa-star"></i></div>
                   <div class="icon">
                     <i class="favorite-heart-icon icon_heart_alt"></i>
                   </div>
                   <ul>
-                    <li class="quick-view"><a href="{{ result.product_url }}">前往網站瀏覽</a></li>
+                    <li class="quick-view"><a href="{{ product.product_url }}">前往網站瀏覽</a></li>
                   </ul>
                 </div>
                 <div class="pi-text">
-                  <a href="{% url 'products:product_detail' result.pk %}">
-                    <h5>{{ result.product_name|truncatechars:20 }}</h5>
+                  <a href="{% url 'products:product_detail' product.pk %}">
+                    <h5>{{ product.product_name|truncatechars:20 }}</h5>
+
                   </a>
-                  {% if result.product_source.slug == "Ruten" %}
+                  {% if product.product_source.slug == "Ruten" %}
                   <div class="catagory-name">露天拍賣</div>
                   {% endif %}
-                  {% if result.product_source.slug == "Shopee" %}
+                  {% if product.product_source.slug == "Shopee" %}
                   <div class="catagory-name">蝦皮購物</div>
                   {% endif %}
-                  {% if result.product_source.slug == "Yahoo" %}
+                  {% if product.product_source.slug == "Yahoo" %}
                   <div class="catagory-name">Yahoo拍賣</div>
                   {% endif %}
-                  {% if result.product_source.slug == "ETMall" %}
+                  {% if product.product_source.slug == "ETMall" %}
                   <div class="catagory-name">東森購物</div>
                   {% endif %}
-                  {% if result.product_source.slug == "Momo" %}
+                  {% if product.product_source.slug == "Momo" %}
                   <div class="catagory-name">Momo購物</div>
                   {% endif %}
                   <div class="product-price">
-                    ${{ result.product_price }}
+                    ${{ product.product_price }}
                   </div>
                 </div>
               </div>
@@ -245,14 +246,16 @@
           {% if product_list.has_next %}
           <button class="page-next"><a href="?{% url_replace next_page=product_list.next_page_number %}">&gt;</a></button>
           {% else %}
-          <button class="page-prev">&gt;</button>
+          <button class="page-next">&gt;</button>
           {% endif %}
 
-
         </div>
+      </div>
+    </div>
+  </div>
+
+
+
 </section>
-
-
-
 
 {% endblock %}

@@ -22,12 +22,13 @@
   <link rel="stylesheet" href="{% static 'css/nice-select.css' %}" type="text/css">
   <link rel="stylesheet" href="{% static 'css/jquery-ui.min.css' %}" type="text/css">
   <link rel="stylesheet" href="{% static 'css/slicknav.min.css' %}" type="text/css">
-  <link rel="stylesheet" href="{% static 'css/style11.css' %}" type="text/css">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/style12.css' %}" type="text/css">
+
 
 </head>
 
 <body>
+  
   <header class="header-section">
     <div class="header-top">
       <div class="container">
@@ -41,7 +42,6 @@
         </div>
         <div class="ht-right">
           <div class="login-panel">
-
             <i class="fa fa-user"></i>
             {% if request.user.is_authenticated %}
             <a href="{% url 'account:logout' %}">{{ request.user.username}}</a>
@@ -74,15 +74,14 @@
                   {% endfor %}
                 </select>
                 <input id='searcher' class="search-text" type="text" placeholder="請輸入關鍵字搜尋比價" name="q" value="{{ request.GET.q }}">
-                <input class="search-submit" type="submit" id="submit" value=""
-                  style="background-image:url({% static 'img/search.png' %});">
+                <input class="search-submit" type="submit" id="submit" value="" style="background-image:url({% static 'img/search.png' %});">
               </div>
             </form>
           </div>
           <div class="col-lg-1 col-md-1">
             <ul class="nav-right">
               <li class="heart-icon">
-                <a href="#" style="margin-top:10px;">                  
+                <a href="#" style="margin-top:10px;">
                   <button class="favorite-heart-icon-main">
                     <i class="icon_heart_alt"></i>
                     <span>1</span>
@@ -99,7 +98,7 @@
         <div class="nav-depart">
           <div class="depart-btn">
             <i class="ti-menu"></i>
-            <span>所有類別</span>
+            <span><a href="{% url 'products:allproduct' %}">所有類別</a></span>
             <ul class="depart-hover">
               {% for category in categories %}
               <li><a href="{{ category.get_absolute_url }}">{{ category.name }}</a></li>
@@ -142,7 +141,7 @@
   <script src="{% static 'js/jquery.dd.min.js' %}"></script>
   <script src="{% static 'js/jquery.slicknav.js' %}"></script>
   <script src="{% static 'js/owl.carousel.min.js' %}"></script>
-  <script src="{% static 'js/main4.js' %}"></script>
+  <script src="{% static 'js/main6.js' %}"></script>
   <script type='text/javascript' src="{% static 'js/autocomplete.js' %}"></script>
   <script src="{% static 'js/jquery.min.js' %}"></script>
 

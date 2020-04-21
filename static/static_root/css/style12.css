@@ -1,4 +1,4 @@
-  /******************************************************************
+/******************************************************************
   Template Name: Fashi
   Description: Fashi eCommerce HTML Template
   Author: Colorlib
@@ -760,6 +760,10 @@ ol {
   margin-left: 16px;
 }
 
+.nav-item .nav-depart .depart-btn span a {
+  color: #ffffff;
+}
+
 .nav-item .nav-depart .depart-btn .depart-hover {
   position: absolute;
   width: 300px;
@@ -879,6 +883,7 @@ ol {
 .slicknav_menu {
   display: none;
 }
+
 
 .favorite-heart-icon-main {
   background-color: #ffffff;
@@ -1306,6 +1311,11 @@ ol {
   background: #fcbabb;
 }
 
+.product-item .pi-pic .sale.pp-sale i{
+  display: inline-block;
+  margin-left: 2px;
+}
+
 .product-image2 .pi-pic .sale.pp-sale {
   background: #fcbabb;
 }
@@ -1418,7 +1428,7 @@ ol {
 .product-item .pi-text a h5 {
   color: #252525;
   font-weight: 600;
-  font-size: 20px;
+  font-size: 18px;
 }
 
 .product-item .pi-text .product-price {
@@ -1501,12 +1511,21 @@ ol {
   font-size: 18px;
   display: inline-block;
   color: #fac451;
-  margin-right: -3px;
+  margin-left: 2px;
 }
 
-.px-text .pd-rating span {
+.px-text .pd-rating .comment-num {
   font-size: 18px;
   color: #999591;
+}
+
+.px-text .pd-rating .point {
+  font-size: 22px;
+  color: #000000;
+}
+
+.pd-rating .rating-point {
+  display: none;
 }
 
 .product-item .pi-text .product-price span {
@@ -2612,6 +2631,9 @@ ol {
   cursor: pointer;
 }
 
+
+.product-details .pd-title .heart-icon i {}
+
 .product-details .pd-title .product-name {
   font-size: 24px;
   font-weight: 600;
@@ -2923,28 +2945,21 @@ ol {
 }
 
 .specification-table table tr td.rating-point {
-  width: 15%;
+  width: 16%;
   text-align: center;
 }
 
-.specification-table table tr td.rating-point span.integer {
-  font-size: 25px;
+.specification-table table tr td.rating-point span {
+  font-size: 22px;
   color: #fcbabb;
   font-weight: 600;
-}
-
-.specification-table table tr td.rating-point span.decimal {
-  font-size: 19px;
-  color: #fcbabb;
-  font-weight: 600;
-  margin-right: 1px;
 }
 
 .specification-table table tr td .pd-rating i {
   font-size: 22px;
   display: inline-block;
   color: #fac451;
-  margin-right: -3px;
+  margin-right: 2px;
 }
 
 .specification-table table tr td .pd-rating span {
@@ -3029,7 +3044,7 @@ ol {
 }
 
 .customer-review-option .comment-option .co-item .avatar-text .at-rating span.point2 {
-  margin-right: 5px;
+  margin-right: 3px;
 }
 
 .customer-review-option .comment-option .co-item .avatar-text .at-rating {
@@ -3040,7 +3055,11 @@ ol {
   font-size: 15px;
   display: inline-block;
   color: #fac451;
-  margin-right: -3px;
+  margin-right: 1px;
+}
+
+.customer-review-option .comment-option .co-item .avatar-text .at-rating .rating-point {
+  display: none;
 }
 
 .customer-review-option .comment-option .co-item .avatar-text h5 {
@@ -5061,12 +5080,12 @@ ol {
 
   .search-input .search-select {
     height: 50px;
-    width: 26%;
+    width: 20%;
     padding-left: 0px;
   }
 
   .search-input .search-text {
-    width: 62%;
+    width: 64%;
   }
 }
 

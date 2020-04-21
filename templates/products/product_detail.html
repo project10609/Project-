@@ -6,8 +6,18 @@
 {% load bootstrap3 %}
 {% load get_list %}
 
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css" rel="stylesheet">
+<script type="text/javascript" src="{% static 'js/toastr.min.js' %}"></script>
+
 <!-- Product Shop Section Begin -->
 <section class="product-shop spad page-details">
+  {% if messages %}
+        {% for message in messages %}
+        <script>toastr.{{ message.tags }}('{{ message }}')</script>
+        {% endfor %}
+  {% endif %}
+
   <div class="container">
     <div class="row">
       <div class="col-lg-3 product-sidebar">
@@ -63,7 +73,7 @@
       <div class="col-lg-9">
         <div class="row">
           <div class="col-lg-5">
-            <img class="product-img" src="{{ product.product_images }}" alt="" />
+            <img class="product-img" src="{{ product.product_images }}" alt="">
             <div class="product-btn">
               <button>
                 <a href="{{ product.product_url }}">前往網站瀏覽</a>
@@ -74,6 +84,7 @@
             <div class="product-details">
               <div class="pd-title">
                 <div class="product-name">{{ product.product_name }}</div>
+
                 <div class="product-store">
                   {% if product.product_source.slug == "Ruten" %}
                   <div class="catagory-name">露天拍賣</div>
@@ -91,73 +102,56 @@
                 <div class="text-right">
                   <i class="favorite-heart-icon icon_heart_alt"></i>
                 </div>
+
               </div>
             </div>
             <div class="tab-item-content">
               <div class="tab-content">
                 <div class="specification-table">
+                  {% if overall_rating != 0 %}
                   <table>
                     <tr>
                       <td class="p-catagory">評價總分</td>
                       <td class="rating-point">
-                        <span class="integer">4.</span><span class="decimal">1</span>/5
+                        <span>{% if overall_rating == 0 %}0{% else %}{{ overall_rating|floatformat:1 }}{% endif %}</span>/5
                       </td>
                       <td>
                         <div class="pd-rating">
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star-o"></i>
-                          <span>(5)</span>
+                          <span class="rating-point">{% if overall_rating == 0 %}0{% else %}{{ overall_rating|floatformat:1 }}{% endif %}</span>
+                          <span>({{ comment_count }})</span>
                         </div>
                       </td>
                     </tr>
                     <tr>
                       <td class="p-catagory">價格品質評價</td>
                       <td class="rating-point">
-                        <span class="integer">4.</span><span class="decimal">1</span>/5
+                        <span>{% for key,value in price_rating.items %}{% if value %}{{ value|floatformat:1}}{% else %}0{% endif %}{% endfor %}</span>/5
                       </td>
                       <td>
                         <div class="pd-rating">
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star-o"></i>
-                          <span>(5)</span>
+                          <span class="rating-point">{% for key,value in price_rating.items %}{% if value %}{{ value|floatformat:1}}{% else %}0{% endif %}{% endfor %}</span>
                         </div>
                       </td>
                     </tr>
                     <tr>
                       <td class="p-catagory">購物平台評價</td>
                       <td class="rating-point">
-                        <span class="integer">4.</span><span class="decimal">1</span>/5
+                        <span>{% for key,value in source_rating.items %}{% if value %}{{ value|floatformat:1 }}{% else %}{% endif %}{% endfor %}</span>/5
                       </td>
-                      <td class="p-rating">
+                      <td class="pd-rating">
                         <div class="pd-rating">
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star-o"></i>
-                          <span>(5)</span>
+                          <span class="rating-point">{% for key,value in source_rating.items %}{% if value %}{{ value|floatformat:1 }}{% else %}{% endif %}{% endfor %}</span>
                         </div>
                       </td>
                     </tr>
                     <tr>
                       <td class="p-catagory">出貨速度評價</td>
                       <td class="rating-point">
-                        <span class="integer">4.</span><span class="decimal">1</span>/5
+                        <span>{% for key,value in speed_rating.items %}{% if value %}{{ value|floatformat:1 }}{% else %}0{% endif %}{% endfor %}</span>/5
                       </td>
                       <td>
                         <div class="pd-rating">
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star-o"></i>
-                          <span>(5)</span>
+                          <span class="rating-point">{% for key,value in speed_rating.items %}{% if value %}{{ value|floatformat:1 }}{% else %}0{% endif %}{% endfor %}</span>
                         </div>
                       </td>
                     </tr>
@@ -170,16 +164,23 @@
                       </td>
                     </tr>
                   </table>
+                  {% else %}
+                  <p>此商品尚無評價</p>
+                  {% endif %}
                 </div>
+
               </div>
             </div>
           </div>
+
           <div class="col-lg-12 customer-review-option">
             <div class="row">
               <div class="comment-option">
                 <div class="col-lg-12">
-                  <h4>評論(2)</h4>
+                  <h4>評論({{ comment_count }})</h4>
                 </div>
+
+                {% for rating in rating_list %}
                 <div class="col-lg-12 col-md-12">
                   <div class="co-item">
                     <div class="avatar-pic">
@@ -187,47 +188,49 @@
                     </div>
                     <div class="avatar-text">
                       <div class="at-rating">
-                        <span class="point">4.0</span><span class="point2">/5</span>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star-o"></i>
+                        <span class="point">{{ rating.user_rating|floatformat:1 }}</span><span class="point2">/5</span>
+                        <span class="rating-point">{{ rating.user_rating|floatformat:1 }}</span>
                       </div>
-                      <h5>Brandon Kelley <span>2019.04.14</span></h5>
-                      <div class="at-reply">Nice !</div>
-                    </div>
-                  </div>
-                  <div class="co-item">
-                    <div class="avatar-pic">
-                      <img src="img/product-single/avatar-2.png" alt="" />
-                    </div>
-                    <div class="avatar-text">
-                      <div class="at-rating">
-                        <span class="point">4.1</span><span class="point2">/5</span>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star-o"></i>
-                      </div>
-                      <h5>Roy Banks <span>2019.04.14</span></h5>
+                      <h5>{{ rating.user }} <span>{{ rating.created_on }}</span></h5>
                       <div class="at-reply">
                         <p>
-                          這個商品很不錯，有良好的出貨速度，優秀的品質，非常值得推薦！這個商品很不錯，有良好的出貨速度，優秀的品質，非常值得推薦！
+                          {% if rating.comment is None %}
+                          <br>
+                          <br>
+                          {% else %}
+                          {{ rating.comment }}
+                          {% endif %}
                         </p>
                       </div>
                     </div>
                   </div>
+                  {% if rating.user == request.user %}
+                  <div class="text-right">
+                    <button class="btn btn-warning"><a href="#">修改評價</a></button>
+                    <button class="btn btn-danger"><a href="{% url 'products:delete_rating' rating.product.pk rating.pk %}">刪除評價</a></button>
+                  </div>
+
+                  {% endif %}
                 </div>
+                <hr>
+                {% endfor %}
+
                 <div class="col-lg-12 text-right product-details-page">
                   <p>
-                    <sapn class="current-page-number">1</sapn>
+                    <span class="current-page-number">{{ rating_list.number }}</span>
                     /
-                    <span class="total-page-number">100</span>
+                    <span class="total-page-number">{{ rating_list.paginator.num_pages }}</span>
                   </p>
-                  <button class="page-prev" title="上一頁">&lt;</button>
-                  <button class="page-next" title="下一頁">&gt;</button>
+                  {% if rating_list.has_previous %}
+                  <button class="page-prev"><a href="?{% url_replace next_page=rating_list.previous_page_number %}">&lt;</a></button>
+                  {% else %}
+                  <button class="page-prev">&lt;</button>
+                  {% endif %}
+                  {% if rating_list.has_next %}
+                  <button class="page-next"><a href="?{% url_replace next_page=rating_list.next_page_number %}">&gt;</a></button>
+                  {% else %}
+                  <button class="page-next">&gt;</button>
+                  {% endif %}
                 </div>
               </div>
             </div>
@@ -242,10 +245,13 @@
                                 <i class="fa fa-star-o"></i>
                             </div>
                         </div> -->
+          {% if request.user.is_authenticated %}
           <div class="col-lg-12 customer-review-option">
             <div class="leave-comment">
               <h4>留下你的評價</h4>
-              <form action="#" class="comment-form">
+              <form action="{% url 'products:product_detail' product.pk %}" class="comment-form" method="POST">
+
+                {% csrf_token %}
                 <div class="row">
                   <div class="col-lg-12">
                     <table>
@@ -256,7 +262,8 @@
                         </td>
                         <td>
                           <div class="add-rating">
-                            <input type="hidden" value="1" id="price-rating" />
+                            {{ form.price_rating }}
+                            <!-- <input type="hidden" name="price_comment" value="1" id="price-rating" /> -->
                             <i class="rating-star fa fa-star" id="price-star"></i>
                             <i class="rating-star fa fa-star-o" id="price-star"></i>
                             <i class="rating-star fa fa-star-o" id="price-star"></i>
@@ -272,7 +279,8 @@
                         </td>
                         <td>
                           <div class="add-rating">
-                            <input type="hidden" value="1" id="store-rating" />
+                            {{ form.source_rating }}
+                            <!-- <input type="hidden" name="source_comment" value="1" id="store-rating" /> -->
                             <i class="rating-star fa fa-star" id="store-star"></i>
                             <i class="rating-star fa fa-star-o" id="store-star"></i>
                             <i class="rating-star fa fa-star-o" id="store-star"></i>
@@ -288,7 +296,7 @@
                         </td>
                         <td>
                           <div class="add-rating">
-                            <input type="hidden" value="1" id="delivery-rating" />
+                            {{ form.speed_rating }}
                             <i class="rating-star fa fa-star" id="delivery-star"></i>
                             <i class="rating-star fa fa-star-o" id="delivery-star"></i>
                             <i class="rating-star fa fa-star-o" id="delivery-star"></i>
@@ -299,8 +307,10 @@
                       </tr>
                     </table>
                   </div>
+
                   <div class="col-lg-12">
-                    <textarea placeholder="寫下你的評論......"></textarea>
+                    {{ form.comment }}
+                    <!-- <textarea name="comment" placeholder="寫下你的評論......"></textarea> -->
                   </div>
                   <div class="col-lg-12 submit-part">
                     <button type="submit" class="site-btn">送出</button>
@@ -309,11 +319,16 @@
               </form>
             </div>
           </div>
+          {% endif %}
         </div>
       </div>
     </div>
   </div>
 </section>
+
+
+
 <!-- Product Shop Section End -->
+
 
 {% endblock %}

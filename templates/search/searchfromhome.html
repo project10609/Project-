@@ -49,7 +49,7 @@
             {% endfor %}
           </ul>
         </div>
-        <form class="" action="{% url 'search:search' %}" method="GET">
+        <form class="" action="{% url 'search:search_from_home' query.search %}" method="GET">
           <div class="filter-widget">
             <h4 class="fw-title">電商平台</h4>
             <div class="fw-brand-check">
@@ -69,17 +69,12 @@
                 {% if request.GET.max_price %}
                 <input type="hidden" name="max_price" value="{{ request.GET.max_price }}">
                 {% endif %}
-                {% if request.GET.q %}
-                <input type="hidden" name="q" value="{{ request.GET.q }}">
-                {% endif %}
-                {% if request.GET.category %}
-                <input type="hidden" name="category" value="{{ request.GET.category }}">
-                {% endif %}
+
               </div>
             </div>
           </div>
         </form>
-        <form action="{% url 'search:search' %}" method="GET">
+        <form action="{% url 'search:search_from_home' query.search %}" method="GET">
           <div class="filter-widget">
             <h4 class="fw-title">價格範圍</h4>
             <div class="filter-range-wrap">
@@ -88,8 +83,7 @@
                   {{ priceform }}
                 </div>
               </div>
-              <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
-                data-min="1" data-max="9999">
+              <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content" data-min="1" data-max="9999">
                 <div class="ui-slider-range ui-corner-all ui-widget-header"></div>
                 <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
                 <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
@@ -100,12 +94,7 @@
             <input type="hidden" name="source" value="{{ sources }}">
             {% endfor %}
             {% endif %}
-            {% if request.GET.q %}
-            <input type="hidden" name="q" value="{{ request.GET.q }}">
-            {% endif %}
-            {% if request.GET.category %}
-            <input type="hidden" name="category" value="{{ request.GET.category }}">
-            {% endif %}
+
             <input type="submit" name="" value="套用">
           </div>
         </form>
@@ -115,7 +104,7 @@
           <div class="row">
             <div class="col-lg-8 col-md-8">
               <div class="select-option">
-                <form action="{% url 'search:search' %}" method="GET">
+                <form action="{% url 'search:search_from_home' query.search %}" method="GET">
                   {{ sortingform }}
                   {% if request.GET.source %}
                   {% for sources in request.GET|get_list:'source' %}
@@ -128,152 +117,189 @@
                   {% if request.GET.max_price %}
                   <input type="hidden" name="max_price" value="{{ request.GET.max_price }}">
                   {% endif %}
-                  {% if request.GET.q %}
-                  <input type="hidden" name="q" value="{{ request.GET.q }}">
-                  {% endif %}
-                  {% if request.GET.category %}
-                  <input type="hidden" name="category" value="{{ request.GET.category }}">
-                  {% endif %}
                 </form>
                 <div class="arrange">
-                  <input id="block-btn" type="image" src="{% static 'img/block.png' %}" width="40px"
-                    style="margin-left:5px; padding:5px; background-color:#f6f6f6;"></input>
-                  <input id="straight-btn" type="image" src="{% static 'img/Straight.png' %}" width="40px"
-                    style="padding:5px;"></input>
+                  <input id="block-btn" type="image" src="{% static 'img/block.png' %}" width="40px" style="margin-left:5px; padding:5px; background-color:#f6f6f6;"></input>
+                  <input id="straight-btn" type="image" src="{% static 'img/Straight.png' %}" width="40px" style="padding:5px;"></input>
                 </div>
-                {% if request.GET.q %}
-                <p class="product-search-result"><span>「{{ request.GET.q }}」</span>的商品有{{ products.count }}筆</p>
-                {% elif request.GET.q == "" %}
-                <p class="product-search-result"><span>「{{ request.GET.category }}」</span>的商品有{{ products.count }}</p>
+              </div>
+              <div class="col-lg-4 col-md-4 product-page-controller text-right">
+                <p>
+                  <span class="current-page-number">{{ product_list.number }}</span>
+                  /
+                  <span class="total-page-number">{{ product_list.paginator.num_pages }}</span>
+                </p>
+                {% if product_list.has_previous %}
+                <button class="page-prev"><a href="?{% url_replace next_page=product_list.previous_page_number %}">&lt;</a></button>
+                {% else %}
+                <button class="page-prev">&lt;</button>
+                {% endif %}
+                {% if product_list.has_next %}
+                <button class="page-next"><a href="?{% url_replace next_page=product_list.next_page_number %}">&gt;</a></button>
+                {% else %}
+                <button class="page-next">&gt;</button>
                 {% endif %}
               </div>
             </div>
-            <div class="col-lg-4 col-md-4 product-page-controller text-right">
-              <p>
-                <span class="current-page-number">{{ product_list.number }}</span>
-                /
-                <span class="total-page-number">{{ product_list.paginator.num_pages }}</span>
-              </p>
-              {% if product_list.has_previous %}
-              <button class="page-prev"><a href="?{% url_replace next_page=product_list.previous_page_number %}">&lt;</a></button>
-              {% endif %}
-              {% if product_list.has_next %}
-              <button class="page-next"><a href="?{% url_replace next_page=product_list.next_page_number %}">&gt;</a></button>
+          </div>
+          <div class="product-list" id="block-sorting">
+            <div class="row">
+              {% for result in product_list %}
+              <div class="col-lg-3 col-sm-6">
+                <div class="product-item">
+                  <div class="pi-pic">
+                    <a href="{% url 'products:product_detail' result.pk %}"><img src="{{ result.product_images }}" alt="image"></a>
+                    <div class="sale pp-sale">{{ product.get_rating|floatformat:1 }}<i class="fa fa-star"></i></div>
+                    <div class="icon">
+                      <i class="icon_heart_alt"></i>
+                    </div>
+                    <ul>
+                      <li class="quick-view"><a href="{{ result.product_url }}">前往網站瀏覽</a></li>
+                    </ul>
+                  </div>
+                  <div class="pi-text">
+                    <a href="{% url 'products:product_detail' search.pk %}">
+                      <h5>{{ result.product_name|truncatechars:20 }}</h5>
+
+                    </a>
+                    {% if result.product_source.slug == "Ruten" %}
+                    <div class="catagory-name">露天拍賣</div>
+                    {% endif %}
+                    {% if result.product_source.slug == "Shopee" %}
+                    <div class="catagory-name">蝦皮購物</div>
+                    {% endif %}
+                    {% if result.product_source.slug == "Yahoo" %}
+                    <div class="catagory-name">Yahoo拍賣</div>
+                    {% endif %}
+                    {% if result.product_source.slug == "ETMall" %}
+                    <div class="catagory-name">東森購物</div>
+                    {% endif %}
+                    {% if result.product_source.slug == "Momo" %}
+                    <div class="catagory-name">Momo購物</div>
+                    {% endif %}
+                    <div class="product-price">
+                      ${{ result.product_price }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+              {% if not product_list %}
+              <h1>It's Empty</h1>
               {% endif %}
             </div>
           </div>
-        </div>
-        <div class="product-list" id="block-sorting">
-          <div class="row">
-            {% for result in product_list %}
-            <div class="col-lg-3 col-sm-6">
-              <div class="product-item">
-                <div class="pi-pic">
-                  <a href="{% url 'products:product_detail' product.pk %}"><img src="{{ result.product_images }}"
-                      alt="image"></a>
-                  <div class="sale pp-sale">{{ result.pk }}</div>
-                  <div class="icon">
-                    <i class="icon_heart_alt"></i>
-                  </div>
-                  <ul>
-                    <li class="quick-view"><a href="{{ result.product_url }}">前往網站瀏覽</a></li>
-                  </ul>
-                </div>
-                <div class="pi-text">
-                  <a href="{% url 'products:product_detail' product.pk %}">
-                    <h5>{{ result.product_name|truncatechars:20 }}</h5>
 
-                  </a>
-                  {% if result.product_source.slug == "Ruten" %}
-                  <div class="catagory-name">露天拍賣</div>
+          <div class="product-list" id="block-sorting">
+            <div class="row">
+              {% for result in product_list %}
+              <div class="col-lg-3 col-sm-6">
+                <div class="product-item">
+                  <div class="pi-pic">
+                    <a href="{% url 'products:product_detail' result.pk %}"><img src="{{ result.product_images }}" alt="image"></a>
+                    <div class="icon">
+                      <i class="icon_heart_alt"></i>
+                    </div>
+                  </div>
+                  <div class="pi-text">
+                    <a href="{% url 'products:product_detail' result.pk %}">
+                      <h5>{{ result.product_name|truncatechars:20 }}</h5>
+
+                    </a>
+                    {% if result.product_source.slug == "Ruten" %}
+                    <div class="product-store">露天拍賣</div>
+                    {% endif %}
+                    {% if result.product_source.slug == "Shopee" %}
+                    <div class="product-store">蝦皮購物</div>
+                    {% endif %}
+                    {% if result.product_source.slug == "Momo" %}
+                    <div class="product-store">Momo購物</div>
+                    {% endif %}
+                    {% if result.product_source.slug == "Yahoo" %}
+                    <div class="product-store">Yahoo拍賣</div>
+                    {% endif %}
+                    {% if result.product_source.slug == "ETMall" %}
+                    <div class="product-store">東森購物</div>
+                    {% endif %}
+                    <div class="product-price">{{ result.product_price }}</div>
+                    <button><a href="{{ result.product_url }}">前往網站瀏覽</a></button>
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+
+          <div class="product-list" id="straight-sorting" style="display: none;">
+
+            {% for product in product_list %}
+            <div class="row">
+              <div class="col-md-3">
+                <div class="product-image2">
+                  <div class="pi-pic">
+                    <a href="{% url 'products:product_detail' product.pk %}"><img src="{{ product.product_images }}" alt=""></a>
+                    <div class="icon">
+                      <i class="icon_heart_alt"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-9">
+                <div class="px-text">
+
+                  <div class="product-name"><a href="{% url 'products:product_detail' product.pk %}">{{ product.product_name }}</a></div>
+                  {% if product.product_source.slug == "Ruten" %}
+                  <div class="product-store">露天拍賣</div>
                   {% endif %}
-                  {% if result.product_source.slug == "Shopee" %}
-                  <div class="catagory-name">蝦皮購物</div>
+                  {% if product.product_source.slug == "Shopee" %}
+                  <div class="product-store">蝦皮購物</div>
                   {% endif %}
-                  {% if result.product_source.slug == "Yahoo" %}
-                  <div class="catagory-name">Yahoo拍賣</div>
+                  {% if product.product_source.slug == "Momo" %}
+                  <div class="product-store">Momo購物</div>
                   {% endif %}
-                  {% if result.product_source.slug == "ETMall" %}
-                  <div class="catagory-name">東森購物</div>
+                  {% if product.product_source.slug == "Yahoo" %}
+                  <div class="product-store">Yahoo拍賣</div>
                   {% endif %}
-                  {% if result.product_source.slug == "Momo" %}
-                  <div class="catagory-name">Momo購物</div>
+                  {% if product.product_source.slug == "ETMall" %}
+                  <div class="product-store">東森購物</div>
                   {% endif %}
-                  <div class="product-price">
-                    ${{ result.product_price }}
+                  <div class="product-price">${{ product.product_price }}</div>
+                  <div class="pd-rating">
+                    <span class="point">{{ product.get_rating|floatformat:1 }}</span>/5
+                    <span class="rating-point">{{ product.get_rating|floatformat:1 }}</span>
+                    <span class="comment-num">({{ comment_count }})</span>
+                  </div>
+                  <button class="product-url"><a href="{{ product.product_url }}">前往網站瀏覽</a></button>
+                  <div class="text-right">
+                    <i class="favorite-heart-icon icon_heart_alt"></i>
                   </div>
                 </div>
               </div>
             </div>
+            <hr>
             {% endfor %}
-            {% if not product_list %}
-            <h1>It's Empty</h1>
+          </div>
+          <div class="col-md-12 col-lg-12 product-bottom-page-controller text-center">
+            {% if product_list.has_previous %}
+            <button class="page-prev"><a href="?{% url_replace next_page=product_list.previous_page_number %}">&lt;</a></button>
+            {% else %}
+            <button class="page-prev">&lt;</button>
             {% endif %}
-          </div>
-        </div>
-
-        <div class="product-list" id="straight-sorting" style="display: none;">
-          <div class="row">
-            {% for result in product_list %}
-            <div class="col-md-4">
-              <div class="product-image2">
-                <div class="pi-pic">
-                  <a href="{% url 'products:product_detail' product.pk %}"><img src="{{ result.product_images   }}"
-                      alt=""></a>
-                  <div class="sale pp-sale">{{ result.pk }}</div>
-                  <div class="icon">
-                    <i class="icon_heart_alt"></i>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="px-text">
-                <div class="product-name"><a
-                    href="{% url 'products:product_detail' product.pk %}">{{ result.product_name }}</a></div>
-                {% if result.product_source.slug == "Ruten" %}
-                <div class="product-store">Ruten</div>
-                {% endif %}
-                {% if result.product_source.slug == "Shopee" %}
-                <div class="product-store">Shopee</div>
-                {% endif %}
-                {% if result.product_source.slug == "Momo" %}
-                <div class="product-store">Momo</div>
-                {% endif %}
-                {% if result.product_source.slug == "Yahoo" %}
-                <div class="product-store">Yahoo</div>
-                {% endif %}
-                {% if result.product_source.slug == "ETMall" %}
-                <div class="product-store">ETMall</div>
-                {% endif %}
-                <div class="product-price">{{ result.product_price }}</div>
-                <button><a href="{{ product.product_url }}">前往網站瀏覽</a></button>
-              </div>
-            </div>
+            {% for pg in page_range %}
+            {% if product_list.number == pg %}
+            <button class="current-page">{{pg}}</button>
+            {% else %}
+            <button><a href="?{% url_replace next_page=pg %}">{{pg}}</a></button>
+            {% endif %}
             {% endfor %}
+            {% if product_list.has_next %}
+            <button class="page-next"><a href="?{% url_replace next_page=product_list.next_page_number %}">&gt;</a></button>
+            {% else %}
+            <button class="page-prev">&gt;</button>
+            {% endif %}
+
+
           </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-  <div class="col-md-12 col-lg-12 product-bottom-page-controller text-center">
-    {% if product_list.has_previous %}
-    <button class="page-prev"><a href="?{% url_replace next_page=product_list.previous_page_number %}">&lt;</a></button>
-    {% endif %}
-    {% for pg in page_range %}
-    {% if product_list.number == pg %}
-    <button class="current-page">{{pg}}</button>
-    {% else %}
-    <button><a href="?{% url_replace next_page=pg %}">{{pg}}</a></button>
-    {% endif %}
-    {% endfor %}
-    {% if product_list.has_next %}
-    <button class="page-next"><a href="?{% url_replace next_page=product_list.next_page_number %}">&gt;</a></button>
-    {% endif %}
-
-
-  </div>
 </section>
 
 
