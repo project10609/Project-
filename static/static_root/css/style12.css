@@ -1,4 +1,4 @@
-  /******************************************************************
+/******************************************************************
   Template Name: Fashi
   Description: Fashi eCommerce HTML Template
   Author: Colorlib
@@ -1311,6 +1311,11 @@ ol {
   background: #fcbabb;
 }
 
+.product-item .pi-pic .sale.pp-sale i{
+  display: inline-block;
+  margin-left: 2px;
+}
+
 .product-image2 .pi-pic .sale.pp-sale {
   background: #fcbabb;
 }
@@ -1423,7 +1428,7 @@ ol {
 .product-item .pi-text a h5 {
   color: #252525;
   font-weight: 600;
-  font-size: 20px;
+  font-size: 18px;
 }
 
 .product-item .pi-text .product-price {
@@ -1506,18 +1511,22 @@ ol {
   font-size: 18px;
   display: inline-block;
   color: #fac451;
-  margin-right: -3px;
+  margin-left: 2px;
 }
 
-.px-text .pd-rating span {
+.px-text .pd-rating .comment-num {
   font-size: 18px;
   color: #999591;
+}
+
+.px-text .pd-rating .point {
+  font-size: 22px;
+  color: #000000;
 }
 
 .pd-rating .rating-point {
   display: none;
 }
-
 
 .product-item .pi-text .product-price span {
   font-size: 14px;
@@ -3035,9 +3044,7 @@ ol {
 }
 
 .customer-review-option .comment-option .co-item .avatar-text .at-rating span.point2 {
-
-  margin-right: 5px;
-
+  margin-right: 3px;
 }
 
 .customer-review-option .comment-option .co-item .avatar-text .at-rating {
