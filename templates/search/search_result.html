@@ -161,7 +161,6 @@
                   <div class="pi-text">
                     <a href="{% url 'products:product_detail' product.pk %}">
                       <h5>{{ result.product_name|truncatechars:20 }}</h5>
-
                     </a>
                     {% if result.product_source.slug == "Ruten" %}
                     <div class="catagory-name">露天拍賣</div>
@@ -190,7 +189,6 @@
               {% endif %}
             </div>
           </div>
-
           <div class="product-list" id="straight-sorting" style="display: none;">
             <div class="row">
               {% for result in product_list %}
@@ -208,7 +206,6 @@
               </div>
               <div class="col-md-6">
                 <div class="px-text">
-
                   <div class="product-name"><a
                       href="{% url 'products:product_detail' product.pk %}">{{ result.product_name }}</a></div>
                   {% if result.product_source.slug == "Ruten" %}
@@ -226,7 +223,14 @@
                   {% if result.product_source.slug == "ETMall" %}
                   <div class="product-store">ETMall</div>
                   {% endif %}
-                  <div class="product-price">{{ result.product_price }}</div>
+                  <div class="pd-rating">
+                          <i class="fa fa-star"></i>
+                          <i class="fa fa-star"></i>
+                          <i class="fa fa-star"></i>
+                          <i class="fa fa-star"></i>
+                          <i class="fa fa-star-o"></i>
+                          <span>(5)</span>
+                  </div>
                   <button><a href="{{ product.product_url }}">前往網站瀏覽</a></button>
                 </div>
               </div>
@@ -234,7 +238,6 @@
             </div>
           </div>
         </div>
-
       </div>
     </div>
     <div class="col-md-12 col-lg-12 product-bottom-page-controller text-center">
