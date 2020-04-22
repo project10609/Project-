@@ -139,7 +139,7 @@
               <div class="product-item">
                 <div class="pi-pic">
                   <a href="{% url 'products:product_detail' result.pk %}"><img src="{{ result.product_images }}" alt="image"></a>
-                  <div class="sale pp-sale">{{ product.get_rating|floatformat:1 }}<i class="fa fa-star"></i></div>
+                  <div class="sale pp-sale">{{ result.get_rating|floatformat:1 }}<i class="fa fa-star"></i></div>
                   <div class="icon">
                     <i class="favorite-heart-icon icon_heart_alt"></i>
                   </div>
@@ -149,7 +149,7 @@
                 </div>
               </div>
                 <div class="pi-text">
-                  <a href="{% url 'products:product_detail' product.pk %}">
+                  <a href="{% url 'products:product_detail' result.pk %}">
                     <h5>{{ result.product_name|truncatechars:20 }}</h5>
                   </a>
                   {% if result.product_source.slug == "Ruten" %}
