@@ -147,7 +147,7 @@
                     <li class="quick-view"><a href="{{ result.product_url }}">前往網站瀏覽</a></li>
                   </ul>
                 </div>
-              </div>
+              
                 <div class="pi-text">
                   <a href="{% url 'products:product_detail' result.pk %}">
                     <h5>{{ result.product_name|truncatechars:20 }}</h5>
@@ -248,6 +248,9 @@
 
 
         </div>
+      </div>
+    </div>
+  </div>
 </section>
 
 
