@@ -41,17 +41,19 @@ def product_detail(request, pk):
     if request.method == "POST":
         form = RatingForm(request.POST)
         if form.is_valid:
-            price_comment = request.POST.get('price_rating', None)
-            speed_comment = request.POST.get('source_rating', None)
-            source_comment = request.POST.get('speed_rating', None)
-            comment = request.POST.get('comment', None)
-            if Rating.objects.filter(product=product, user=request.user).exists():
-                messages.error(request, '你已經在此商品評價過！')
+            comment = form.save(commit=False)
+            comment.price_rating = request.POST.get('price_rating', None)
+            comment.speed_rating = request.POST.get('source_rating', None)
+            comment.source_rating = request.POST.get('speed_rating', None)
+            comment.comment = request.POST.get('comment', None)
+            comment.user = request.user
+            comment.product = product
+            if Rating.objects.filter(product=product,user=request.user):
+                messages.error(request,"你已經在此商品評價過了！")
             else:
-                new_comment = Rating.objects.create(user=request.user, product=product, price_rating=price_comment,
-                                                    speed_rating=speed_comment, source_rating=source_comment, comment=comment, created_on=timezone.now())
-                new_comment.save()
+                comment.save()
                 messages.success(request, '成功新增評價！')
+                return HttpResponseRedirect(reverse('products:product_detail',args=(product.pk,)))
 
     else:
         form = RatingForm()
@@ -93,3 +95,19 @@ def delete_rating(request, pk, id):
     rating = Rating.objects.get(pk=id).delete()
     messages.success(request, "刪除成功！")
     return HttpResponseRedirect(reverse('products:product_detail', args=(product.pk,)))
+
+def update_rating(request, pk, id):
+    product = get_object_or_404(Product, pk=pk)
+    rating = get_object_or_404(Rating,pk=id)
+    if request.method == "POST":
+        form = RatingForm(request.POST, instance=rating)
+        if form.is_valid:
+            instance = form.save(commit=False)
+            instance.user = request.user
+            instance.save()
+            messages.success(request,"評價更改成功！")
+            return HttpResponseRedirect(reverse('products:product_detail',args=(product.pk,)))
+    else:
+        form = RatingForm(instance=rating)
+
+        return render(request,'Rating/update_rating.html',{'form':form,'product':product})

@@ -207,7 +207,7 @@
                   </div>
                   {% if rating.user == request.user %}
                   <div class="text-right">
-                    <button class="btn btn-warning"><a href="#">修改評價</a></button>
+                    <button class="btn btn-warning"><a href="{% url 'products:update_rating' rating.product.pk rating.pk %}">修改評價</a></button>
                     <button class="btn btn-danger"><a href="{% url 'products:delete_rating' rating.product.pk rating.pk %}">刪除評價</a></button>
                   </div>
 
@@ -250,7 +250,7 @@
           <div class="col-lg-12 customer-review-option">
             <div class="leave-comment">
               <h4>留下你的評價</h4>
-              <form action="{% url 'products:product_detail' product.pk %}" class="comment-form" method="POST">
+              <form class="comment-form" method="POST">
 
                 {% csrf_token %}
                 <div class="row">
