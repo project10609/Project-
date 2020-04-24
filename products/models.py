@@ -82,6 +82,9 @@ class Product(models.Model):
             overall_rating = int(0)
         return overall_rating
 
+    def get_comment_count(self):
+        return Rating.objects.filter(product=self.pk).aggregate(counts=Count('product')).get('counts')
+
     class Meta:
         db_table = 'Product'
 
