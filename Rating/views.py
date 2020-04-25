@@ -58,7 +58,7 @@ def product_detail(request, pk):
             else:
                 comment.save()
                 messages.success(request, '成功新增評價！')
-                return HttpResponseRedirect(reverse('products:product_detail',args=(product.pk,)))
+                return HttpResponseRedirect(reverse('products:product_detail',args=(products.pk,)))
 
     else:
         form = RatingForm()
