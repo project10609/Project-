@@ -50,54 +50,56 @@
           </ul>
           <div class="hot-product">
             <h4 class="fw-title">熱門商品</h4>
+            {% for item in recommendItems %}
             <div class="product-item">
               <div class="pi-pic">
-                <img src="img/products/product-1.jpg" />
+                <img src="{{ item.product_images }}" />
                 <ul>
-                  <li class="quick-view"><a href="#">前往網站瀏覽</a></li>
+                  <li class="quick-view"><a href="{{ item.product_url }}">前往網站瀏覽</a></li>
                 </ul>
               </div>
               <div class="pi-text">
-                <a href="#">
-                  <h5>Pure Pineapple</h5>
+                <a href="{% url 'products:product_detail' item.pk %}">
+                  <h5>{{ item.product_name }}</h5>
                 </a>
-                <div class="catagory-name">露天拍賣</div>
+                <div class="catagory-name">{{ item.product_category.name }}</div>
                 <div class="product-price">
-                  $14.00
+                  {{ item.product_price }}
                 </div>
               </div>
             </div>
+            {% endfor %}
           </div>
         </div>
       </div>
       <div class="col-lg-9">
         <div class="row">
           <div class="col-lg-5">
-            <img class="product-img" src="{{ product.product_images }}" alt="" />
+            <img class="product-img" src="{{ products.product_images }}" alt="" />
             <div class="product-btn">
               <button>
-                <a href="{{ product.product_url }}">前往網站瀏覽</a>
+                <a href="{{ products.product_url }}">前往網站瀏覽</a>
               </button>
             </div>
           </div>
           <div class="col-lg-7">
             <div class="product-details">
               <div class="pd-title">
-                <div class="product-name">{{ product.product_name }}</div>
+                <div class="product-name">{{ products.product_name }}</div>
                 <div class="product-store">
-                  {% if product.product_source.slug == "Ruten" %}
+                  {% if products.product_source.slug == "Ruten" %}
                   <div class="catagory-name">露天拍賣</div>
-                  {% endif %} {% if product.product_source.slug == "Shopee" %}
+                  {% endif %} {% if products.product_source.slug == "Shopee" %}
                   <div class="catagory-name">蝦皮購物</div>
-                  {% endif %} {% if product.product_source.slug == "Yahoo" %}
+                  {% endif %} {% if products.product_source.slug == "Yahoo" %}
                   <div class="catagory-name">Yahoo拍賣</div>
-                  {% endif %} {% if product.product_source.slug == "ETMall" %}
+                  {% endif %} {% if products.product_source.slug == "ETMall" %}
                   <div class="catagory-name">東森購物</div>
-                  {% endif %} {% if product.product_source.slug == "Momo" %}
+                  {% endif %} {% if products.product_source.slug == "Momo" %}
                   <div class="catagory-name">Momo購物</div>
                   {% endif %}
                 </div>
-                <div class="product-price">${{ product.product_price }}</div>
+                <div class="product-price">${{ products.product_price }}</div>
                 <div class="text-right">
                   <i class="favorite-heart-icon icon_heart_alt"></i>
                 </div>
@@ -160,7 +162,7 @@
                       <td class="p-catagory">分類</td>
                       <td rowspan="2" colspan="2">
                         <div class="p-stock">
-                          {{ product.product_category.name }}
+                          {{ products.product_category.name }}
                         </div>
                       </td>
                     </tr>

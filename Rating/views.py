@@ -23,14 +23,19 @@ from django.utils import timezone
 
 
 def product_detail(request, pk):
-    product = get_object_or_404(Product, pk=pk)
-    ratings = Rating.objects.filter(product=product).annotate(
+    products = get_object_or_404(Product, pk=pk)
+    product = Product.objects.all()
+    queries = Queries.objects.all().values(
+        'search').annotate(counts=Count('search')).order_by('-counts')[:3]
+    recommendItems = product.filter(
+        reduce(operator.or_, (Q(product_name__icontains=x['search']) for x in queries)))[:4]
+    ratings = Rating.objects.filter(product=products).annotate(
         user_rating=(F('price_rating') + F('speed_rating') + F('source_rating')) / 3)
-    price_rating = Rating.objects.filter(product=product).aggregate(
+    price_rating = Rating.objects.filter(product=products).aggregate(
         price_sum=Sum('price_rating', output_field=FloatField()) / Count('product', output_field=FloatField()))
-    speed_rating = Rating.objects.filter(product=product).aggregate(
+    speed_rating = Rating.objects.filter(product=products).aggregate(
         speed_sum=Sum('speed_rating', output_field=FloatField()) / Count('product', output_field=FloatField()))
-    source_rating = Rating.objects.filter(product=product).aggregate(
+    source_rating = Rating.objects.filter(product=products).aggregate(
         source_sum=Sum('source_rating', output_field=FloatField()) / Count('product', output_field=FloatField()))
     if ratings:
         overall_rating = float((price_rating['price_sum'] +
@@ -47,8 +52,8 @@ def product_detail(request, pk):
             comment.source_rating = request.POST.get('speed_rating', None)
             comment.comment = request.POST.get('comment', None)
             comment.user = request.user
-            comment.product = product
-            if Rating.objects.filter(product=product,user=request.user):
+            comment.product = products
+            if Rating.objects.filter(product=products,user=request.user):
                 messages.error(request,"你已經在此商品評價過了！")
             else:
                 comment.save()
@@ -82,10 +87,11 @@ def product_detail(request, pk):
         'price_rating': price_rating,
         'speed_rating': speed_rating,
         'source_rating': source_rating,
-        'product': product,
+        'products': products,
         'ratings': rating_list,
         'comment_count': comment_count,
         'rating_list': rating_list,
+        'recommendItems':recommendItems,
     }
     return render(request, 'products/product_detail.html', context)
 
