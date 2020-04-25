@@ -53,7 +53,7 @@
             {% for item in recommendItems %}
             <div class="product-item">
               <div class="pi-pic">
-                <img src="{{ item.product_images }}" />
+                <a href="{% url 'products:product_detail' item.pk %}"><img src="{{ item.product_images }}" /></a>
                 <ul>
                   <li class="quick-view"><a href="{{ item.product_url }}">前往網站瀏覽</a></li>
                 </ul>
