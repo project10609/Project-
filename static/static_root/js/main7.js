@@ -378,29 +378,38 @@ window.onload = function setStarNumber() {
       var n = $(this).text();
       var rounded = (n | 0)
       var decimal = n - rounded
-      for (var j = 0; j < 5 - rounded; j++) {
-        $(this).after("<i class='fa fa-star-o'></i>")
-      }
       if (decimal) {
+        for (var j = 0; j < 4 - rounded; j++) {
+          $(this).after("<i class='fa fa-star-o'></i>")
+        }
         $(this).after("<i class='fa fa-star-half-o'></i>");
         }
+      else{
+        for (var j = 0; j < 5-rounded;j++){
+          $(this).after("<i class='fa fa-star-o'></i>")
+        }
       }
-      for (var i = 0; i < rounded; i++) {
-        $(this).after("<i class='fa fa-star'></i>");
+      for (var i=0;i<rounded;i++){
+        $(this).after("<i class='fa fa-star'></i>")
       }
     });
     $(".at-rating .rating-point").each(function () {
       var n = $(this).text();
       var rounded = (n | 0)
       var decimal = n - rounded
-      for (var j = 0; j < 5 - rounded; j++) {
-        $(this).after("<i class='fa fa-star-o'></i>")
-      }
       if (decimal) {
+        for (var j = 0; j < 4 - rounded; j++) {
+          $(this).after("<i class='fa fa-star-o'></i>")
+        }
         $(this).after("<i class='fa fa-star-half-o'></i>");
+        }
+      else{
+        for (var j = 0; j < 5-rounded;j++){
+          $(this).after("<i class='fa fa-star-o'></i>")
+        }
       }
-      for (var i = 0; i < rounded; i++) {
-        $(this).after("<i class='fa fa-star'></i>");
+      for (var i=0;i<rounded;i++){
+        $(this).after("<i class='fa fa-star'></i>")
       }
     });
   });
