@@ -383,6 +383,9 @@ window.onload = function setStarNumber() {
       }
       if (decimal) {
         $(this).after("<i class='fa fa-star-half-o'></i>");
+        for (var i = 0; i < rounded-1; i++) {
+          $(this).after("<i class='fa fa-star'></i>");
+        }
       }
       for (var i = 0; i < rounded; i++) {
         $(this).after("<i class='fa fa-star'></i>");
@@ -397,6 +400,9 @@ window.onload = function setStarNumber() {
       }
       if (decimal) {
         $(this).after("<i class='fa fa-star-half-o'></i>");
+        for (var i = 0; i < rounded-1; i++) {
+          $(this).after("<i class='fa fa-star'></i>");
+        }
       }
       for (var i = 0; i < rounded; i++) {
         $(this).after("<i class='fa fa-star'></i>");
@@ -426,7 +432,7 @@ function clickHeart(element) {
 }
 
 /*-------------------
-		shoe-messages
+		show-messages
   --------------------- */
 
 toastr.options = {
