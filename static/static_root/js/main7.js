@@ -383,8 +383,6 @@ window.onload = function setStarNumber() {
       }
       if (decimal) {
         $(this).after("<i class='fa fa-star-half-o'></i>");
-      } else {
-        $(this).after("<i class='fa fa-star-o'></i>");
       }
       for (var i = 0; i < rounded; i++) {
         $(this).after("<i class='fa fa-star'></i>");
@@ -399,9 +397,7 @@ window.onload = function setStarNumber() {
       }
       if (decimal) {
         $(this).after("<i class='fa fa-star-half-o'></i>");
-      } else {
-        $(this).after("<i class='fa fa-star-o'></i>");
-      }
+      } 
       for (var i = 0; i < rounded; i++) {
         $(this).after("<i class='fa fa-star'></i>");
       }
