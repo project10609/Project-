@@ -17,3 +17,8 @@ def url_replace(context, next_page):
     else:
         url = query
     return f'{url}&page={next_page}'
+
+
+@register.filter
+def hash(h, key):
+    return h[key]

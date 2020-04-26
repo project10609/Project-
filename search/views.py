@@ -373,9 +373,7 @@ def search(request):
             return render(request, 'search/search_result.html', context)
 
 
-
 def search_from_home(request, pk):
-    query = Queries.objects.all()
     products = Product.objects.filter(product_name__icontains=pk)
     if request.method == 'GET' and 'filter_by' in request.GET or request.method == 'GET' and 'source' in request.GET or request.method == 'GET' and 'min_price' in request.GET or request.method == 'GET' and 'max_price' in request.GET:
         sortingform = ProductFilterForm(request.GET)
@@ -424,7 +422,7 @@ def search_from_home(request, pk):
                             product_source__slug__in=source).order_by('?')
                 else:
                     if min_price and max_price:
-                        products = products.filter(
+                        products = products.filter(product_category__slug__icontains=category).filter(
                             product_price__range=(min_price, max_price)).order_by('?')
                     else:
                         products = products.order_by('?')
@@ -446,8 +444,6 @@ def search_from_home(request, pk):
         page_range = list(paginator.page_range)[start_index:end_index]
 
         context = {
-            'query':query,
-            'products': products,
             'product_list': product_list,
             'page_range': page_range,
             'sortingform': sortingform,
@@ -479,7 +475,6 @@ def search_from_home(request, pk):
         page_range = list(paginator.page_range)[start_index:end_index]
 
         context = {
-            'query':query,
             'products': products,
             'product_list': product_list,
             'page_range': page_range,
