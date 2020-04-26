@@ -11,7 +11,7 @@
           <ul class="filter-catagories">
             {% for category in categories %}
             <li><a
-                href="{% url 'products:categories' category.pk %}">{{ category.name }}({{category.products.count}})</a>
+                href="{% url 'products:categories' category.pk %}">
                 {% if category.slug == "Blush" %}
                 <img src="{% static 'img/makeup-icon/1.png' %}" alt="">
                 {% elif category.slug == "Brow" %}
@@ -31,6 +31,9 @@
                 {% elif category.slug == "Remover" %}
                 <img src="{% static 'img/makeup-icon/9.png' %}" alt="">
                 {% endif %}
+
+                {{ category.name }}({{category.products.count}})</a>
+
               {% if category.subcategory.count == 1 %}
               {% else %}
               <i class="list-btn"></i>
