@@ -460,14 +460,6 @@ toastr.options = {
   --------------------- */
 
 $(document).ready(function () {
-  $(".search-submit").click(function () {
-    if ($(".search-text").val() == "") {
-      $(".search-text").val("口紅");
-    }
-  });
-});
-
-$(document).ready(function () {
   $(".search-submit").submit(function () {
     if ($(".search-text").val() == "") {
       $(".search-text").val("口紅");
