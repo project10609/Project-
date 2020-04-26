@@ -16,6 +16,25 @@
             {% for category in categories %}
             <li><a
                 href="{% url 'products:categories' category.pk %}">{{ category.name }}({{category.products.count}})</a>
+                {% if category.slug == "Blush" %}
+                <img src="{% static 'img/makeup-icon/1.png' %}" alt="">
+                {% elif category.slug == "Brow" %}
+                <img src="{% static 'img/makeup-icon/2.png' %}" alt="">
+                {% elif category.slug == "EyeLiner" %}
+                <img src="{% static 'img/makeup-icon/3.png' %}" alt="">
+                {% elif category.slug == "EyeShadow" %}
+                <img src="{% static 'img/makeup-icon/4.png' %}" alt="">
+                {% elif category.slug == "Foundation" %}
+                <img src="{% static 'img/makeup-icon/5.png' %}" alt="">
+                {% elif category.slug == "Lipstick" %}
+                <img src="{% static 'img/makeup-icon/6.png' %}" alt="">
+                {% elif category.slug == "MakeupTools" %}
+                <img src="{% static 'img/makeup-icon/7.png' %}" alt="">
+                {% elif category.slug == "Mascara" %}
+                <img src="{% static 'img/makeup-icon/8.png' %}" alt="">
+                {% elif category.slug == "Remover" %}
+                <img src="{% static 'img/makeup-icon/9.png' %}" alt="">
+                {% endif %}
               {% if category.subcategory.count == 1 %}
               {% else %}
               <i class="list-btn before-active"></i>

@@ -373,11 +373,10 @@ def search(request):
             return render(request, 'search/search_result.html', context)
 
 
+
 def search_from_home(request, pk):
-    products = Product.objects.all()
-    query = Queries.objects.filter(search=pk).values('search')
-    products = products.filter(
-        reduce(operator.or_, (Q(product_name__icontains=x['search']) for x in query)))
+    query = Queries.objects.all()
+    products = Product.objects.filter(product_name__icontains=pk)
     if request.method == 'GET' and 'filter_by' in request.GET or request.method == 'GET' and 'source' in request.GET or request.method == 'GET' and 'min_price' in request.GET or request.method == 'GET' and 'max_price' in request.GET:
         sortingform = ProductFilterForm(request.GET)
         sourceform = ProductSourceForm(request.GET)
@@ -447,7 +446,8 @@ def search_from_home(request, pk):
         page_range = list(paginator.page_range)[start_index:end_index]
 
         context = {
-            'query': query,
+            'query':query,
+            'products': products,
             'product_list': product_list,
             'page_range': page_range,
             'category': category,
@@ -456,7 +456,7 @@ def search_from_home(request, pk):
             'priceform': priceform,
         }
 
-        return render(request, 'search/search_result.html', context)
+        return render(request, 'search/searchfromhome.html', context)
 
     else:
         sortingform = ProductFilterForm()
@@ -480,7 +480,7 @@ def search_from_home(request, pk):
         page_range = list(paginator.page_range)[start_index:end_index]
 
         context = {
-            'query': query,
+            'query':query,
             'products': products,
             'product_list': product_list,
             'page_range': page_range,
@@ -488,7 +488,7 @@ def search_from_home(request, pk):
             'sourceform': sourceform,
             'priceform': priceform,
         }
-        return render(request, 'search/search_result.html', context)
+        return render(request, 'search/searchfromhome.html', context)
 
 
 # class SearchListView(ListView):

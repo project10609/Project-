@@ -11,8 +11,7 @@
           <ul class="filter-catagories">
             {% for category in categories %}
             <li><a href="{% url 'products:categories' category.pk %}">
-                <img src="{% static 'img/makeup-icon/1.png' %}" alt="">
-                <!-- {% if category.slug == "Blush" %}
+                {% if category.slug == "Blush" %}
                 <img src="{% static 'img/makeup-icon/1.png' %}" alt="">
                 {% elif category.slug == "Brow" %}
                 <img src="{% static 'img/makeup-icon/2.png' %}" alt="">
@@ -30,7 +29,7 @@
                 <img src="{% static 'img/makeup-icon/8.png' %}" alt="">
                 {% elif category.slug == "Remover" %}
                 <img src="{% static 'img/makeup-icon/9.png' %}" alt="">
-                {% endif %} -->
+                {% endif %}
                 {{ category.name }}({{category.products.count}})</a>
               {% if category.subcategory.count == 1 %}
               {% else %}
@@ -49,7 +48,7 @@
             {% endfor %}
           </ul>
         </div>
-        <form class="" action="{% url 'search:search_from_home' query.search %}" method="GET">
+        <form method="GET">
           <div class="filter-widget">
             <h4 class="fw-title">電商平台</h4>
             <div class="fw-brand-check">
@@ -74,7 +73,7 @@
             </div>
           </div>
         </form>
-        <form action="{% url 'search:search_from_home' query.search %}" method="GET">
+        <form method="GET">
           <div class="filter-widget">
             <h4 class="fw-title">價格範圍</h4>
             <div class="filter-range-wrap">
@@ -105,7 +104,7 @@
           <div class="row">
             <div class="col-lg-9 col-md-9">
               <div class="select-option">
-                <form action="{% url 'search:search_from_home' query.search %}" method="GET">
+                <form method="GET">
                   {{ sortingform }}
                   {% if request.GET.source %}
                   {% for sources in request.GET|get_list:'source' %}
@@ -156,7 +155,7 @@
                 <div class="pi-pic">
                   <a href="{% url 'products:product_detail' result.pk %}"><img src="{{ result.product_images }}"
                       alt="image"></a>
-                  <div class="sale pp-sale">{{ product.get_rating|floatformat:1 }}<i class="fa fa-star"></i></div>
+                  <div class="sale pp-sale">{{ result.get_rating|floatformat:1 }}<i class="fa fa-star"></i></div>
                   <div class="icon">
                     <i class="favorite-heart-icon icon_heart_alt"></i>
                   </div>
@@ -165,7 +164,7 @@
                   </ul>
                 </div>
                 <div class="pi-text">
-                  <a href="{% url 'products:product_detail' search.pk %}">
+                  <a href="{% url 'products:product_detail' result.pk %}">
                     <h5>{{ result.product_name|truncatechars:20 }}</h5>
                   </a>
                   {% if result.product_source.slug == "Ruten" %}
