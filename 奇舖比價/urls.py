@@ -20,6 +20,7 @@ from django.conf import settings
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.conf.urls.static import static
 from products import views
+from .views import contact_us
 
 urlpatterns = [
 
@@ -28,6 +29,7 @@ urlpatterns = [
     path('account/', include('account.urls')),
     path('search/', include('search.urls')),
     path('product/', include('products.urls')),
+    path('contact_us/' ,contact_us,name="contact_us"),
     # path(r'/search', productSearch)
 ]
 if settings.ADMIN_ENABLED:

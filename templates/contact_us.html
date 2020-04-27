@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load shuffle %}
+{% load static %}
+{% load bootstrap3 %}
+{% load get_list %}
+
+
+    <!-- Contact Section Begin -->
+    {% if messages %}
+          {% for message in messages %}
+          <script>toastr.{{ message.tags }}('{{ message }}')</script>
+          {% endfor %}
+    {% endif %}
+    <section class="contact-section spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="contact-title">
+                        <h4>聯絡資訊</h4>
+                        <p>有任何問題，歡迎聯絡我們！</p>
+                    </div>
+                    <div class="contact-widget">
+                        <div class="cw-item">
+                            <div class="ci-icon">
+                                <i class="ti-location-pin"></i>
+                            </div>
+                            <div class="ci-text">
+                                <span>地點資訊：</span>
+                                <p>國立臺灣科技大學 資訊管理系</p>
+                            </div>
+                        </div>
+                        <div class="cw-item">
+                            <div class="ci-icon">
+                                <i class="ti-email"></i>
+                            </div>
+                            <div class="ci-text">
+                                <span>電子郵件:</span>
+                                <p>project10609@gmail.com</p>
+                            </div>
+                        </div>
+                        <div class="cw-item">
+                            <div class="ci-icon">
+                                <i class="ti-github"></i>
+                            </div>
+                            <div class="ci-text">
+                                <span>GitHub：</span>
+                                <p>project10609</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="contact-form">
+                        <div class="leave-comment" style="margin-top: 60px;">
+                            <h4>回報問題</h4>
+                            <p>如果有任何問題請回報我們！</p>
+                            <form class="comment-form" method="POST">
+                              {% csrf_token %}
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                      {{ form.name }}
+                                        <!-- <input type="text" placeholder="您的稱呼..."> -->
+                                    </div>
+                                    <div class="col-lg-6">
+                                      {{ form.email }}
+                                        <!-- <input type="email" id="email" name="email" placeholder="您的電子郵件..."> -->
+                                    </div>
+                                    <div class="col-lg-12">
+                                      {{ form.feedback }}
+                                        <!-- <textarea placeholder="請輸入訊息..."></textarea> -->
+                                        <div style="text-align: center;">
+                                            <button type="submit" class="site-btn">送出訊息</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Contact Section End -->
+
+
+{% endblock %}
