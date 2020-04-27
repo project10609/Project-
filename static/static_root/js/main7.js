@@ -383,13 +383,12 @@ window.onload = function setStarNumber() {
           $(this).after("<i class='fa fa-star-o'></i>")
         }
         $(this).after("<i class='fa fa-star-half-o'></i>");
-        }
-      else{
-        for (var j = 0; j < 5-rounded;j++){
+      } else {
+        for (var j = 0; j < 5 - rounded; j++) {
           $(this).after("<i class='fa fa-star-o'></i>")
         }
       }
-      for (var i=0;i<rounded;i++){
+      for (var i = 0; i < rounded; i++) {
         $(this).after("<i class='fa fa-star'></i>")
       }
     });
@@ -402,13 +401,12 @@ window.onload = function setStarNumber() {
           $(this).after("<i class='fa fa-star-o'></i>")
         }
         $(this).after("<i class='fa fa-star-half-o'></i>");
-        }
-      else{
-        for (var j = 0; j < 5-rounded;j++){
+      } else {
+        for (var j = 0; j < 5 - rounded; j++) {
           $(this).after("<i class='fa fa-star-o'></i>")
         }
       }
-      for (var i=0;i<rounded;i++){
+      for (var i = 0; i < rounded; i++) {
         $(this).after("<i class='fa fa-star'></i>")
       }
     });
@@ -456,3 +454,15 @@ toastr.options = {
   "showMethod": "fadeIn",
   "hideMethod": "fadeOut"
 }
+
+/*-------------------
+		search-empty
+  --------------------- */
+
+$(document).ready(function () {
+  $(".search-submit").submit(function () {
+    if ($(".search-text").val() == "") {
+      $(".search-text").val("口紅");
+    }
+  });
+});
