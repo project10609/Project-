@@ -3123,6 +3123,10 @@ ol {
   color: #636363;
 }
 
+.customer-review-option .comment-option .no-comment {
+  margin-left: 20px;
+}
+
 .product-details-page {
   width: 880px;
 }

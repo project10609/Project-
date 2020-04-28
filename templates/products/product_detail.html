@@ -13,9 +13,15 @@
 <!-- Product Shop Section Begin -->
 <section class="product-shop spad page-details">
   {% if messages %}
-        {% for message in messages %}
-        <script>toastr.{{ message.tags }}('{{ message }}')</script>
-        {% endfor %}
+  {% for message in messages %}
+  <script>
+    toastr. {
+      {
+        message.tags
+      }
+    }('{{ message }}')
+  </script>
+  {% endfor %}
   {% endif %}
 
   <div class="container">
@@ -97,7 +103,7 @@
                 {% if item.product_source.source == 'Momo' %}
                 <div class="catagory-name">Momo購物</div>
                 {% endif %}
-                
+
                 <div class="product-price">
                   ${{ item.product_price }}
                 </div>
@@ -152,7 +158,8 @@
                       </td>
                       <td>
                         <div class="pd-rating">
-                          <span class="rating-point">{% if overall_rating == 0 %}0{% else %}{{ overall_rating|floatformat:1 }}{% endif %}</span>
+                          <span
+                            class="rating-point">{% if overall_rating == 0 %}0{% else %}{{ overall_rating|floatformat:1 }}{% endif %}</span>
                           <span>(5)</span>
                         </div>
                       </td>
@@ -164,7 +171,8 @@
                       </td>
                       <td>
                         <div class="pd-rating">
-                          <span class="rating-point">{% for key,value in price_rating.items %}{% if value %}{{ value|floatformat:1}}{% else %}0{% endif %}{% endfor %}</span>
+                          <span
+                            class="rating-point">{% for key,value in price_rating.items %}{% if value %}{{ value|floatformat:1}}{% else %}0{% endif %}{% endfor %}</span>
                           <span>(5)</span>
                         </div>
                       </td>
@@ -176,7 +184,8 @@
                       </td>
                       <td class="pd-rating">
                         <div class="pd-rating">
-                          <span class="rating-point">{% for key,value in source_rating.items %}{% if value %}{{ value|floatformat:1 }}{% else %}{% endif %}{% endfor %}</span>
+                          <span
+                            class="rating-point">{% for key,value in source_rating.items %}{% if value %}{{ value|floatformat:1 }}{% else %}{% endif %}{% endfor %}</span>
                           <span>(5)</span>
                         </div>
                       </td>
@@ -188,7 +197,8 @@
                       </td>
                       <td>
                         <div class="pd-rating">
-                          <span class="rating-point">{% for key,value in speed_rating.items %}{% if value %}{{ value|floatformat:1 }}{% else %}0{% endif %}{% endfor %}</span>
+                          <span
+                            class="rating-point">{% for key,value in speed_rating.items %}{% if value %}{{ value|floatformat:1 }}{% else %}0{% endif %}{% endfor %}</span>
                           <span>(5)</span>
                         </div>
                       </td>
@@ -217,7 +227,9 @@
                 <div class="col-lg-12">
                   <h4>評論({{ comment_count }})</h4>
                 </div>
-
+                {% if comment_count == 0 %}
+                <p class="no-comment">尚無評價</p>
+                {% else %}
                 {% for rating in rating_list %}
                 <div class="col-lg-12 col-md-12">
                   <div class="co-item">
@@ -244,15 +256,17 @@
                   </div>
                   {% if rating.user == request.user %}
                   <div class="text-right">
-                    <button class="btn btn-warning"><a href="{% url 'products:update_rating' rating.product.pk rating.pk %}">修改評價</a></button>
-                    <button class="btn btn-danger"><a href="{% url 'products:delete_rating' rating.product.pk rating.pk %}">刪除評價</a></button>
+                    <button class="btn btn-warning"><a
+                        href="{% url 'products:update_rating' rating.product.pk rating.pk %}">修改評價</a></button>
+                    <button class="btn btn-danger"><a
+                        href="{% url 'products:delete_rating' rating.product.pk rating.pk %}">刪除評價</a></button>
                   </div>
 
                   {% endif %}
                 </div>
                 <hr>
                 {% endfor %}
-
+                {% endif %}
                 <div class="col-lg-12 text-right product-details-page">
                   <p>
                     <span class="current-page-number">{{ rating_list.number }}</span>
@@ -260,12 +274,14 @@
                     <span class="total-page-number">{{ rating_list.paginator.num_pages }}</span>
                   </p>
                   {% if rating_list.has_previous %}
-                  <button class="page-prev"><a href="?{% url_replace next_page=rating_list.previous_page_number %}">&lt;</a></button>
+                  <button class="page-prev"><a
+                      href="?{% url_replace next_page=rating_list.previous_page_number %}">&lt;</a></button>
                   {% else %}
                   <button class="page-prev">&lt;</button>
                   {% endif %}
                   {% if rating_list.has_next %}
-                  <button class="page-next"><a href="?{% url_replace next_page=rating_list.next_page_number %}">&gt;</a></button>
+                  <button class="page-next"><a
+                      href="?{% url_replace next_page=rating_list.next_page_number %}">&gt;</a></button>
                   {% else %}
                   <button class="page-next">&gt;</button>
                   {% endif %}
