@@ -2053,7 +2053,7 @@ ol {
 .filter-widget .fw-brand-check .bc-item label {
   position: relative;
   cursor: pointer;
-  padding-left: 28px;
+  padding-left: 15px;
 }
 
 .filter-widget .fw-brand-check .bc-item label input {
@@ -2086,6 +2086,14 @@ ol {
   -webkit-transform: rotate(127deg);
   -ms-transform: rotate(127deg);
   transform: rotate(127deg);
+}
+
+.filter-widget .fw-brand-check .cancel{
+  color: #636363;
+}
+
+.filter-widget .fw-brand-check .cancel:hover{
+  color: #fcbabb;
 }
 
 .filter-widget .filter-range-wrap {
@@ -2498,6 +2506,7 @@ ol {
 .product-sidebar .product-item {
   margin-left: 10px;
   margin-right: 10px;
+  text-align: center;
 }
 
 .product-sidebar .hot-product {
@@ -2505,9 +2514,10 @@ ol {
 }
 
 .product-sidebar .hot-product .product-item img {
-  width: 100%;
+  width: 85%;
   object-fit: cover;
-  height: 250px;
+  height: 200px;
+  min-width: 0;
 }
 
 .product-shop .product-img {
@@ -3136,6 +3146,10 @@ ol {
   margin-left: 0px;
 }
 
+.product-details-page .page-prev a{
+  color: #ffffff;
+}
+
 .product-details-page .page-next {
   width: 30px;
   height: 30px;
@@ -3144,6 +3158,10 @@ ol {
   color: #ffffff;
   margin: 5px;
   margin-left: 0px;
+}
+
+.product-details-page .page-next a{
+  color: #ffffff;
 }
 
 .product-details-page button:hover {
@@ -4272,6 +4290,11 @@ ol {
   padding-left: 20px;
   padding-top: 10px;
   margin-bottom: 45px;
+}
+
+.update-comment{
+  text-align: center;
+  margin-bottom: 50px;
 }
 
 /*---------------------

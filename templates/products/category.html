@@ -13,25 +13,25 @@
           <ul class="filter-catagories">
             {% for category in categories %}
             <li><a href="{% url 'products:categories' category.pk %}">
-              {% if category.slug == "Blush" %}
-              <img src="{% static 'img/makeup-icon/1.png' %}" alt="">
-              {% elif category.slug == "Brow" %}
-              <img src="{% static 'img/makeup-icon/2.png' %}" alt="">
-              {% elif category.slug == "EyeLiner" %}
-              <img src="{% static 'img/makeup-icon/3.png' %}" alt="">
-              {% elif category.slug == "EyeShadow" %}
-              <img src="{% static 'img/makeup-icon/4.png' %}" alt="">
-              {% elif category.slug == "Foundation" %}
-              <img src="{% static 'img/makeup-icon/5.png' %}" alt="">
-              {% elif category.slug == "Lipstick" %}
-              <img src="{% static 'img/makeup-icon/6.png' %}" alt="">
-              {% elif category.slug == "MakeupTools" %}
-              <img src="{% static 'img/makeup-icon/7.png' %}" alt="">
-              {% elif category.slug == "Mascara" %}
-              <img src="{% static 'img/makeup-icon/8.png' %}" alt="">
-              {% elif category.slug == "Remover" %}
-              <img src="{% static 'img/makeup-icon/9.png' %}" alt="">
-              {% endif %}
+                {% if category.slug == "Blush" %}
+                <img src="{% static 'img/makeup-icon/1.png' %}" alt="">
+                {% elif category.slug == "Brow" %}
+                <img src="{% static 'img/makeup-icon/2.png' %}" alt="">
+                {% elif category.slug == "EyeLiner" %}
+                <img src="{% static 'img/makeup-icon/3.png' %}" alt="">
+                {% elif category.slug == "EyeShadow" %}
+                <img src="{% static 'img/makeup-icon/4.png' %}" alt="">
+                {% elif category.slug == "Foundation" %}
+                <img src="{% static 'img/makeup-icon/5.png' %}" alt="">
+                {% elif category.slug == "Lipstick" %}
+                <img src="{% static 'img/makeup-icon/6.png' %}" alt="">
+                {% elif category.slug == "MakeupTools" %}
+                <img src="{% static 'img/makeup-icon/7.png' %}" alt="">
+                {% elif category.slug == "Mascara" %}
+                <img src="{% static 'img/makeup-icon/8.png' %}" alt="">
+                {% elif category.slug == "Remover" %}
+                <img src="{% static 'img/makeup-icon/9.png' %}" alt="">
+                {% endif %}
                 {{ category.name }}({{category.products.count}})</a>
               {% if category.subcategory.count == 1 %}
               {% else %}
@@ -55,27 +55,22 @@
           <div class="filter-widget">
             <h4 class="fw-title">電商平台</h4>
             <div class="fw-brand-check">
-              <div class="bc-item">
-                <li><a href="{% url 'products:categories' category.pk %}">全部商品</a></li>
-                <!-- {{ sourceform.as_p }} -->
-                {% for field in sourceform.source %}
-                <label for="{{ field.id_for_label }}">
-                  {{ field }}
-                  <span class='checkmark'></span>
-
-                </label>
-                {% endfor %}
-                {% if request.GET.min_price %}
-                <input type="hidden" name="min_price" value="{{ request.GET.min_price }}">
-                {% endif %}
-                {% if request.GET.max_price %}
-                <input type="hidden" name="max_price" value="{{ request.GET.max_price }}">
-                {% endif %}
-                <!-- {% if request.GET.filter_by %}
+              <!-- {{ sourceform.as_p }} -->
+              {% for field in sourceform.source %}
+              <div>
+                {{ field }}
+              </div>
+              {% endfor %}
+              {% if request.GET.min_price %}
+              <input type="hidden" name="min_price" value="{{ request.GET.min_price }}">
+              {% endif %}
+              {% if request.GET.max_price %}
+              <input type="hidden" name="max_price" value="{{ request.GET.max_price }}">
+              {% endif %}
+              <!-- {% if request.GET.filter_by %}
                               <input type="hidden" name="filter_by" value="{{ request.GET.filter_by }}">
                               {% endif %} -->
-                <!-- <input type="submit" name="sourceSubmit" value="套用"> -->
-              </div>
+              <!-- <input type="submit" name="sourceSubmit" value="套用"> -->
             </div>
           </div>
         </form>
@@ -95,7 +90,7 @@
                 <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
               </div>
             </div>
-            <input class="filter-submit" type="submit" name="" value="套用">
+            <input class="filter-btn" type="submit" name="" value="套用">
           </div>
         </form>
       </div>
@@ -125,7 +120,8 @@
                     style="padding:5px;"></input>
                 </div>
                 <div class="product-search-result">
-                  <p><i class="icon_search"></i> 顯示{{ products.count }}件商品中的{{ product_list.start_index }} - {{ product_list.end_index }}</p>
+                  <p><i class="icon_search"></i> 顯示{{ products.count }}件商品中的{{ product_list.start_index }} -
+                    {{ product_list.end_index }}</p>
                 </div>
               </div>
             </div>
@@ -233,7 +229,8 @@
                 <div class="pd-rating">
                   <span class="point">{{ product.get_rating|floatformat:1 }}</span>/5
                   <span class="rating-point">{{ product.get_rating|floatformat:1 }}</span>
-                  <span class="comment-num">{% if product.get_comment_count != 0 %}({{ product.get_comment_count }}){% else %}{% endif %}</span>
+                  <span
+                    class="comment-num">{% if product.get_comment_count != 0 %}({{ product.get_comment_count }}){% else %}{% endif %}</span>
                 </div>
                 <button class="product-url"><a href="{{ product.product_url }}">前往網站瀏覽</a></button>
                 <div class="text-right">
