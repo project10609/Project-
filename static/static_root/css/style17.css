@@ -2088,11 +2088,11 @@ ol {
   transform: rotate(127deg);
 }
 
-.filter-widget .fw-brand-check .cancel{
+.filter-widget .fw-brand-check .cancel {
   color: #636363;
 }
 
-.filter-widget .fw-brand-check .cancel:hover{
+.filter-widget .fw-brand-check .cancel:hover {
   color: #fcbabb;
 }
 
@@ -3127,6 +3127,21 @@ ol {
   margin-left: 20px;
 }
 
+.customer-review-option .comment-option .edit-icon a {
+  background-color: #DEDEDE;
+  border-radius: 50%;
+  display: inline-block;
+  color: #636363;
+  text-align: center;
+  vertical-align: middle;
+  padding: 5px 9px 5px 9px;
+  margin-left: 3px;
+}
+
+.customer-review-option .comment-option .edit-icon a:hover {
+  background-color: #EBEAEA;
+}
+
 .product-details-page {
   width: 880px;
 }
@@ -3150,7 +3165,7 @@ ol {
   margin-left: 0px;
 }
 
-.product-details-page .page-prev a{
+.product-details-page .page-prev a {
   color: #ffffff;
 }
 
@@ -3164,7 +3179,7 @@ ol {
   margin-left: 0px;
 }
 
-.product-details-page .page-next a{
+.product-details-page .page-next a {
   color: #ffffff;
 }
 
@@ -3250,6 +3265,10 @@ ol {
   border: none;
   padding: 0;
   margin: 0;
+}
+
+.update-rating{
+  display: none;
 }
 
 .customer-review-option .leave-comment .comment-form table {
@@ -4296,7 +4315,7 @@ ol {
   margin-bottom: 45px;
 }
 
-.update-comment{
+.update-comment {
   text-align: center;
   margin-bottom: 50px;
 }

@@ -14,50 +14,51 @@
             <tr>
               <td class="rating-catagory">價格品質</td>
               <td class="rating-point">
-                <span id="price-rating-span">1</span>/5
+                <span id="price-rating-span">{{ rating.price_rating|floatformat:0 }}</span>/5
               </td>
               <td>
                 <div class="add-rating">
                   {{ form.price_rating }}
-                  <!-- <input type="hidden" name="price_comment" value="1" id="price-rating" /> -->
-                  <i class="rating-star fa fa-star" id="price-star"></i>
-                  <i class="rating-star fa fa-star-o" id="price-star"></i>
-                  <i class="rating-star fa fa-star-o" id="price-star"></i>
-                  <i class="rating-star fa fa-star-o" id="price-star"></i>
-                  <i class="rating-star fa fa-star-o" id="price-star"></i>
+                  <span class="update-rating" id="price-rating-span">{{ rating.price_rating|floatformat:0 }}</span>
+                  <i class="rating-star fa" id="price-star"></i>
+                  <i class="rating-star fa" id="price-star"></i>
+                  <i class="rating-star fa" id="price-star"></i>
+                  <i class="rating-star fa" id="price-star"></i>
+                  <i class="rating-star fa" id="price-star"></i>
                 </div>
               </td>
             </tr>
             <tr>
               <td class="rating-catagory">購物平台</td>
               <td class="rating-point">
-                <span id="store-rating-span">1</span>/5
+                <span id="store-rating-span">{{ rating.source_rating|floatformat:0 }}</span>/5
               </td>
               <td>
                 <div class="add-rating">
                   {{ form.source_rating }}
-                  <!-- <input type="hidden" name="source_comment" value="1" id="store-rating" /> -->
-                  <i class="rating-star fa fa-star" id="store-star"></i>
-                  <i class="rating-star fa fa-star-o" id="store-star"></i>
-                  <i class="rating-star fa fa-star-o" id="store-star"></i>
-                  <i class="rating-star fa fa-star-o" id="store-star"></i>
-                  <i class="rating-star fa fa-star-o" id="store-star"></i>
+                  <span class="update-rating" id="store-rating-span">{{ rating.source_rating|floatformat:0 }}</span>
+                  <i class="rating-star fa" id="store-star"></i>
+                  <i class="rating-star fa" id="store-star"></i>
+                  <i class="rating-star fa" id="store-star"></i>
+                  <i class="rating-star fa" id="store-star"></i>
+                  <i class="rating-star fa" id="store-star"></i>
                 </div>
               </td>
             </tr>
             <tr>
               <td class="rating-catagory">出貨速度</td>
               <td class="rating-point">
-                <span id="delivery-rating-span">1</span>/5
+                <span id="delivery-rating-span">{{ rating.speed_rating|floatformat:0 }}</span>/5
               </td>
               <td>
                 <div class="add-rating">
                   {{ form.speed_rating }}
-                  <i class="rating-star fa fa-star" id="delivery-star"></i>
-                  <i class="rating-star fa fa-star-o" id="delivery-star"></i>
-                  <i class="rating-star fa fa-star-o" id="delivery-star"></i>
-                  <i class="rating-star fa fa-star-o" id="delivery-star"></i>
-                  <i class="rating-star fa fa-star-o" id="delivery-star"></i>
+                  <span class="update-rating" id="delivery-rating-span">{{ rating.speed_rating|floatformat:0 }}</span>
+                  <i class="rating-star fa" id="delivery-star"></i>
+                  <i class="rating-star fa" id="delivery-star"></i>
+                  <i class="rating-star fa" id="delivery-star"></i>
+                  <i class="rating-star fa" id="delivery-star"></i>
+                  <i class="rating-star fa" id="delivery-star"></i>
                 </div>
               </td>
             </tr>

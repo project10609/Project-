@@ -410,6 +410,39 @@ window.onload = function setStarNumber() {
         $(this).after("<i class='fa fa-star'></i>")
       }
     });
+
+    $(".update-rating").each(function () {
+      var n = $(this).text();
+      if ($(this).next(".rating-star").attr("id") == "price-star") {
+        $("#price-star").each(function () {
+          alert(n);
+          if (n > 0) {
+            $(this).addClass("fa-star")
+            n = n - 1;
+          } else {
+            $(this).addClass("fa-star-o")
+          }
+        });
+      } else if ($(this).next(".rating-star").attr("id") == "store-star") {
+        $("#store-star").each(function () {
+          if (n > 0) {
+            $(this).addClass("fa-star")
+            n = n - 1;
+          } else {
+            $(this).addClass("fa-star-o")
+          }
+        });
+      } else if ($(this).next(".rating-star").attr("id") == "delivery-star") {
+        $("#delivery-star").each(function () {
+          if (n > 0) {
+            $(this).addClass("fa-star")
+            n = n - 1;
+          } else {
+            $(this).addClass("fa-star-o")
+          }
+        });
+      }
+    });
   });
 };
 

@@ -3230,6 +3230,10 @@ ol {
   margin: 0;
 }
 
+.update-rating{
+  display: none;
+}
+
 .customer-review-option .leave-comment .comment-form table {
   width: 100%;
   margin-bottom: 40px;

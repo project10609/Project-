@@ -116,4 +116,4 @@ def update_rating(request, pk, id):
     else:
         form = RatingForm(instance=rating)
 
-        return render(request,'Rating/update_rating.html',{'form':form,'product':product})
+        return render(request,'Rating/update_rating.html',{'form':form,'product':product, 'rating':rating,})

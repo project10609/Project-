@@ -255,13 +255,12 @@
                     </div>
                   </div>
                   {% if rating.user == request.user %}
-                  <div class="text-right">
-                    <button class="btn btn-warning"><a
-                        href="{% url 'products:update_rating' rating.product.pk rating.pk %}">修改評價</a></button>
-                    <button class="btn btn-danger"><a
-                        href="{% url 'products:delete_rating' rating.product.pk rating.pk %}">刪除評價</a></button>
+                  <div class="text-right edit-icon">
+                    <a href="{% url 'products:update_rating' rating.product.pk rating.pk %}"><i class="ti-pencil-alt"
+                        title="修改評價"></i></a>
+                    <a href="{% url 'products:delete_rating' rating.product.pk rating.pk %}"><i class="ti-trash"
+                        title="刪除評價"></i></a>
                   </div>
-
                   {% endif %}
                 </div>
                 <hr>
