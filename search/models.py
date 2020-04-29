@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 
 class Queries(models.Model):
     search = models.CharField(max_length=120, primary_key=True)
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE,blank = True, null = True)
 
     def __str__(self):
         return self.search
