@@ -17,13 +17,16 @@ import os
 
 
 def search(request):
-
     category = request.GET.get('category', None)
     query = request.GET.get('q', None)
-    if request.user.is_authenticated:
-        result = Queries.objects.create(search=query, user=request.user)
-        result.save()
+
     if category:
+        if request.user.is_authenticated:
+            result = Queries.objects.create(search=query,user= request.user)
+            result.save()
+        else:
+            result = Queries.objects.create(search=query)
+            result.save()
         products = Product.objects.filter(
             product_category__slug__icontains=category).filter(product_name__icontains=query)
         if request.method == 'GET' and 'filter_by' in request.GET or request.method == 'GET' and 'source' in request.GET or request.method == 'GET' and 'min_price' in request.GET or request.method == 'GET' and 'max_price' in request.GET:
@@ -140,9 +143,14 @@ def search(request):
             return render(request, 'search/search_result.html', context)
 
     if category == "":
+
         products = Product.objects.filter(product_name__icontains=query)
-        result = Queries.objects.create(search=query, user=request.user)
-        result.save()
+        if request.user.is_authenticated:
+            result = Queries.objects.create(search=query,user= request.user)
+            result.save()
+        else:
+            result = Queries.objects.create(search=query)
+            result.save()
         if request.method == 'GET' and 'filter_by' in request.GET or request.method == 'GET' and 'source' in request.GET or request.method == 'GET' and 'min_price' in request.GET or request.method == 'GET' and 'max_price' in request.GET:
             sortingform = ProductFilterForm(request.GET)
             sourceform = ProductSourceForm(request.GET)
@@ -259,6 +267,12 @@ def search(request):
 
     else:
         products = Product.objects.filter(product_name__icontains=query)
+        if request.user.is_authenticated:
+            result = Queries.objects.create(search=query,user= request.user)
+            result.save()
+        else:
+            result = Queries.objects.create(search=query)
+            result.save()
         if request.method == 'GET' and 'filter_by' in request.GET or request.method == 'GET' and 'source' in request.GET or request.method == 'GET' and 'min_price' in request.GET or request.method == 'GET' and 'max_price' in request.GET:
             sortingform = ProductFilterForm(request.GET)
             sourceform = ProductSourceForm(request.GET)
