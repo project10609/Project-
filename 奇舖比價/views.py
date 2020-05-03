@@ -22,3 +22,6 @@ def contact_us(request):
 
 
     return render(request,'contact_us.html',{'form':form})
+
+def faq(request):
+    return render(request,'faq.html',{})

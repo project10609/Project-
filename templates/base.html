@@ -22,7 +22,7 @@
   <link rel="stylesheet" href="{% static 'css/nice-select.css' %}" type="text/css">
   <link rel="stylesheet" href="{% static 'css/jquery-ui.min.css' %}" type="text/css">
   <link rel="stylesheet" href="{% static 'css/slicknav.min.css' %}" type="text/css">
-  <link rel="stylesheet" href="{% static 'css/style19.css' %}" type="text/css">
+  <link rel="stylesheet" href="{% static 'css/style20.css' %}" type="text/css">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css" rel="stylesheet">
 
 </head>
@@ -112,7 +112,7 @@
             <li><a href="./news.html">最新消息</a></li>
             <li><a href="{% url 'account:user_login' %}">會員中心</a></li>
             <li><a href="{% url 'contact_us' %}">聯絡我們</a></li>
-            <li><a href="./news.html">常見問題</a></li>
+            <li><a href="{% url 'faq' %}">常見問題</a></li>
             <li><a href="./news.html">關於我們</a></li>
           </ul>
         </nav>
