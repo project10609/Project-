@@ -11,6 +11,21 @@
 <script type="text/javascript" src="{% static 'js/toastr.min.js' %}"></script>
 
 <!-- Product Shop Section Begin -->
+<div class="breacrumb-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb-text">
+                        <a href="{% url 'index' %}"><i class="fa fa-home"></i> 首頁</a>
+                        <a href="{% url 'products:allproduct' %}"><span>全部商品</span></a>
+                        <a href="{% url 'products:categories' products.product_category.pk %}"><span>{{ products.product_category.name }}</span></a>
+                        <a href="{% url 'products:subcategory' products.product_subcategory.pk %}"><span>{{ products.product_subcategory.subcategory_name }}</span></a>
+                        <span>{{ products.product_name }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 <section class="product-shop spad page-details">
   {% if messages %}
   {% for message in messages %}
