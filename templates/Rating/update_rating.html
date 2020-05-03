@@ -24,7 +24,7 @@
   <div class="leave-comment update-comment">
     <div class="update-comment-title">修改你的評價</div>
     <div class="text-left return-btn">
-      <a href="#"><i class="ti-angle-double-left"></i>返回商品</a>
+      <a href="{% url 'products:product_detail' product.pk %}"><i class="ti-angle-double-left"></i>返回商品</a>
     </div>
     <form class="comment-form" method="POST">
       {% csrf_token %}

@@ -48,8 +48,8 @@ def product_detail(request, pk):
         if form.is_valid:
             comment = form.save(commit=False)
             comment.price_rating = request.POST.get('price_rating', None)
-            comment.speed_rating = request.POST.get('source_rating', None)
-            comment.source_rating = request.POST.get('speed_rating', None)
+            comment.speed_rating = request.POST.get('speed_rating', None)
+            comment.source_rating = request.POST.get('source_rating', None)
             comment.comment = request.POST.get('comment', None)
             comment.user = request.user
             comment.product = products
