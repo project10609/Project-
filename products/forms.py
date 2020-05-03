@@ -25,5 +25,5 @@ class ProductSourceForm(forms.Form):
     )
 
 class ProductPriceForm(forms.Form):
-    min_price = forms.CharField(label="", required="",help_text="", widget=forms.TextInput(attrs={'id':'minamount'}))
-    max_price = forms.CharField(label="", required="",help_text="",widget=forms.TextInput(attrs={'id':'maxamount'}))
+    min_price = forms.CharField(label="", required="",help_text="", widget=forms.TextInput(attrs={'id':'minamount','readonly':True,}))
+    max_price = forms.CharField(label="", required="",help_text="",widget=forms.TextInput(attrs={'id':'maxamount','readonly':True,}))

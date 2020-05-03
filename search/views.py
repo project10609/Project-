@@ -436,7 +436,7 @@ def search_from_home(request, pk):
                             product_source__slug__in=source).order_by('?')
                 else:
                     if min_price and max_price:
-                        products = products.filter(product_category__slug__icontains=category).filter(
+                        products = products.filter(
                             product_price__range=(min_price, max_price)).order_by('?')
                     else:
                         products = products.order_by('?')
