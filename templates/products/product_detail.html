@@ -20,7 +20,6 @@
                         <a href="{% url 'products:allproduct' %}"><span>全部商品</span></a>
                         <a href="{% url 'products:categories' products.product_category.pk %}"><span>{{ products.product_category.name }}</span></a>
                         <a href="{% url 'products:subcategory' products.product_subcategory.pk %}"><span>{{ products.product_subcategory.subcategory_name }}</span></a>
-                        
                     </div>
                 </div>
             </div>
