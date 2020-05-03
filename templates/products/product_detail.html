@@ -234,68 +234,68 @@
 
           <div class="col-lg-12 customer-review-option">
             <div class="row">
-              <div class="comment-option">
-                <div class="col-lg-12">
-                  <h4>評論({{ comment_count }})</h4>
-                </div>
-                {% if comment_count == 0 %}
-                <p class="no-comment">尚無評價</p>
-                {% else %}
-                {% for rating in rating_list %}
-                <div class="col-lg-12 col-md-12">
-                  <div class="co-item">
-                    <div class="avatar-pic">
-                      <img src="img/product-single/avatar-1.png" alt="" />
-                    </div>
-                    <div class="avatar-text">
-                      <div class="at-rating">
-                        <span class="point">{{ rating.user_rating|floatformat:1 }}</span><span class="point2">/5</span>
-                        <span class="rating-point">{{ rating.user_rating|floatformat:1 }}</span>
-                      </div>
-                      <h5>{{ rating.user }} <span>{{ rating.created_on }}</span></h5>
-                      <div class="at-reply">
-                        <p>
-                          {% if rating.comment is None %}
-                          <br>
-                          <br>
-                          {% else %}
-                          {{ rating.comment }}
-                          {% endif %}
-                        </p>
-                      </div>
-                    </div>
+              <div class="comment-option col-lg-12">
+                  <div class="col-lg-12">
+                    <h4>評論({{ comment_count }})</h4>
                   </div>
-                  {% if rating.user == request.user %}
-                  <div class="text-right edit-icon">
-                    <a href="{% url 'products:update_rating' rating.product.pk rating.pk %}"><i class="ti-pencil-alt"
-                        title="修改評價"></i></a>
-                    <a href="{% url 'products:delete_rating' rating.product.pk rating.pk %}"><i class="ti-trash"
-                        title="刪除評價"></i></a>
+                  {% if comment_count == 0 %}
+                  <p class="no-comment">尚無評價</p>
+                  {% else %}
+                  {% for rating in rating_list %}
+                  <div class="col-lg-12 col-md-12">
+                    <div class="co-item">
+                      <div class="avatar-pic">
+                        <img src="img/product-single/avatar-1.png" alt="" />
+                      </div>
+                      <div class="avatar-text">
+                        <div class="at-rating">
+                          <span class="point">{{ rating.user_rating|floatformat:1 }}</span><span class="point2">/5</span>
+                          <span class="rating-point">{{ rating.user_rating|floatformat:1 }}</span>
+                        </div>
+                        <h5>{{ rating.user }} <span>{{ rating.created_on }}</span></h5>
+                        <div class="at-reply">
+                          <p>
+                            {% if rating.comment is None %}
+                            <br>
+                            <br>
+                            {% else %}
+                            {{ rating.comment }}
+                            {% endif %}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    {% if rating.user == request.user %}
+                    <div class="text-right edit-icon">
+                      <a href="{% url 'products:update_rating' rating.product.pk rating.pk %}"><i class="ti-pencil-alt"
+                          title="修改評價"></i></a>
+                      <a href="{% url 'products:delete_rating' rating.product.pk rating.pk %}"><i class="ti-trash"
+                          title="刪除評價"></i></a>
+                    </div>
+                    {% endif %}
                   </div>
+                  <hr>
+                  {% endfor %}
                   {% endif %}
-                </div>
-                <hr>
-                {% endfor %}
-                {% endif %}
-                <div class="col-lg-12 text-right product-details-page">
-                  <p>
-                    <span class="current-page-number">{{ rating_list.number }}</span>
-                    /
-                    <span class="total-page-number">{{ rating_list.paginator.num_pages }}</span>
-                  </p>
-                  {% if rating_list.has_previous %}
-                  <button class="page-prev"><a
-                      href="?{% url_replace next_page=rating_list.previous_page_number %}">&lt;</a></button>
-                  {% else %}
-                  <button class="page-prev">&lt;</button>
-                  {% endif %}
-                  {% if rating_list.has_next %}
-                  <button class="page-next"><a
-                      href="?{% url_replace next_page=rating_list.next_page_number %}">&gt;</a></button>
-                  {% else %}
-                  <button class="page-next">&gt;</button>
-                  {% endif %}
-                </div>
+                  <div class="col-lg-12 text-right product-details-page">
+                    <p>
+                      <span class="current-page-number">{{ rating_list.number }}</span>
+                      /
+                      <span class="total-page-number">{{ rating_list.paginator.num_pages }}</span>
+                    </p>
+                    {% if rating_list.has_previous %}
+                    <button class="page-prev"><a
+                        href="?{% url_replace next_page=rating_list.previous_page_number %}">&lt;</a></button>
+                    {% else %}
+                    <button class="page-prev">&lt;</button>
+                    {% endif %}
+                    {% if rating_list.has_next %}
+                    <button class="page-next"><a
+                        href="?{% url_replace next_page=rating_list.next_page_number %}">&gt;</a></button>
+                    {% else %}
+                    <button class="page-next">&gt;</button>
+                    {% endif %}
+                  </div>
               </div>
             </div>
           </div>

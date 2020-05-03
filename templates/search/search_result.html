@@ -4,18 +4,18 @@
 {% load get_list %}
 
 <div class="breacrumb-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="breadcrumb-text">
-                        <a href="{% url 'index' %}"><i class="fa fa-home"></i> 首頁</a>
-                        <span>搜尋</span>
-                    </div>
-                </div>
-            </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="breadcrumb-text">
+          <a href="{% url 'index' %}"><i class="fa fa-home"></i> 首頁</a>
+          <span>搜尋</span>
         </div>
+      </div>
     </div>
-<section class="product-shop">
+  </div>
+</div>
+<section class="product-shop spad">
   <div class="container">
     <div class="row">
       <div class="col-lg-3 col-md-6 col-sm-8 order-2 order-lg-1 produts-sidebar-filter">
@@ -135,13 +135,18 @@
                   <input id="block-btn" type="image" src="{% static 'img/block.png' %}"></input>
                   <input id="straight-btn" type="image" src="{% static 'img/Straight.png' %}"></input>
                 </div>
-                <div class="product-search-result">
+                <div class="accordion" id="accordionExample">
+                  <div class="search-reslut-button">
+                    <a data-toggle="collapse" data-target="#collapse-search"><span display="hidden"></span></a>
+                  </div>
+                </div>
+                {% comment %} <div class="product-search-result">
                   {% if request.GET.q %}
                   <p><i class="icon_search"></i><span>「{{ request.GET.q }}」</span>的商品有{{ products.count }}筆</p>
                   {% elif request.GET.q == "" %}
                   <p><i class="icon_search"></i><span>「{{ request.GET.category }}」</span>的商品有{{ products.count }}筆</p>
                   {% endif %}
-                </div>
+                </div> {% endcomment %}
               </div>
             </div>
             <div class="col-lg-3 col-md-3 product-page-controller text-right">
@@ -162,6 +167,19 @@
               {% else %}
               <button class="page-next">&gt;</button>
               {% endif %}
+            </div>
+            <div class="col-lg-12">
+              <div id="collapse-search" class="collapse" data-parent="#accordionExample">
+                <div class="product-search-result">
+                  {% if request.GET.q %}
+                  <p><i class="icon_search"></i><span>「{{ request.GET.q }}」</span>的商品有{{ products.count }}筆
+                  </p>
+                  {% elif request.GET.q == "" %}
+                  <p><i class="icon_search"></i><span>「{{ request.GET.category }}」</span>的商品有{{ products.count }}筆
+                  </p>
+                  {% endif %}
+                </div>
+              </div>
             </div>
           </div>
         </div>
