@@ -19,7 +19,7 @@ class OrderItem(models.Model):
 
 class Order(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE, null=True,db_column='owner')
-    items = models.ForeignKey(OrderItem,related_name='order',db_column='items',on_delete=models.CASCADE)
+    items = models.ForeignKey(OrderItem,db_column='items',on_delete=models.CASCADE)
 
     def __str__(self):
         return self.items

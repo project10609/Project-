@@ -467,3 +467,10 @@ def add_to_cart(request,pk,order):
 
     messages.success(request, "商品成功加入追蹤清單")
     return HttpResponseRedirect(request.META.get('HTTP_REFERER','/'))
+
+def cart_items(request):
+    orders = Order.objects.filter(owner=request.user)
+    context = {
+        'orders':orders,
+    }
+    return render(request,'products/following-list.html',context)

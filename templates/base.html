@@ -22,7 +22,7 @@
   <link rel="stylesheet" href="{% static 'css/nice-select.css' %}" type="text/css">
   <link rel="stylesheet" href="{% static 'css/jquery-ui.min.css' %}" type="text/css">
   <link rel="stylesheet" href="{% static 'css/slicknav.min.css' %}" type="text/css">
-  <link rel="stylesheet" href="{% static 'css/style21.css' %}" type="text/css">
+  <link rel="stylesheet" href="{% static 'css/style22.css' %}" type="text/css">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css" rel="stylesheet">
 
 </head>
@@ -81,7 +81,7 @@
           <div class="col-lg-1 col-md-1">
             <ul class="nav-right">
               <li class="heart-icon">
-                <a href="#" style="margin-top:10px;">
+                <a href="{% url 'products:following-list' %}" style="margin-top:10px;">
                   <button class="favorite-heart-icon-main">
                     <i class="icon_heart_alt"></i>
                     <span>{{ order_item }}</span>

@@ -4049,6 +4049,7 @@ ol {
 .blog-sidebar .recent-post .recent-blog .rb-item .rb-pic img {
   height: 80px;
   width: 80px;
+  object-fit: cover;
 }
 
 .blog-sidebar .recent-post .recent-blog .rb-item .rb-text {
@@ -4101,6 +4102,10 @@ ol {
   margin-bottom: 42px;
 }
 
+.blog-item .bi-pic {
+  padding: 10px 10px 10px 10px;
+}
+
 .blog-item .bi-pic img {
   min-width: 100%;
 }
@@ -4114,23 +4119,31 @@ ol {
   font-weight: 700;
   line-height: 30px;
   margin-bottom: 16px;
+  font-size: 35px;
 }
 
-.blog-item .bi-text p {
+.blog-item .bi-text .news-category {
   margin-bottom: 0;
-  font-size: 14px;
-  font-weight: 700;
-  text-transform: uppercase;
+  font-size: 16px;
+  font-weight: 600;
   color: #fcbabb;
-  letter-spacing: 2px;
-  line-height: 20px;
 }
 
-.blog-item .bi-text p span {
+.blog-item .bi-text .news-date {
+  margin-bottom: 0;
   color: #b2b2b2;
-  font-weight: 400;
+  font-weight: 500;
   text-transform: capitalize;
-  letter-spacing: 0;
+  font-size: 16px;
+}
+
+.blog-item .bi-text .content {
+  color: #223323;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 200%;
+  letter-spacing: 2px;
+  text-indent: 40px;
 }
 
 /*---------------------
@@ -4869,14 +4882,114 @@ ol {
   About Us
 -----------------------*/
 
+.about-us {
+  margin-top: 28px;
+}
+
 .about-us .about-us-title {
   text-align: center;
+  margin-bottom: 20px;
 }
 
 .about-us .about-us-title h3 {
   color: #252525;
   font-weight: 700;
   margin-bottom: 16px;
+  font-size: 35px;
+}
+
+.about-us .about-us-subtitle h4 {
+  color: #252525;
+  font-weight: 700;
+  margin-bottom: 16px;
+  font-size: 24px;
+}
+
+.about-us .about-us-pic {
+  padding: 10px 30px 10px 30px;
+}
+
+.about-us .about-us-desc {
+  padding: 10px 30px 10px 30px;
+}
+
+.about-us .about-us-desc p {
+  line-height: 200%;
+  letter-spacing: 2px;
+  text-indent: 40px;
+}
+
+.about-us .our-team {
+  margin-top: 50px;
+}
+
+.about-us .our-team .team-member {
+  border-radius: 5%;
+  padding: 10px 10px 10px 10px;
+  margin: 10px 15px 10px 15px;
+}
+
+.about-us .our-team .team-member img {
+  width: 100%;
+  object-fit: cover;
+  padding: 10px 40px 10px 40px;
+  border-radius: 50%;
+}
+
+.about-us .our-team .team-member .member-name {
+  font-size: 22px;
+  font-weight: 500;
+}
+
+.about-us .our-team .team-member .member-social-website a {
+  color: #252525;
+  font-size: 20px;
+  padding: 12px 12px 12px 12px;
+}
+
+.about-us .our-team .team-member .member-social-website a:hover {
+  color: #fcbabb;
+}
+
+.about-us .web-sources {
+  margin-top: 50px;
+}
+
+.about-us .web-sources .sources-item .card {
+  margin-bottom: 20px;
+}
+
+.about-us .web-sources .sources-item .sources-title {
+  margin-bottom: 10px;
+  font-weight: 600;
+  font-size: 20px;
+}
+
+.about-us .web-sources .sources-item .sources-desc {
+  margin-bottom: 20px;
+}
+
+.about-us .web-sources .sources-item .sources-desc a {
+  color: #589ef0;
+  font-weight: 500;
+  margin-left: 2px;
+  margin-right: 2px;
+}
+
+.about-us .web-sources .sources-item .sources-desc a:hover {
+  color: #2773be;
+}
+
+.about-us .web-sources .sources-item .sources-url {
+  color: #ffffff;
+  background-color: #fcbabb;
+  padding: 10px 20px 10px 20px;
+  margin-left: 10px;
+  border-radius: 2%;
+}
+
+.about-us .web-sources .sources-item .sources-url:hover {
+  background-color: rgba(252, 186, 187, 0.7);
 }
 
 /* ------------------------------ Responsive Media Styles ---------------------------- */
