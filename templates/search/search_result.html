@@ -7,13 +7,6 @@
 
 <script type="text/javascript" src="{% static 'js/toastr.min.js' %}"></script>
 
-{% if messages %}
-  {% for message in messages %}
-  <script>
-    toastr.{{message.tags}}('{{ message }}')
-  </script>
-  {% endfor %}
-  {% endif %}
 
 <div class="breacrumb-section">
   <div class="container">
@@ -28,6 +21,14 @@
   </div>
 </div>
 <section class="product-shop spad">
+{% if messages %}
+  {% for message in messages %}
+  <script>
+    toastr.{{message.tags}}('{{ message }}')
+  </script>
+  {% endfor %}
+  {% endif %}
+
   <div class="container">
     <div class="row">
       <div class="col-lg-3 col-md-6 col-sm-8 order-2 order-lg-1 produts-sidebar-filter">
@@ -205,7 +206,9 @@
                       alt="image"></a>
                   <div class="sale pp-sale">{{ result.get_rating|floatformat:1 }}<i class="fa fa-star"></i></div>
                   <div class="icon">
+                  <a href="{% url 'products:add_to_cart' request.user.pk result.pk %}">
                     <i class="favorite-heart-icon icon_heart_alt"></i>
+                    </a>
                   </div>
                   <ul>
                     <li class="quick-view"><a href="{{ result.product_url }}">前往網站瀏覽</a></li>

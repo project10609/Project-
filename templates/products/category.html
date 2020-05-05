@@ -8,13 +8,7 @@
 
 <script type="text/javascript" src="{% static 'js/toastr.min.js' %}"></script>
 
-{% if messages %}
-  {% for message in messages %}
-  <script>
-    toastr.{{message.tags}}('{{ message }}')
-  </script>
-  {% endfor %}
-  {% endif %}
+
 <div class="breacrumb-section">
   <div class="container">
     <div class="row">
@@ -30,6 +24,13 @@
 </div>
 
 <section class="product-shop spad">
+{% if messages %}
+  {% for message in messages %}
+  <script>
+    toastr.{{message.tags}}('{{ message }}')
+  </script>
+  {% endfor %}
+  {% endif %}
   <div class="container">
     <div class="row">
       <div class="col-lg-3 col-md-6 col-sm-8 order-2 order-lg-1 produts-sidebar-filter">

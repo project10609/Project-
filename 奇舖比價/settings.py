@@ -97,6 +97,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'products.views.category_list',
                 'products.views.source_list',
+                'products.views.get_orderitem_count',
             ],
             'libraries':{
                 'shuffle': 'products.shuffle',

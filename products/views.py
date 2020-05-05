@@ -447,6 +447,13 @@ def source_list(request):
     }
     return context
 
+def get_orderitem_count(request):
+    order_item = Order.objects.filter(owner=request.user).aggregate(order_counts=Count('items')).get('order_counts')
+    context = {
+        'order_item':order_item,
+    }
+    return context
+
 
 @login_required
 def add_to_cart(request,pk,order):
