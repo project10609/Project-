@@ -22,11 +22,10 @@ class Order(models.Model):
     items = models.ForeignKey(OrderItem,db_column='items',on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.items
+        return self.items.product.product_name
 
     class Meta:
         db_table = 'Order'
-
 
 class Categories(models.Model):
     name = models.CharField(max_length=120, db_column='name')

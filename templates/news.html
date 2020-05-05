@@ -1,0 +1,174 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load shuffle %}
+{% load static %}
+{% load bootstrap3 %}
+{% load get_list %}
+
+    <!-- Breadcrumb Section Begin -->
+    <div class="breacrumb-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb-text">
+                        <a href="./index.html"><i class="fa fa-home"></i> 首頁</a>
+                        <span>最新消息</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb Section Begin -->
+
+    <!-- Blog Section Begin -->
+    <section class="blog-section spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 col-sm-8 order-2 order-lg-1">
+                    <div class="blog-sidebar">
+                        <div class="recent-post">
+                            <h4>重要公告</h4>
+                            <div class="recent-blog">
+                                <a href="#post1" class="rb-item">
+                                    <div class="rb-pic">
+                                        <img src="{% static 'img/post1.jpg' %}" alt="">
+                                    </div>
+                                    <div class="rb-text">
+                                        <h6>最詳細的化妝品比價網「奇鋪比價」上線了！</h6>
+                                        <p><span>2020年5月5日</span></p>
+                                    </div>
+                                </a>
+                                <a href="#post2" class="rb-item">
+                                    <div class="rb-pic">
+                                        <img src="{% static 'img/post2.jpg' %}" alt="">
+                                    </div>
+                                    <div class="rb-text">
+                                        <h6>手機也能上奇鋪！</h6>
+                                        <p><span>2020年5月1日</span></p>
+                                    </div>
+                                </a>
+                                <a href="#post3" class="rb-item">
+                                    <div class="rb-pic">
+                                        <img src="{% static 'img/post3.jpg' %}" alt="">
+                                    </div>
+                                    <div class="rb-text">
+                                        <h6>奇舖比價即將上線！</h6>
+                                        <p><span>2020年4月25日</span></p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="recent-post">
+                            <h4>奇鋪新聞</h4>
+                            <div class="recent-blog">
+                                <a href="#news1" class="rb-item">
+                                    <div class="rb-pic">
+                                        <img src="{% static 'img/news1.jpg' %}" alt="">
+                                    </div>
+                                    <div class="rb-text">
+                                        <h6>五月美妝新品上市！大廠牌相繼推出夏季主打商品</h6>
+                                        <p><span>2020年5月1日</span></p>
+                                    </div>
+                                </a>
+                                <a href="#news2" class="rb-item">
+                                    <div class="rb-pic">
+                                        <img src="{% static 'img/news2.jpg' %}" alt="">
+                                    </div>
+                                    <div class="rb-text">
+                                        <h6>五月最新優惠！快來看看有哪些促銷商品</h6>
+                                        <p><span>2020年4月25日</span></p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-9 order-1 order-lg-2">
+                    <div class="row">
+                        <div class="col-lg-12 col-sm-12">
+                            <div class="blog-item" id="post1">
+                                <div class="bi-text">
+                                    <h4>最詳細的化妝品比價網「奇鋪比價」上線了！</h4>
+                                    <p class="news-date">2020年5月5日</p>
+                                    <p class="news-category">重要公告</p>
+                                </div>
+                                <div class="bi-pic">
+                                    <img src="{% static 'img/post1.jpg' %}" alt="">
+                                </div>
+                                <div class="bi-text">
+                                    <p class="content">
+                                        奇鋪比價上線了，在這裡有最詳盡的分類，讓你搜尋全網最便宜的商品！現在就在搜尋欄輸入你最想了解的商品，參考最低價格、觀看用戶評價，如果喜歡還可以加入追蹤清單喔！
+                                    </p>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="blog-item" id="post2">
+                                <div class="bi-text">
+                                    <h4>手機也能上奇鋪！</h4>
+                                    <p class="news-date">2020年5月1日</p>
+                                    <p class="news-category">重要公告</p>
+                                </div>
+                                <div class="bi-pic">
+                                    <img src="{% static 'img/post2.jpg' %}" alt="">
+                                </div>
+                                <div class="bi-text">
+                                    <p class="content">
+                                        奇舖比價即將上線，手機用戶也可以使用喔！
+                                    </p>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="blog-item" id="news1">
+                                <div class="bi-text">
+                                    <h4>五月美妝新品上市！大廠牌相繼推出夏季主打商品</h4>
+                                    <p class="news-date">2020年5月1日</p>
+                                    <p class="news-category">奇鋪新聞</p>
+                                </div>
+                                <div class="bi-pic">
+                                    <img src="{% static 'img/news1.jpg' %}" alt="">
+                                </div>
+                                <div class="bi-text">
+                                    <p class="content">天氣逐漸轉熱，這個炎熱的夏天你準備好怎麼迎接了嗎？先來看看各大廠牌五月最新主打商品吧！
+                                    </p>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="blog-item" id="news2">
+                                <div class="bi-text">
+                                    <h4>五月最新優惠！快來看看有哪些促銷商品</h4>
+                                    <p class="news-date">2020年4月25日</p>
+                                    <p class="news-category">奇鋪新聞</p>
+                                </div>
+                                <div class="bi-pic">
+                                    <img src="{% static 'img/news2.jpg' %}" alt="">
+                                </div>
+                                <div class="bi-text">
+                                    <p class="content">
+                                        春暖花開，五月即將到來，讓我們來看看有那些優惠吧！
+                                    </p>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="blog-item" id="post3">
+                                <div class="bi-text">
+                                    <h4>奇舖比價即將上線！</h4>
+                                    <p class="news-date">2020年4月25日</p>
+                                    <p class="news-category">重要公告</p>
+                                </div>
+                                <div class="bi-pic">
+                                    <img src="{% static 'img/post3.jpg' %}" alt="">
+                                </div>
+                                <div class="bi-text">
+                                    <p class="content">
+                                        奇鋪比價即將上線了囉，最快五月初見！
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Blog Section End -->
+    {% endblock %}

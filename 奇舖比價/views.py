@@ -25,3 +25,9 @@ def contact_us(request):
 
 def faq(request):
     return render(request,'faq.html',{})
+
+def about(request):
+    return render(request,'about.html',{})
+
+def news(request):
+    return render(request,'news.html',{})

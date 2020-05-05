@@ -433,9 +433,11 @@ def subcategory(request, pk):
 def category_list(request):
     categories = Categories.objects.all()
     subcategory = Subcategories.objects.all()
+    orders = Order.objects.filter(owner=request.user).aggregate(order_counts=Count('items')).get('order_counts')
     context = {
         "categories": categories,
         "subcategory": subcategory,
+        'orders':orders,
     }
     return context
 
@@ -444,13 +446,6 @@ def source_list(request):
     sources = Source.objects.all()
     context = {
         'sources': sources
-    }
-    return context
-
-def get_orderitem_count(request):
-    order_item = Order.objects.filter(owner=request.user).aggregate(order_counts=Count('items')).get('order_counts')
-    context = {
-        'order_item':order_item,
     }
     return context
 
@@ -468,6 +463,7 @@ def add_to_cart(request,pk,order):
     messages.success(request, "商品成功加入追蹤清單")
     return HttpResponseRedirect(request.META.get('HTTP_REFERER','/'))
 
+@login_required
 def cart_items(request):
     orders = Order.objects.filter(owner=request.user)
     context = {
@@ -475,6 +471,7 @@ def cart_items(request):
     }
     return render(request,'products/following-list.html',context)
 
+@login_required
 def delete_cart_items(request,pk):
     cart_items = get_object_or_404(Order,pk=pk).delete()
     messages.success(request,'此商品成功從追蹤清單裡移除')

@@ -1,0 +1,158 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load shuffle %}
+{% load static %}
+{% load bootstrap3 %}
+{% load get_list %}
+
+    <!-- Breadcrumb Section Begin -->
+    <div class="breacrumb-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb-text">
+                        <a href="{% url 'index' %}"><i class="fa fa-home"></i>首頁</a>
+                        <span>關於我們</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb Section Begin -->
+
+    <!-- Blog Details Section Begin -->
+    <section class="about-us">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 about-us-title">
+                    <h3>關於我們</h3>
+                </div>
+                <div class="col-lg-6 about-us-pic">
+                    <img src="{% static 'img/team.jpg' %}" alt="">
+                </div>
+                <div class="col-lg-6 about-us-desc">
+                    <p> 我們是台科大資管系三年級的學生，我們的團隊有四個成員，陳菳峰是我們的組長其於組員為徐薪博、楊姿湘、廖妍茹，這是我們於實務專題課程所開發的作品「一個為化妝品專門製作的比價網」，當初會取名為奇鋪比價是取自英文「cheap」這個單字的中文諧音，意旨希望大家可以透過我們的比價網找到全網最便宜的商品，如果有問題都歡迎回報給我們喔！
+                    </p>
+                </div>
+                <div class="col-lg-12 web-sources">
+                    <div class="row">
+                        <div class="col-lg-12 about-us-subtitle">
+                            <h4>網站資料來源</h4>
+                            <p>此網站上所使用到的網路資源，這些資料和版權不是我們所有，僅作為製作專題使用。</p>
+                        </div>
+                        <div class="col-lg-6 col-md-6 sources-item">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="sources-title">網站模板</h5>
+                                    <p class="sources-desc">這個模板是由<a href="https://colorlib.com"
+                                            target="_blank">Colorlib</a>所製作，版權也是其所有。</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 sources-item">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="sources-title">網站圖標</h5>
+                                    <p class="sources-desc">
+                                        網站圖標是來自<a href="https://www.flaticon.com/"
+                                            target="_blank">www.flaticon.com</a>，由<a
+                                            href="https://www.flaticon.com/authors/freepik"
+                                            target="_blank">Freepik</a>製作。</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 sources-item">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="sources-title">商品資料</h5>
+                                    <p class="sources-desc">商品資料來自以下<a href="https://shopee.tw/"
+                                            target="_blank">蝦皮購物</a>、<a href="https://www.ruten.com.tw/"
+                                            target="_blank">露天拍賣</a>、<a href="https://tw.bid.yahoo.com/"
+                                            target="_blank">Yahoo拍賣</a>、<a href="https://www.momoshop.com.tw/"
+                                            target="_blank">Momo購物</a>、<a href="https://www.etmall.com.tw/"
+                                            target="_blank">東森購物</a>。</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 sources-item">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="sources-title">圖片來源</h5>
+                                    <p class="sources-desc">本網站所使用的圖片是來自<a href="https://www.pexels.com/"
+                                            target="_blank">Pexels</a>此免費圖庫網站，版權並非我們所有。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12 our-team">
+                    <div class="row">
+                        <div class="col-lg-12 about-us-subtitle">
+                            <h4>專題小組成員</h4>
+                        </div>
+                        <div class="col-lg-3 col-md-6 text-center">
+                            <div class="team-member">
+                                <h5 class="member-name">陳菳峰</h5>
+                                <img src="{% static 'img/michael.jpg' %}" alt="">
+                                <div class="member-social-website">
+                                    <a href="https://www.facebook.com/michaelzz" target="_blank"><i
+                                            class="fa fa-facebook"></i></a>
+                                    <a href="https://www.instagram.com/michaelzz40/" target="_blank"><i
+                                            class="fa fa-instagram"></i></a>
+                                    <a href="https://github.com/michaelzz40" target="_blank"><i
+                                            class="fa fa-github"></i></a>
+                                    <a href="mailto:chen.michael11@yahoo.com
+                                    "><i class="fa fa-envelope"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 text-center">
+                            <div class="team-member">
+                                <h5 class="member-name">徐薪博</h5>
+                                <img src="{% static 'img/billy.jpg' %}" alt="">
+                                <div class="member-social-website">
+                                    <a href="https://www.facebook.com/profile.php?id=100002378368108" target="_blank"><i
+                                            class="fa fa-facebook"></i></a>
+                                    <a href="https://www.instagram.com/billy091123/" target="_blank"><i
+                                            class="fa fa-instagram"></i></a>
+                                    <a href="#" target="_blank"><i class="fa fa-github"></i></a>
+                                    <a href="mailto:"><i class="fa fa-envelope"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 text-center">
+                            <div class="team-member">
+                                <h5 class="member-name">楊姿湘</h5>
+                                <img src="{% static 'img/zizi.jpg' %}" alt="">
+                                <div class="member-social-website">
+                                    <a href="https://www.facebook.com/profile.php?id=100001709396886" target="_blank"><i
+                                            class="fa fa-facebook"></i></a>
+                                    <a href="https://www.instagram.com/zi_xiang0802/" target="_blank"><i
+                                            class="fa fa-instagram"></i></a>
+                                    <a href="#" target="_blank"><i class="fa fa-github"></i></a>
+                                    <a href="mailto:hlpss12345622@yahoo.com.tw"><i class="fa fa-envelope"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 text-center">
+                            <div class="team-member">
+                                <h5 class="member-name">廖妍茹</h5>
+                                <img src="{% static 'img/yanru.jpg' %}" alt="">
+                                <div class="member-social-website">
+                                    <a href="https://www.facebook.com/yanruliao" target="_blank"><i
+                                            class="fa fa-facebook"></i></a>
+                                    <a href="https://www.instagram.com/liao_yan_ru/" target="_blank"><i
+                                            class="fa fa-instagram"></i></a>
+                                    <a href="https://github.com/yanru0213" target="_blank"><i
+                                            class="fa fa-github"></i></a>
+                                    <a href="mailto:yanru0213@gmail.com"><i class="fa fa-envelope"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Blog Details Section End -->
+{% endblock %}
