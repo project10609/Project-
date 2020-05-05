@@ -458,5 +458,5 @@ def add_to_cart(request,pk,order):
     cart_item = OrderItem.objects.create(product=product)
     Order.objects.get_or_create(owner=user_profile,items=cart_item)
 
-    messages.success(request, "item added to cart")
+    messages.success(request, "商品成功加入追蹤清單")
     return HttpResponseRedirect(request.META.get('HTTP_REFERER','/'))
