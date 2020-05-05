@@ -1,18 +1,20 @@
 from django.http import HttpResponseRedirect
-from django.shortcuts import render, get_object_or_404
-from .models import *
+from django.shortcuts import render, get_object_or_404,redirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger, InvalidPage
 from django.urls import reverse
-from products.models import Product, Categories, Source, Subcategories
+from products.models import Product, Categories, Source, Subcategories, Order, OrderItem
 from django.views.generic import ListView, DetailView
 from django.views.generic.list import MultipleObjectMixin
 from .forms import ProductFilterForm, ProductSourceForm, ProductPriceForm
 from django.db.models import Count, Q
 from search.models import Queries
 from functools import reduce
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 import operator
 import random
 import os
+from django.contrib.auth.models import User
 
 # class Products(ListView):
 #     template = ""
@@ -444,3 +446,17 @@ def source_list(request):
         'sources': sources
     }
     return context
+
+
+@login_required
+def add_to_cart(request,pk,order):
+  
+    #get the user 
+    user_profile = get_object_or_404(User, pk=pk)
+    product = get_object_or_404(Product,pk=order)
+ 
+    cart_item = OrderItem.objects.create(product=product)
+    Order.objects.get_or_create(owner=user_profile,items=cart_item)
+
+    messages.info(request, "item added to cart")
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER','/'))

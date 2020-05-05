@@ -180,7 +180,7 @@
                       alt="image"></a>
                   <div class="sale pp-sale">{{ product.get_rating|floatformat:1 }}<i class="fa fa-star"></i></div>
                   <div class="icon">
-                    <i class="favorite-heart-icon icon_heart_alt"></i>
+                  <a href="{% url 'products:add_to_cart' request.user.pk product.pk %}"><i class="favorite-heart-icon icon_heart_alt"></i></a>
                   </div>
                   <ul>
                     <li class="quick-view"><a href="{{ product.product_url }}">前往網站瀏覽</a></li>
@@ -258,7 +258,7 @@
                 </div>
                 <button class="product-url"><a href="{{ product.product_url }}">前往網站瀏覽</a></button>
                 <div class="text-right">
-                  <i class="favorite-heart-icon icon_heart_alt"></i>
+                  <a href="{% url 'products:add_to_cart' request.user.pk product.pk %}"><i class="favorite-heart-icon icon_heart_alt"></i> </a>
                 </div>
               </div>
             </div>

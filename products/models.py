@@ -1,9 +1,31 @@
 from django.db import models
 from django.http import HttpResponseRedirect
-from django.urls import reverse
+from django.urls import reverse, resolve
 from django.db.models import Count
 from Rating.models import Rating
 from django.db.models import Count, Q, F, Sum, FloatField
+from django.contrib.auth.models import User
+
+
+class OrderItem(models.Model):
+    product = models.OneToOneField('Product', on_delete=models.CASCADE, null=True, db_column='product')
+    date_added = models.DateTimeField(auto_now=True,db_column='date_added')
+
+    def __str__(self):
+        return self.product.product_name
+
+    class Meta:
+        db_table = 'OrderItem'
+
+class Order(models.Model):
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, null=True,db_column='owner')
+    items = models.ForeignKey(OrderItem,related_name='order',db_column='items',on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.items
+
+    class Meta:
+        db_table = 'Order'
 
 
 class Categories(models.Model):
