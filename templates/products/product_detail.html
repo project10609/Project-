@@ -152,7 +152,9 @@
                 </div>
                 <div class="product-price">${{ products.product_price }}</div>
                 <div class="text-right">
+                <a href={% url 'products:add_to_cart' request.user.pk products.pk %}>
                   <i class="favorite-heart-icon icon_heart_alt"></i>
+                  </a>
                 </div>
               </div>
             </div>
