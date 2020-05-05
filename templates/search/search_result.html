@@ -269,7 +269,9 @@
                 </div>
                 <button class="product-url"><a href="{{ product.product_url }}">前往網站瀏覽</a></button>
                 <div class="text-right">
+                <a href="{% url 'products:add_to_cart' request.user.pk product.pk %}">
                   <i class="favorite-heart-icon icon_heart_alt"></i>
+                </a>
                 </div>
               </div>
             </div>

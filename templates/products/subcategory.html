@@ -184,7 +184,9 @@
                       alt="image"></a>
                   <div class="sale pp-sale">{{ product.get_rating|floatformat:1 }}<i class="fa fa-star"></i></div>
                   <div class="icon">
+                  <a href="{% url 'products:add_to_cart' request.user.pk product.pk %}">
                     <i class="favorite-heart-icon icon_heart_alt"></i>
+                  </a>
                   </div>
                   <ul>
                     <li class="quick-view"><a href="{{ product.product_url }}">前往網站瀏覽</a></li>
@@ -230,9 +232,9 @@
                 <div class="pi-pic">
                   <a href="{% url 'products:product_detail' product.pk %}"><img src="{{ product.product_images }}"
                       alt=""></a>
-                  <div class="icon">
-                    <i class="icon_heart_alt"></i>
-                  </div>
+                  
+                    
+                  
                 </div>
               </div>
             </div>
