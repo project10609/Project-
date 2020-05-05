@@ -433,12 +433,18 @@ def subcategory(request, pk):
 def category_list(request):
     categories = Categories.objects.all()
     subcategory = Subcategories.objects.all()
-    orders = Order.objects.filter(owner=request.user).aggregate(order_counts=Count('items')).get('order_counts')
-    context = {
+    if request.user.is_authenticated:
+        orders = Order.objects.filter(owner=request.user).aggregate(order_counts=Count('items')).get('order_counts')
+        context = {
         "categories": categories,
         "subcategory": subcategory,
         'orders':orders,
-    }
+        }
+    else:
+        context = {
+            "categories": categories,
+            "subcategory": subcategory,
+        }
     return context
 
 
