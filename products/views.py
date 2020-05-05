@@ -474,3 +474,9 @@ def cart_items(request):
         'orders':orders,
     }
     return render(request,'products/following-list.html',context)
+
+def delete_cart_items(request,pk):
+    cart_items = get_object_or_404(Order,pk=pk).delete()
+    messages.success(request,'此商品成功從追蹤清單裡移除')
+    return redirect(reverse('products:following-list'))
+    

@@ -2,6 +2,9 @@
 {% block content %}
 {% load static %}
 {% load get_list %}
+<script src="{% static 'js/jquery-1.9.1.min.js' %}"></script>
+
+<script type="text/javascript" src="{% static 'js/toastr.min.js' %}"></script>
 
 <div class="breacrumb-section">
   <div class="container">
@@ -17,6 +20,13 @@
 </div>
 
     <section class="shopping-cart spad">
+    {% if messages %}
+  {% for message in messages %}
+  <script>
+    toastr.{{message.tags}}('{{ message }}')
+  </script>
+  {% endfor %}
+  {% endif %}
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -57,7 +67,7 @@
                                     {% endif %}
                                     <td class="">{{ product.items.product.product_category.name }}</td>
                                     <td class="current-price">{{ product.items.product.product_price }}</td>
-                                    <td class="close-td"><button class="close-btn"><i class="ti-close"></i></button>
+                                    <td class="close-td"><button class="close-btn"><a href="{% url 'products:delete_cart' product.pk %}"><i class="ti-close"></i></a></button>
                                     </td>
                                 </tr>
                                 {% endfor %}
