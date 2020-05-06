@@ -49,7 +49,7 @@
                             <tbody>
                                 {% for product in orders %}
                                 <tr>
-                                    <td class="product-img"><a><img src="{{ product.items.product.product_images }}" alt=""></a></td>
+                                    <td class="product-img"><a href="{% url 'products:product_detail' product.items.product.pk %}"><img src="{{ product.items.product.product_images }}" alt=""></a></td>
                                     <td class="product-name">
                                         <a href="{% url 'products:product_detail' product.items.product.pk %}">{{ product.items.product.product_name }}</a>
                                     </td>
