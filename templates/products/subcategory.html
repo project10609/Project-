@@ -79,7 +79,7 @@
             {% endfor %}
           </ul>
         </div>
-        <form action="{% url 'products:subcategory' category.pk %}" method="GET">
+        <form method="GET">
           <div class="filter-widget">
             <h4 class="fw-title">電商平台</h4>
             <div class="fw-brand-check">
@@ -102,7 +102,7 @@
             </div>
           </div>
         </form>
-        <form class="" action="{% url 'products:subcategory' category.pk %}" method="GET">
+        <form class="" method="GET">
           <div class="filter-widget">
             <h4 class="fw-title">價格範圍</h4>
             <div class="filter-range-wrap">
@@ -128,7 +128,7 @@
           <div class="row">
             <div class="col-lg-9 col-md-9">
               <div class="select-option">
-                <form action="{% url 'products:subcategory' category.pk %}" method="GET">
+                <form method="GET">
                   {{ sortingform }}
                   {% if request.GET.source %}
                   {% for sources in request.GET|get_list:'source' %}
