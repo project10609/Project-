@@ -487,7 +487,7 @@ toastr.options = {
 		search-empty
   --------------------- */
 
-$(document).ready(function () {
+$(window).load(function () {
   $(".search-submit").submit(function () {
     if ($(".search-text").val() == "") {
       $(".search-text").val("口紅");

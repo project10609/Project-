@@ -3905,6 +3905,14 @@ ol {
   padding-top: 60px;
 }
 
+.following-list .no-item{
+  color: #fcbabb;
+}
+
+.following-list .no-item:hover{
+  color: rgba(252, 186, 187, 0.7);
+}
+
 .following-list table {
   border: 1px solid #ebebeb;
   width: 100%;
@@ -3939,6 +3947,14 @@ ol {
 }
 
 .following-list .close-btn:hover {
+  color: gray;
+}
+
+.following-list .close-btn a{
+  color: #000000;
+}
+
+.following-list .close-btn a:hover{
   color: gray;
 }
 
@@ -5640,6 +5656,14 @@ ol {
 
   .footer-makeup-icon img {
     width: 90%;
+  }
+
+  .following-list table {
+    min-width: 0;
+  }
+
+  .following-list .table-img {
+    display: none;
   }
 }
 
