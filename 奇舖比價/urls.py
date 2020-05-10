@@ -20,7 +20,7 @@ from django.conf import settings
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.conf.urls.static import static
 from products import views
-from .views import contact_us, faq, about, news
+from .views import contact_us, faq, about, news, forum
 
 urlpatterns = [
 
@@ -32,6 +32,7 @@ urlpatterns = [
     path('contact_us/' ,contact_us,name="contact_us"),
     path('FAQ/',faq,name='faq'),
     path('about_us',about,name='about'),
+    path('forum',forum,name='forum'),
     # path(r'/search', productSearch)
 ]
 if settings.ADMIN_ENABLED:

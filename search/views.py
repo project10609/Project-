@@ -19,7 +19,6 @@ import os
 def search(request):
     category = request.GET.get('category', None)
     query = request.GET.get('q', None)
-
     if category:
         if request.user.is_authenticated:
             result = Queries.objects.create(search=query,user= request.user)

@@ -3905,11 +3905,11 @@ ol {
   padding-top: 60px;
 }
 
-.following-list .no-item{
+.following-list .no-item {
   color: #fcbabb;
 }
 
-.following-list .no-item:hover{
+.following-list .no-item:hover {
   color: rgba(252, 186, 187, 0.7);
 }
 
@@ -3950,11 +3950,11 @@ ol {
   color: gray;
 }
 
-.following-list .close-btn a{
+.following-list .close-btn a {
   color: #000000;
 }
 
-.following-list .close-btn a:hover{
+.following-list .close-btn a:hover {
   color: gray;
 }
 
@@ -4747,6 +4747,62 @@ ol {
   font-size: 13px;
   color: #ffffff;
   background: #fcbabb;
+}
+
+/*---------------------
+  Forum Section
+-----------------------*/
+
+.forum-title {
+  margin-bottom: 30px;
+}
+
+.forum-title h4 {
+  color: #252525;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.forum-title p a {
+  color: #fcbabb;
+}
+
+.forum-title p a:hover {
+  color: #ecb3b4;
+}
+
+.forum-section {
+  padding-top: 28px;
+  padding-bottom: 54px;
+}
+
+.forum-section .card-link {
+  color: #223323;
+}
+
+.forum-section .card-link:hover {
+  color: #fcbabb;
+}
+
+.forum-section .card-header {
+  background-color: #ffffff;
+  border-color: rgba(0, 0, 0, 0.1);
+}
+
+.forum-section .card {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.forum-section .card-body .Q {
+  font-size: 20px;
+}
+
+.forum-section .card-body .Q span {
+  color: #fcbabb;
+}
+
+.forum-section .card-body .A {
+  font-size: 16px;
 }
 
 /*---------------------

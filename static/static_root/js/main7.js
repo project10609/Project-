@@ -487,10 +487,13 @@ toastr.options = {
 		search-empty
   --------------------- */
 
-$(window).load(function () {
-  $(".search-submit").submit(function () {
-    if ($(".search-text").val() == "") {
-      $(".search-text").val("口紅");
-    }
-  });
-});
+  $(document).ready(function (){
+    $('#searchform').submit(function(e){
+      e.preventDefault();
+      var v = $('#searcher')
+      if(v.val() ==  ""){
+        v.val('口紅');
+      }
+      this.submit();
+    })
+  })

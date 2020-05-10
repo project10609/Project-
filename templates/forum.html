@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load shuffle %}
+{% load static %}
+{% load bootstrap3 %}
+{% load get_list %}
+
+    <!-- Breadcrumb Section Begin -->
+    <div class="breacrumb-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb-text">
+                        <a href="{% url 'index' %}"><i class="fa fa-home"></i> 首頁</a>
+                        <span>討論區</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb Section Begin -->
+
+    <!-- Forum Section Begin -->
+    <div class="forum-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="forum-title">
+                        <h4>討論區</h4>
+                        <p>我們蒐集了大家的回饋整理出來並回覆，若有其他問題，可以到<a href="{% url 'contact_us' %}">這裡</a>回饋給我們喔！</p>
+                    </div>
+                    <div id="accordion">
+                    {% for feedback in feedbacks %}
+                        <div class="card">
+                            <div class="card-header">
+                                <a class="card-link" data-toggle="collapse" href="#collapse1">
+                                    #1 不能使用追蹤清單
+                                </a>
+                            </div>
+                            <div id="collapse1" class="collapse show" data-parent="#accordion">
+                                <div class="card-body">
+                                    <p class="Q"><span>Q:</span> 為什麼我的帳號不能使用追蹤清單？</p>
+                                    <p class="A">您好！關於個人帳號的一切問題請將您的帳號資料來信到：project10609@gmail.com，並附上您遇到的問題，謝謝您！</p>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Forum Section End -->
+{% endblock %}

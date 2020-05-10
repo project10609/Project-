@@ -4,6 +4,7 @@ from feedback.models import Feedback
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from feedback.models import Feedback
 
 def contact_us(request):
     feedback = Feedback.objects.all()
@@ -31,3 +32,10 @@ def about(request):
 
 def news(request):
     return render(request,'news.html',{})
+
+def forum(request):
+    feedbacks = Feedback.objects.all()
+    context = {
+        'feedbacks':feedbacks,
+    }
+    return render(request,'forum.html',context)
