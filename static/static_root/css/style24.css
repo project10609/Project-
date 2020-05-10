@@ -4776,33 +4776,38 @@ ol {
   padding-bottom: 54px;
 }
 
-.forum-section .card-link {
-  color: #223323;
+.forum-section .card-link .username {
+  color: #000000;
+  font-size: 20px;
+  font-weight: 600;
 }
 
-.forum-section .card-link:hover {
+.forum-section .card-link .username:hover {
   color: #fcbabb;
+}
+
+.forum-section .card-body {
+  padding-top: 0px;
+}
+
+.forum-section .card-body .date {
+  color: rgba(0, 0, 0, 0.5);
+  font-size: 15px;
+  margin-bottom: 5px;
+}
+
+.forum-section .card-body .content {
+  color: #2d292f;
+  font-size: 16px;
 }
 
 .forum-section .card-header {
   background-color: #ffffff;
-  border-color: rgba(0, 0, 0, 0.1);
+  border: none;
 }
 
 .forum-section .card {
   border: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-.forum-section .card-body .Q {
-  font-size: 20px;
-}
-
-.forum-section .card-body .Q span {
-  color: #fcbabb;
-}
-
-.forum-section .card-body .A {
-  font-size: 16px;
 }
 
 /*---------------------

@@ -11,7 +11,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb-text">
-                        <a href="{% url 'index' %}"><i class="fa fa-home"></i> 首頁</a>
+                        <a href="./index.html"><i class="fa fa-home"></i> 首頁</a>
                         <span>討論區</span>
                     </div>
                 </div>
@@ -34,16 +34,16 @@
                         <div class="card">
                             <div class="card-header">
                                 <a class="card-link" data-toggle="collapse" href="#collapse1">
-                                    #1 不能使用追蹤清單
+                                    <span class="username">{{feedback.name}}</span>
                                 </a>
                             </div>
                             <div id="collapse1" class="collapse show" data-parent="#accordion">
                                 <div class="card-body">
-                                    <p class="Q"><span>Q:</span> 為什麼我的帳號不能使用追蹤清單？</p>
-                                    <p class="A">您好！關於個人帳號的一切問題請將您的帳號資料來信到：project10609@gmail.com，並附上您遇到的問題，謝謝您！</p>
+                                    <p class="date">{{feedback.added_at}}</p>
+                                    <p class="content">{{feedback.feedback}}</p>
                                 </div>
                             </div>
-                        </div>
+                        </div>   
                         {% endfor %}
                     </div>
                 </div>
@@ -51,4 +51,5 @@
         </div>
     </div>
     <!-- Forum Section End -->
+
 {% endblock %}
