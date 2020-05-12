@@ -22,9 +22,11 @@
       <div class="col-lg-6 offset-lg-3">
         <div class="login-form">
           <h2>登入</h2>
+          {% if message %}
           <div class="container">
             <h4>{{ message }}</h4>
           </div>
+          {% endif %}
           <form action="{% url 'account:user_login' %}" method="POST">
             {% csrf_token %}
             <div class="group-input">
