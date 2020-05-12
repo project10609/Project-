@@ -19,13 +19,13 @@ class UserForm(forms.Form):
     def clean_username(self):
         username = self.cleaned_data.get('username')
         if len(username) < 3:
-            raise forms.ValidationError("your username must be at least 3 characters log")
+            raise forms.ValidationError("所輸入隻帳號長度需大於3")
         elif len(username) > 20:
-            raise forms.ValidationError("your username is too long")
+            raise forms.ValidationError("所輸入隻帳號長度過長")
         else:
             filter_result = User.objects.filter(username__exact=username)
             if len(filter_result) > 0:
-                raise forms.ValidationError('your username already exists')
+                raise forms.ValidationError('帳戶使用者已存在')
         return username
 
     def clean_email(self):
@@ -33,18 +33,18 @@ class UserForm(forms.Form):
         if email_check(email):
             filter_result = User.objects.filter(email__exact=email)
             if len(filter_result) > 0:
-                raise forms.ValidationError("your email already exists")
+                raise forms.ValidationError("電子郵件已存在")
         else:
-            raise forms.ValidationError("Please enter a valid email")
+            raise forms.ValidationError("請輸入正確的電子郵件格式")
 
         return email
 
     def clean_password1(self):
         password1 = self.cleaned_data.get('password1')
         if len(password1) < 3:
-            raise forms.ValidationError("your password is too short")
+            raise forms.ValidationError("密碼長度太短")
         elif len(password1) > 20:
-            raise forms.ValidationError("your password is too long")
+            raise forms.ValidationError("密碼長度太長")
 
         return password1
 
@@ -53,6 +53,6 @@ class UserForm(forms.Form):
         password2 = self.cleaned_data.get('password2')
 
         if password1 and password2 and password1 != password2:
-            raise forms.ValidationError('Password mismatch Please enter again')
+            raise forms.ValidationError('密碼確認不符')
 
         return password2
