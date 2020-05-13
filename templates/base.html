@@ -97,7 +97,7 @@
                   <h4>追蹤清單</h4>
                   <div class="select-items">
                   {% if orders_count != 0 %}
-                    {% for product in order_list %}
+                    {% for product in order_list|slice:":4" %}
                     <table>
                       <tbody>
                         <tr>
