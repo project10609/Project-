@@ -3,20 +3,20 @@
 
 {% block content %}
 
-  <!-- Breadcrumb Section Begin -->
-    <div class="breacrumb-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="breadcrumb-text">
-                        <a href="{% url 'index' %}"><i class="fa fa-home"></i> 首頁</a>
-                        <span>註冊</span>
-                    </div>
-                </div>
-            </div>
+<!-- Breadcrumb Section Begin -->
+<div class="breacrumb-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="breadcrumb-text">
+          <a href="{% url 'index' %}"><i class="fa fa-home"></i> 首頁</a>
+          <span>註冊</span>
         </div>
+      </div>
     </div>
-    <!-- Breadcrumb Section Begin -->
+  </div>
+</div>
+<!-- Breadcrumb Section Begin Hi-->
 
 <div class="register-login-section spad">
   <div class="container" {% if form.errors %}has-error{% endif %}>
@@ -24,37 +24,37 @@
       <div class="col-lg-6 offset-lg-3">
         <div class="register-form">
           <h2>註冊</h2>
-          
+
           <form action="{% url 'account:register' %}" method='POST'>
             {% csrf_token %}
             {% if user_form.errors %}
-              {% for field in user_form %}
-                  {% for error in field.errors %}
-                      <div class="alert alert-danger">
-                          <strong>{{ error|escape }}</strong>
-                      </div>
-                  {% endfor %}
-              {% endfor %}
-              {% for error in user_form.non_field_errors %}
-                  <div class="alert alert-danger">
-                      <strong>{{ error|escape }}</strong>
-                  </div>
-              {% endfor %}
-          {% endif %}
+            {% for field in user_form %}
+            {% for error in field.errors %}
+            <div class="message">
+              {{ error|escape }}
+            </div>
+            {% endfor %}
+            {% endfor %}
+            {% for error in form.non_field_errors %}
+            <div class="message">
+              {{ error|escape }}
+            </div>
+            {% endfor %}
+            {% endif %}
             <div class="group-input">
-              <p>帳號:{{ user_form.username }}</p>
+              <p>帳號 *{{ user_form.username }}</p>
             </div>
             <div class="group-input">
-              <p>密碼:{{ user_form.password1 }}</p>
+              <p>密碼 *{{ user_form.password1 }}</p>
             </div>
             <div class="group-input">
-              <p>確認密碼:{{ user_form.password2 }}</p>
+              <p>確認密碼 *{{ user_form.password2 }}</p>
             </div>
             <div class="group-input">
-              <p>名稱:{{ user_form.first_name }}</p>
+              <p>名稱 *{{ user_form.first_name }}</p>
             </div>
             <div class="group-input">
-              <p>信箱:{{ user_form.email }}</p>
+              <p>信箱 *{{ user_form.email }}</p>
             </div>
 
             <button type="submit" class="site-btn register-btn">註冊</button>

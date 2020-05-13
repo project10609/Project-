@@ -22,7 +22,7 @@
   <link rel="stylesheet" href="{% static 'css/nice-select.css' %}" type="text/css">
   <link rel="stylesheet" href="{% static 'css/jquery-ui.min.css' %}" type="text/css">
   <link rel="stylesheet" href="{% static 'css/slicknav.min.css' %}" type="text/css">
-  <link rel="stylesheet" href="{% static 'css/style24.css' %}" type="text/css">
+  <link rel="stylesheet" href="{% static 'css/style25.css' %}" type="text/css">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css" rel="stylesheet">
 
 </head>
@@ -93,6 +93,26 @@
                     <span>{{ orders_count }}</span>
                   </button>
                 </a>
+                <div class="following-hover">
+                  <h4>追蹤清單</h4>
+                  <div class="select-items">
+                    <table>
+                      <tbody>
+                        {% for product in orders %}
+                        <tr>
+                          <td class="si-pic"><a href="{% url 'products:product_detail' product.items.product.pk %}"><img src="{{ product.items.product.product_images }}" alt=""></a></td>
+                          <td class="si-text">
+                            <div class="product-selected">
+                              <p>${{ product.items.product.product_price }}</p>
+                              <h6><a href="{% url 'products:product_detail' product.items.product.pk %}">{{ product.items.product.product_name|truncatechars:10 }}</a></h6>
+                            </div>
+                          </td>
+                        </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
               </li>
               {% else %}
               <li class="heart-icon">
@@ -102,6 +122,12 @@
                     <span>0</span>
                   </button>
                 </a>
+                <div class="following-hover">
+                  <h4>追蹤清單</h4>
+                  <div class="select-items">
+                    <p>目前並無追蹤商品。</p>
+                  </div>
+                </div>
               </li>
               {% endif %}
             </ul>
@@ -139,11 +165,6 @@
   </header>
   <br>
 
-    {% for items in order_list %}
-      {{ items.items.product.product_name }}
-      {{ items.items.product.product_price }}
-      {{ items.items.product.product_category }}
-    {% endfor %}
   {% block content %}
 
   {% endblock %}
