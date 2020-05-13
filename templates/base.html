@@ -96,9 +96,10 @@
                 <div class="following-hover">
                   <h4>追蹤清單</h4>
                   <div class="select-items">
+                  {% if orders_count != 0 %}
+                    {% for product in order_list %}
                     <table>
                       <tbody>
-                        {% for product in orders %}
                         <tr>
                           <td class="si-pic"><a href="{% url 'products:product_detail' product.items.product.pk %}"><img src="{{ product.items.product.product_images }}" alt=""></a></td>
                           <td class="si-text">
@@ -107,10 +108,16 @@
                               <h6><a href="{% url 'products:product_detail' product.items.product.pk %}">{{ product.items.product.product_name|truncatechars:10 }}</a></h6>
                             </div>
                           </td>
-                        </tr>
-                        {% endfor %}
+                        </tr> 
                       </tbody>
                     </table>
+                    {% endfor %}
+                  {% else %}
+                          <div class="select-items">
+                            <p>目前並無追蹤商品。</p>
+                            </div>
+                          </div>
+                  {% endif %}
                   </div>
                 </div>
               </li>

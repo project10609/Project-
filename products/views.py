@@ -434,11 +434,13 @@ def category_list(request):
     categories = Categories.objects.all()
     subcategory = Subcategories.objects.all()
     if request.user.is_authenticated:
+        order_list = Order.objects.filter(owner=request.user)[:4]
         orders_count = Order.objects.filter(owner=request.user).aggregate(order_counts=Count('items')).get('order_counts')
         context = {
         "categories": categories,
         "subcategory": subcategory,
         'orders_count':orders_count,
+        'order_list':order_list,
         }
     else:
         context = {
@@ -462,12 +464,16 @@ def add_to_cart(request,pk,order):
     #get the user 
     user_profile = get_object_or_404(User, pk=pk)
     product = get_object_or_404(Product,pk=order)
- 
-    cart_item = OrderItem.objects.create(product=product)
-    Order.objects.get_or_create(owner=user_profile,items=cart_item)
+    
+    if Order.objects.filter(items__product=product):
+        messages.error(request,"此商品已經在追蹤清單裡")
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER','/'))
+    else:
+        cart_item = OrderItem.objects.create(product=product)
+        Order.objects.get_or_create(owner=user_profile,items=cart_item)
 
-    messages.success(request, "商品成功加入追蹤清單")
-    return HttpResponseRedirect(request.META.get('HTTP_REFERER','/'))
+        messages.success(request, "商品成功加入追蹤清單")
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER','/'))
 
 @login_required
 def cart_items(request):

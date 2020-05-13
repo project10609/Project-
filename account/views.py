@@ -8,17 +8,17 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from account.models import UserProfile
 
-# Create your views here.
-@login_required
-def profile(request, pk):
-    user = get_object_or_404(User, pk=pk)
-    return render(request, 'account/profile.html', {'user': user})
+# # Create your views here.
+# @login_required
+# def profile(request, pk):
+#     user = get_object_or_404(User, pk=pk)
+#     return render(request, 'account/profile.html', {'user': user})
 
 
 @login_required
 def user_logout(request):
     logout(request)
-    return HttpResponseRedirect(reverse('index'))
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER','/'))
 
 
 def register(request):
