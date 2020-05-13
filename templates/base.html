@@ -22,7 +22,7 @@
   <link rel="stylesheet" href="{% static 'css/nice-select.css' %}" type="text/css">
   <link rel="stylesheet" href="{% static 'css/jquery-ui.min.css' %}" type="text/css">
   <link rel="stylesheet" href="{% static 'css/slicknav.min.css' %}" type="text/css">
-  <link rel="stylesheet" href="{% static 'css/style25.css' %}" type="text/css">
+  <link rel="stylesheet" href="{% static 'css/style26.css' %}" type="text/css">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css" rel="stylesheet">
 
 </head>
@@ -95,30 +95,33 @@
                 </a>
                 <div class="following-hover">
                   <h4>追蹤清單</h4>
-                  <div class="select-items">
                   {% if orders_count != 0 %}
-                    {% for product in order_list|slice:":3" %}
+                  <div class="select-items">
                     <table>
                       <tbody>
+                        {% for product in order_list|slice:":3" %}
                         <tr>
-                          <td class="si-pic"><a href="{% url 'products:product_detail' product.items.product.pk %}"><img src="{{ product.items.product.product_images }}" alt=""></a></td>
+                          <td class="si-pic"><a href="{% url 'products:product_detail' product.items.product.pk %}"><img
+                                src="{{ product.items.product.product_images }}" alt=""></a></td>
                           <td class="si-text">
                             <div class="product-selected">
                               <p>${{ product.items.product.product_price }}</p>
-                              <h6><a href="{% url 'products:product_detail' product.items.product.pk %}">{{ product.items.product.product_name|truncatechars:10 }}</a></h6>
+                              <h6><a
+                                  href="{% url 'products:product_detail' product.items.product.pk %}">{{ product.items.product.product_name|truncatechars:22 }}</a>
+                              </h6>
                             </div>
                           </td>
-                        </tr> 
+                        </tr>
+                        {% endfor %}
                       </tbody>
                     </table>
-                    {% endfor %}
-                  {% else %}
-                          <div class="select-items">
-                            <p>目前並無追蹤商品。</p>
-                            </div>
-                          </div>
-                  {% endif %}
                   </div>
+                  <div class="select-button">
+                    <a href="{% url 'products:following-list' %}" class="primary-btn view-card">查看更多..</a>
+                  </div>
+                  {% else %}
+                  <p>您沒有沒有追蹤任何商品</p>
+                  {% endif %}
                 </div>
               </li>
               {% else %}
@@ -131,9 +134,7 @@
                 </a>
                 <div class="following-hover">
                   <h4>追蹤清單</h4>
-                  <div class="select-items">
-                    <p>目前並無追蹤商品。</p>
-                  </div>
+                  <p>請先<a href="{% url 'account:user_login' %}" class="login">登入</a></p>
                 </div>
               </li>
               {% endif %}
