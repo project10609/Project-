@@ -139,6 +139,11 @@
   </header>
   <br>
 
+    {% for items in order_list %}
+      {{ items.items.product.product_name }}
+      {{ items.items.product.product_price }}
+      {{ items.items.product.product_category }}
+    {% endfor %}
   {% block content %}
 
   {% endblock %}

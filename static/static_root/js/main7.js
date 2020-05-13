@@ -485,14 +485,9 @@ toastr.options = {
 
 /*-------------------
 		search-empty
-  --------------------- */
-
+  // --------------------- */
   // $(document).ready(function (){
-  //   $('#searchform').submit(function(e){
-  //     var v = $('#searcher')
-  //     if(v.val() ==  ""){
-  //       v.val('口紅');
-  //     }
-  //     this.submit();
+  //   $("#searchform").submit(function (){
+  //     var $input = $(this).
   //   })
   // })

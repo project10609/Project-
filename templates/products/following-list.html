@@ -56,16 +56,16 @@
                                     {% if product.items.product.product_source.source == 'Shopee' %}
                                         <td class="">蝦皮購物</td>
                                     {% endif %}
-                                    {% if item.product_source.source == 'Ruten' %}
+                                    {% if product.items.product.product_source.source == 'Ruten' %}
                                         <td class="">露天拍賣</td>
                                     {% endif %}
-                                    {% if item.product_source.source == 'ETMall' %}
+                                    {% if product.items.product.product_source.source == 'ETMall' %}
                                         <td class="">東森購物</td>
                                     {% endif %}
-                                    {% if item.product_source.source == 'Yahoo' %}
+                                    {% if product.items.product.product_source.source == 'Yahoo' %}
                                         <td class="">Yahoo拍賣</td>
                                         {% endif %}
-                                    {% if item.product_source.source == 'Momo' %}
+                                    {% if product.items.product.product_source.source == 'Momo' %}
                                         <td class="">Momo購物</td>
                                     {% endif %}
                                     <td class="">{{ product.items.product.product_category.name }}</td>
