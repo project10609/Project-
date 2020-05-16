@@ -2573,6 +2573,11 @@ ol {
   background: #fcbabb;
 }
 
+.no-search-reslut{
+  text-align: center;
+  color: #9f8e8e;
+}
+
 .product-search-result {
   text-align: center;
   margin-bottom: 10px;

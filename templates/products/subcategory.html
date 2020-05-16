@@ -13,24 +13,28 @@
 
 
 <div class="breacrumb-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="breadcrumb-text">
-                        <a href="{% url 'index' %}"><i class="fa fa-home"></i> 首頁</a>
-                        <a href="{% url 'products:allproduct' %}"><span>全部商品</span></a>
-                        <a href="{% url 'products:categories' category.category.pk %}"><span>{{ category.category.name }}</span></a>
-                        <span>{{ category.subcategory_name }}</span>
-                    </div>
-                </div>
-            </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="breadcrumb-text">
+          <a href="{% url 'index' %}"><i class="fa fa-home"></i> 首頁</a>
+          <a href="{% url 'products:allproduct' %}"><span>全部商品</span></a>
+          <a href="{% url 'products:categories' category.category.pk %}"><span>{{ category.category.name }}</span></a>
+          <span>{{ category.subcategory_name }}</span>
         </div>
+      </div>
     </div>
+  </div>
+</div>
 <section class="product-shop spad">
-{% if messages %}
+  {% if messages %}
   {% for message in messages %}
   <script>
-    toastr.{{message.tags}}('{{ message }}')
+    toastr. {
+      {
+        message.tags
+      }
+    }('{{ message }}')
   </script>
   {% endfor %}
   {% endif %}
@@ -86,7 +90,7 @@
               <!-- {{ sourceform.as_p }} -->
               {% for field in sourceform.source %}
               <div>
-                  {{ field }}
+                {{ field }}
               </div>
               {% endfor %}
               {% if request.GET.min_price %}
@@ -150,7 +154,8 @@
                 </div>
                 <div class="accordion" id="accordionExample">
                   <div class="search-reslut-button">
-                    <a data-toggle="collapse" data-target="#collapse-search"  class="collapse-reslut" aria-expanded="true"><span display="hidden"></span></a>
+                    <a data-toggle="collapse" data-target="#collapse-search" class="collapse-reslut"
+                      aria-expanded="true"><span display="hidden"></span></a>
                   </div>
                 </div>
               </div>
@@ -197,9 +202,9 @@
                       alt="image"></a>
                   <div class="sale pp-sale">{{ product.get_rating|floatformat:1 }}<i class="fa fa-star"></i></div>
                   <div class="icon">
-                  <a href="{% url 'products:add_to_cart' request.user.pk product.pk %}">
-                    <i class="favorite-heart-icon icon_heart_alt"></i>
-                  </a>
+                    <a href="{% url 'products:add_to_cart' request.user.pk product.pk %}">
+                      <i class="favorite-heart-icon icon_heart_alt"></i>
+                    </a>
                   </div>
                   <ul>
                     <li class="quick-view"><a href="{{ product.product_url }}">前往網站瀏覽</a></li>
@@ -232,9 +237,6 @@
               </div>
             </div>
             {% endfor %}
-            {% if not product_list %}
-            <p>沒有符合的商品</p>
-            {% endif %}
           </div>
         </div>
         <div class="product-list" id="straight-sorting" style="display: none;">
@@ -245,9 +247,6 @@
                 <div class="pi-pic">
                   <a href="{% url 'products:product_detail' product.pk %}"><img src="{{ product.product_images }}"
                       alt=""></a>
-                  
-                    
-                  
                 </div>
               </div>
             </div>
@@ -280,8 +279,8 @@
                 </div>
                 <button class="product-url"><a href="{{ product.product_url }}">前往網站瀏覽</a></button>
                 <div class="text-right">
-                <a href="{% url 'products:add_to_cart' request.user.pk product.pk %}">
-                  <i class="favorite-heart-icon icon_heart_alt"></i>
+                  <a href="{% url 'products:add_to_cart' request.user.pk product.pk %}">
+                    <i class="favorite-heart-icon icon_heart_alt"></i>
                   </a>
                 </div>
               </div>
@@ -290,6 +289,9 @@
           <hr>
           {% endfor %}
         </div>
+        {% if not product_list %}
+        <div class="no-search-reslut">沒有符合的商品</div>
+        {% endif %}
         <div class="col-md-12 col-lg-12 product-bottom-page-controller text-center">
           {% if product_list.has_previous %}
           <button class="page-prev"><a

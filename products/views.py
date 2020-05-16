@@ -36,7 +36,7 @@ def index(request):
     queries_items = list(Queries.objects.values_list(
         'search', flat=True).annotate(counts=Count('search')).distinct())
     queries = Queries.objects.all().values(
-        'search').annotate(counts=Count('search')).order_by('-counts')[:16]
+        'search').annotate(counts=Count('search')).order_by('-counts')[:10]
     listitems = list(Queries.objects.values_list(
         'search', flat=True).distinct().filter(user=request.user.id))
 
