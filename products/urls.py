@@ -1,5 +1,5 @@
 from django.urls import path, re_path
-from products.views import category_item, subcategory, product_list, add_to_cart, cart_items,delete_cart_items, delete_cart
+from products.views import category_item, subcategory, product_list, add_to_cart, cart_items,delete_cart_items
 from Rating.views import product_detail, delete_rating,update_rating
 
 
