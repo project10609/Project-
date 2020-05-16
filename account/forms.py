@@ -41,7 +41,7 @@ class UserForm(forms.Form):
 
     def clean_password1(self):
         password1 = self.cleaned_data.get('password1')
-        if len(password1) < 3:
+        if len(password1) < 6:
             raise forms.ValidationError("密碼長度太短")
         elif len(password1) > 20:
             raise forms.ValidationError("密碼長度太長")
