@@ -9,11 +9,11 @@
 
 <!-- content Begin -->
 
-<div class="filter-widget" style="margin: 20px;">
+<div class="filter-widget">
   <div class="home-page-section-title">
     熱門關鍵字
   </div>
-  <div class="fw-tags col-lg-12" style="margin-left: 50px; margin-right: 50px;">
+  <div class="fw-tags col-lg-12">
     {% for query in queries %}
     <a href="{% url 'search:search_from_home' query.search %}">{{ query.search }}</a>
     {% endfor %}
@@ -41,7 +41,7 @@
             </a>
             <div class="catagory-name">{{ item.product_source }}</div>
             <div class="product-price">
-              {{ item.product_price }}
+              ${{ item.product_price }}
             </div>
           </div>
         </div>
@@ -53,7 +53,7 @@
 </div>
 
 {% if request.user.is_authenticated %}
-<div class="container-fluid" style="margin-top: 40px;">
+<div class="container-fluid" style="margin-top: 40px; margin-bottom: 40px;">
   <div class="home-page-section-title">
     你可能有興趣的商品
   </div>
@@ -75,7 +75,7 @@
             </a>
             <div class="catagory-name">{{ item.product_source }}</div>
             <div class="product-price">
-              {{ item.product_price }}
+              ${{ item.product_price }}
             </div>
           </div>
         </div>

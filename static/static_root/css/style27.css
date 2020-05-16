@@ -36,7 +36,8 @@ body {
   height: 100%;
   font-family: "Muli", sans-serif;
   -webkit-font-smoothing: antialiased;
-  font-smoothing: antialiased;
+  font-smooth: antialiased;
+  overflow-x: hidden;
 }
 
 h1,
@@ -151,20 +152,20 @@ ol {
 
 .home-page-section-title {
   color: #252525;
-  font-size: 25px;
-  font-weight: 500;
+  font-size: 26px;
+  font-weight: 600;
   margin-bottom: 40px;
   position: relative;
-  text-align: left;
-  margin-left: 50px;
+  text-align: center;
 }
 
 .home-page-section-title:before {
   position: absolute;
-  left: 10px;
+  left: 0;
+  right: 0;
   bottom: -5px;
-  width: 220px;
-  height: 2px;
+  width: 70px;
+  height: 3px;
   background: #fcbabb;
   content: "";
   margin: 0 auto;
@@ -714,7 +715,7 @@ ol {
 
 .inner-header .nav-right li.heart-icon .following-hover {
   position: absolute;
-  right: -70px;
+  right: 10px;
   top: 100px;
   width: 350px;
   background: #ffffff;
@@ -736,11 +737,11 @@ ol {
   margin-bottom: 16px;
 }
 
-.inner-header .nav-right li.heart-icon .following-hover p a{
+.inner-header .nav-right li.heart-icon .following-hover p a {
   color: #fcbabb;
 }
 
-.inner-header .nav-right li.heart-icon .following-hover p a:hover{
+.inner-header .nav-right li.heart-icon .following-hover p a:hover {
   color: #ecb3b4;
 }
 
@@ -752,7 +753,7 @@ ol {
   padding-bottom: 20px;
 }
 
-.inner-header .nav-right li.heart-icon .following-hover .select-items table tr td.si-pic{
+.inner-header .nav-right li.heart-icon .following-hover .select-items table tr td.si-pic {
   width: 40%;
 }
 
@@ -1390,8 +1391,8 @@ ol {
 }
 
 .product-item .pi-pic .home-page-img {
-  min-width: 100%;
-  height: 350px;
+  width: 80%;
+  height: 300px;
   object-fit: cover;
 }
 
@@ -2370,6 +2371,11 @@ ol {
 .filter-widget .fw-size-choose .sc-item label.active {
   background: #252525;
   color: #ffffff;
+}
+
+.filter-widget .fw-tags {
+  margin-left: 50px;
+  margin-right: 50px;
 }
 
 .filter-widget .fw-tags a {
@@ -5761,6 +5767,16 @@ ol {
 
   .following-list .table-img {
     display: none;
+  }
+
+  .filter-widget .fw-tags {
+    margin-left: 0px;
+    margin-right: 0px;
+    text-align: center;
+  }
+
+  .product-item .pi-pic .home-page-img {
+    height: 220px;
   }
 }
 
