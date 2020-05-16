@@ -9,7 +9,7 @@
 
 <!-- content Begin -->
 
-<div class="filter-widget">
+<div class="container filter-widget">
   <div class="home-page-section-title">
     熱門關鍵字
   </div>
@@ -19,19 +19,22 @@
     {% endfor %}
   </div>
 </div>
-<div class="container-fluid" style="margin-top: 40px;">
-  <div class="home-page-section-title">
-    熱門商品
-  </div>
-  <div class="row" style="margin-left: 50px; margin-right: 50px;">
-    <div class="col-lg-12">
+<div class="container" style="margin-top: 40px;">
+  <div class="row product-slider-row">
+    <div class="col-lg-3">
+      <div class="product-large set-bg" data-setbg="{% static 'img/home-hot3.jpg' %}">
+        <h2>熱門商品</h2>
+        <a href="#">Popular Product</a>
+      </div>
+    </div>
+    <div class="col-lg-9 offset-lg-1 product-slider-div-1">
       <div class="product-slider owl-carousel">
         {% if recommendItems %}
         {% for item in recommendItems|shuffle %}
         <div class="product-item">
           <div class="pi-pic">
-          <a href="{% url 'products:product_detail' item.pk %}">
-            <img class="home-page-img" src="{{ item.product_images }}">
+            <a href="{% url 'products:product_detail' item.pk %}">
+              <img class="home-page-img" src="{{ item.product_images }}">
             </a>
             <ul>
               <li class="quick-view"><a href="{{ item.product_url }}">前往網站瀏覽</a></li>
@@ -69,19 +72,16 @@
 </div>
 
 {% if request.user.is_authenticated %}
-<div class="container-fluid" style="margin-top: 40px; margin-bottom: 40px;">
-  <div class="home-page-section-title">
-    你可能有興趣的商品
-  </div>
-  <div class="row" style="margin-left: 50px; margin-right: 50px;">
-    <div class="col-lg-12">
+<div class="container" style="margin-top: 40px; margin-bottom: 40px;">
+  <div class="row product-slider-row">
+    <div class="col-lg-9 order-2 order-lg-1 product-slider-div-2">
       <div class="product-slider owl-carousel">
         {% if user_item %}
         {% for item in user_item %}
         <div class="product-item">
           <div class="pi-pic">
-          <a href="{% url 'products:product_detail' item.pk %}">
-            <img class="home-page-img" src="{{ item.product_images }}">
+            <a href="{% url 'products:product_detail' item.pk %}">
+              <img class="home-page-img" src="{{ item.product_images }}">
             </a>
             <ul>
               <li class="quick-view"><a href="{{ item.product_url }}">前往網站瀏覽</a></li>
@@ -113,6 +113,12 @@
         </div>
         {% endfor %}
         {% endif %}
+      </div>
+    </div>
+    <div class="col-lg-3 order-1 order-lg-2">
+      <div class="product-large set-bg" data-setbg="{% static 'img/home-interest3.jpg' %}">
+        <h2>你可能有興趣的商品</h2>
+        <a href="#">Interesting product</a>
       </div>
     </div>
   </div>
