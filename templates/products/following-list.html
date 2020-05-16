@@ -42,7 +42,7 @@
                                     <th class="">電商平台</th>
                                     <th>類別</th>
                                     <th>現在的價格</th>
-                                    <th class="close-th"><button class="close-btn"><i class="ti-close"></i></button>
+                                    <th class="close-th"><button class="close-btn"><a href="{% url 'products:delete_all' %}"><i class="ti-close"></i></a></button>
                                     </th>
                                 </tr>
                             </thead>
@@ -56,16 +56,16 @@
                                     {% if product.items.product.product_source.source == 'Shopee' %}
                                         <td class="">蝦皮購物</td>
                                     {% endif %}
-                                    {% if item.product_source.source == 'Ruten' %}
+                                    {% if product.items.product.product_source.source == 'Ruten' %}
                                         <td class="">露天拍賣</td>
                                     {% endif %}
-                                    {% if item.product_source.source == 'ETMall' %}
+                                    {% if product.items.product.product_source.source == 'ETMall' %}
                                         <td class="">東森購物</td>
                                     {% endif %}
-                                    {% if item.product_source.source == 'Yahoo' %}
+                                    {% if product.items.product.product_source.source == 'Yahoo' %}
                                         <td class="">Yahoo拍賣</td>
                                         {% endif %}
-                                    {% if item.product_source.source == 'Momo' %}
+                                    {% if product.items.product.product_source.source == 'Momo' %}
                                         <td class="">Momo購物</td>
                                     {% endif %}
                                     <td class="">{{ product.items.product.product_category.name }}</td>
