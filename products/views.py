@@ -490,11 +490,6 @@ def delete_cart_items(request,pk):
     messages.success(request,'此商品成功從追蹤清單裡移除')
     return redirect(reverse('products:following-list'))
 
-@login_required
-def delete_cart(request):
-    user = Order.objects.filter(owner=request.user).delete()
-    messages.success(request,'成功刪除追蹤清單所有的商品')
-    return redirect(reverse('products:following-list'))
     
 
     
