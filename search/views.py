@@ -197,7 +197,7 @@ def search(request):
                                 product_source__slug__in=source).order_by('?')
                     else:
                         if min_price and max_price:
-                            products = Product.objects.filter(product_category__slug__icontains=category).filter(
+                            products = products.filter(
                                 product_price__range=(min_price, max_price)).order_by('?')
                         else:
                             products = products.order_by('?')
@@ -319,7 +319,7 @@ def search(request):
                                 product_source__slug__in=source).order_by('?')
                     else:
                         if min_price and max_price:
-                            products = Product.objects.filter(product_category__slug__icontains=category).filter(
+                            products = products.filter(
                                 product_price__range=(min_price, max_price)).order_by('?')
                         else:
                             products = products.order_by('?')
