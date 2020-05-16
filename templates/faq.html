@@ -5,55 +5,62 @@
 {% load bootstrap3 %}
 {% load get_list %}
 
-    <!-- Breadcrumb Section Begin -->
-    <div class="breacrumb-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="breadcrumb-text">
-                        <a href="{% url 'index' %}"><i class="fa fa-home"></i> 首頁</a>
-                        <span>常見問題</span>
-                    </div>
+<!-- Breadcrumb Section Begin -->
+<div class="breacrumb-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb-text">
+                    <a href="{% url 'index' %}"><i class="fa fa-home"></i> 首頁</a>
+                    <span>常見問題</span>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Breadcrumb Section Begin -->
+</div>
+<!-- Breadcrumb Section Begin -->
 
-    <!-- Faq Section Begin -->
-    <div class="faq-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="faq-title">
-                        <h4>常見問題</h4>
-                        <p>如果您還有其他疑問，請點選<a href="{% url 'contact_us' %}">這邊</a>與我們聯繫！</p>
+<!-- Faq Section Begin -->
+<div class="faq-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="faq-title">
+                    <h4>常見問題</h4>
+                    <p>如果您還有其他疑問，請點選<a href="{% url 'contact_us' %}">這邊</a>與我們聯繫！</p>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title"><i class="icon_lightbulb_alt"></i>這個網站怎麼使用？</h4>
+                        <p class="card-text">這是我們以化妝品為主所開發的比價網站，您可以點選上方的搜尋區域輸入想找尋的商品名稱，並按下搜尋按鈕，就會顯示當前關鍵字相關的所有商品進行比價。
+                        </p>
                     </div>
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="card-title"><i class="icon_lightbulb_alt"></i>這個網站怎麼使用？</h4>
-                            <p class="card-text">這是我們以化妝品為主所開發的比價網站，您可以點選上方的搜尋區域輸入想找尋的商品名稱，並按下搜尋按鈕，就會顯示當前關鍵字相關的所有商品進行比價。
-                            </p>
-                        </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title"><i class="icon_lightbulb_alt"></i>為什麼找不到我想要的商品？</h4>
+                        <p class="card-text">
+                            我們的比價網是以化妝品為主開發的，其中的商品是以現今購物網站常見的商品為主，如果您找不到您想要的商品，那很有可能它是比較冷門沒有在一般購物網站上販售的。
+                        </p>
                     </div>
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="card-title"><i class="icon_lightbulb_alt"></i>為什麼找不到我想要的商品？</h4>
-                            <p class="card-text">
-                                我們的比價網是以化妝品為主開發的，其中的商品是以現今購物網站常見的商品為主，如果您找不到您想要的商品，那很有可能它是比較冷門沒有在一般購物網站上販售的。
-                            </p>
-                        </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title"><i class="icon_lightbulb_alt"></i>怎麼使用追蹤清單？</h4>
+                        <p class="card-text">要使用追蹤清單需先註冊我們的網站會員並登入，您可以看到於網頁右上角的心型符號，就是您的追蹤清單，點選任一商品的心型符號，即可以將其加入您的追蹤清單中。
+                        </p>
                     </div>
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="card-title"><i class="icon_lightbulb_alt"></i>為什麼我的帳號登入不了？</h4>
-                            <p class="card-text">非常抱歉造成您的困擾，請您來信到：project10609@gmail.com，我們將盡快為您處理。</p>
-                        </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title"><i class="icon_lightbulb_alt"></i>為什麼我的帳號登入不了？</h4>
+                        <p class="card-text">非常抱歉造成您的困擾，請您來信到：project10609@gmail.com，我們將盡快為您處理。</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Faq Section End -->
+</div>
+<!-- Faq Section End -->
 
 {% endblock %}
