@@ -30,18 +30,34 @@
         {% for item in recommendItems|shuffle %}
         <div class="product-item">
           <div class="pi-pic">
+          <a href="{% url 'products:product_detail' item.pk %}">
             <img class="home-page-img" src="{{ item.product_images }}">
+            </a>
             <ul>
               <li class="quick-view"><a href="{{ item.product_url }}">前往網站瀏覽</a></li>
             </ul>
           </div>
           <div class="pi-text">
-            <a href="{{ item.product_url }}">
+            <a href="{% url 'products:product_detail' item.pk %}}">
               <h5>{{ item.product_name }}</h5>
             </a>
-            <div class="catagory-name">{{ item.product_source }}</div>
+            {% if item.product_source.source == "Shopee" %}
+            <div class="catagory-name">蝦皮購物</div>
+            {% endif %}
+            {% if item.product_source.source == "Yahoo" %}
+            <div class="catagory-name">Yahoo拍賣</div>
+            {% endif %}
+            {% if item.product_source.source == "Momo" %}
+            <div class="catagory-name">Momo購物</div>
+            {% endif %}
+            {% if item.product_source.source == "ETMall" %}
+            <div class="catagory-name">東森購物</div>
+            {% endif %}
+            {% if item.product_source.source == "Ruten" %}
+            <div class="catagory-name">露天拍賣</div>
+            {% endif %}
             <div class="product-price">
-              {{ item.product_price }}
+              ${{ item.product_price }}
             </div>
           </div>
         </div>
