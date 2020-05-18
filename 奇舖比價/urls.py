@@ -20,10 +20,11 @@ from django.conf import settings
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.conf.urls.static import static
 from products import views
-from .views import contact_us, faq, about, news, forum
+from .views import contact_us, faq, about, news, forum, handler404, handler500
 
 urlpatterns = [
-
+    path('404/',handler404),
+    path('500/',handler500),
     path('', views.index, name='index'),
     path('news/',news,name='news'),
     path('account/', include('account.urls')),
