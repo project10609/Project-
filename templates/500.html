@@ -5,15 +5,13 @@
 {% load bootstrap3 %}
 {% load get_list %}
 
-<div>
-    <p>
-        Server Error (500)
-    </p>
-
+<div class="error-page">
+    <div class="error-num">
+        <span>500</span>
+    </div>
+    <div class="error-msg">
+        伺服器錯誤！<a href="{% url 'index' %}" class="error-btn">點此回首頁</a>
+    </div>
 </div>
-
-
-
-
 
 {% endblock %}
