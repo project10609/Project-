@@ -41,7 +41,7 @@
             </ul>
           </div>
           <div class="pi-text">
-            <a href="{% url 'products:product_detail' item.pk %}}">
+            <a href="{% url 'products:product_detail' item.pk %}">
               <h5>{{ item.product_name }}</h5>
             </a>
             {% if item.product_source.source == "Shopee" %}
