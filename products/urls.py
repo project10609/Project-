@@ -1,5 +1,5 @@
 from django.urls import path, re_path
-from products.views import category_item, subcategory, product_list, add_to_cart, cart_items,delete_cart_items
+from products.views import category_item, subcategory, product_list, add_to_cart, cart_items,delete_cart_items,delete_all
 from Rating.views import product_detail, delete_rating,update_rating
 
 
@@ -8,6 +8,7 @@ app_name = 'products'
 urlpatterns = [
 
     path('', product_list, name='allproduct'),
+    path('delete_all/',delete_all,name='delete_all'),
     path('following-list/',cart_items,name='following-list'),
     path('following-list/delete/<pk>',delete_cart_items,name='delete_cart'),
     path('<pk>/', product_detail, name='product_detail'),
