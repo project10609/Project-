@@ -6,12 +6,13 @@
 {% load get_list %}
 
 
-<div>
-    <p>
-        404 Not Found!
-    </p>
-
+<div class="error-page">
+    <div class="error-num">
+        <span>404</span>
+    </div>
+    <div class="error-msg">
+        找不到頁面！<a href="{% url 'index' %}" class="error-btn">點此回首頁</a>
+    </div>
 </div>
-
 
 {% endblock %}
