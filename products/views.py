@@ -496,3 +496,4 @@ def delete_all(request):
     cart_items = Order.objects.filter(owner=request.user).delete()
     cart_items.filter(items__product=product).delete()
     messages.success(request,'追蹤清單刪除成功')
+    return redirect(request.META.get('HTTP_REFERER','/'))

@@ -26,7 +26,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '-2_fg*hd^kpdv%g%fx88v-&lu_zx@3(rs-nt)*9wm5pb-)8q!^'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 ALLOWED_HOSTS = ['evening-fortress-74505.herokuapp.com', '*']
 
 ADMIN_ENABLED = False
