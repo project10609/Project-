@@ -466,7 +466,7 @@ def add_to_cart(request,pk,order):
     user_profile = get_object_or_404(User, pk=pk)
     product = get_object_or_404(Product,pk=order)
     
-    if Order.objects.filter(items__product=product):
+    if Order.objects.filter(items__product=product,owner=request.user):
         messages.error(request,"此商品已經在追蹤清單裡")
         return HttpResponseRedirect(request.META.get('HTTP_REFERER','/'))
     else:
