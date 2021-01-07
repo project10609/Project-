@@ -27,7 +27,7 @@ hyperlink==19.0.0
 idna==2.8
 incremental==17.5.0
 jieba==0.42.1
-lxml==4.5.0
+lxml==4.6.2
 more-itertools==8.2.0
 oauthlib==3.1.0
 olefile==0.46
