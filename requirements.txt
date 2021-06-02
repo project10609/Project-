@@ -57,7 +57,7 @@ six==1.14.0
 sqlparse==0.3.1
 static3==0.7.0
 Twisted==19.10.0
-urllib3==1.25.8
+urllib3==1.26.5
 w3lib==1.21.0
 wcwidth==0.1.8
 whitenoise==5.0.1
